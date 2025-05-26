@@ -1,0 +1,73 @@
+/* frontend/src/App.module.css */
+.appContainer {
+  width: 100%; /* By default, use full available width */
+  padding: 15px; /* Padding for mobile - gives some breathing room */
+  margin: 0 auto; /* Still useful if a max-width is applied later */
+}
+
+/* For larger screens (e.g., tablets and up), you might want to constrain the width */
+@media (min-width: 768px) { /* Example breakpoint for tablets */
+  .appContainer {
+    width: 90%;       /* Your desired width for larger screens */
+    max-width: 1600px;/* Your desired max-width */
+    padding: 20px;    /* Your desired padding for larger screens */
+  }
+}
+
+/* You can add more breakpoints if needed, for example: */
+/*
+@media (min-width: 1200px) {
+  .appContainer {
+     // Adjustments for very large desktops if necessary
+  }
+}
+*/
+
+/* === NEW STYLES FOR FEEDBACK AND RESULTS PREVIEW === */
+
+.feedbackMessage {
+  text-align: center;
+  padding: 15px; /* Adjusted padding */
+  margin-top: 20px;
+  border-radius: 5px;
+  font-style: italic;
+  background-color: #e9ecef; /* Light grey for loading/info */
+  color: #495057;
+  font-size: 0.9rem; /* Slightly smaller font for feedback */
+}
+
+.errorMessage {
+  background-color: #f8d7da; /* Light red for errors */
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.resultsPreview {
+  margin-top: 25px; /* More space above results preview */
+  padding: 20px;
+  background-color: #f8f9fa; /* Very light grey background */
+  border: 1px solid #dee2e6;
+  border-radius: 8px; /* Consistent with other containers */
+}
+
+.resultsPreview h3 {
+  margin-top: 0;
+  margin-bottom: 15px; /* Space below heading */
+  color: #343a40; /* Darker heading color */
+  font-size: 1.2rem;
+}
+
+.resultsPreview pre {
+  white-space: pre-wrap;    /* Allow text to wrap */
+  word-wrap: break-word;    /* Break long words if necessary */
+  background-color: #fff;   /* White background for the pre block */
+  padding: 15px;
+  border-radius: 4px;       /* Slightly rounded corners */
+  border: 1px solid #ced4da;/* Subtle border */
+  max-height: 400px;        /* Prevent very long outputs from dominating the page */
+  overflow-y: auto;         /* Add a scrollbar if content exceeds max-height */
+  font-size: 0.85rem;       /* Slightly smaller font for preformatted text */
+  line-height: 1.6;         /* Better line spacing for readability */
+}

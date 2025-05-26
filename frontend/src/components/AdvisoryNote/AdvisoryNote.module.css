@@ -1,0 +1,15 @@
+/* frontend/src/components/AdvisoryNote/AdvisoryNote.module.css */
+.advisoryNote {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #fff3cd; /* Light yellow */
+    border-left: 5px solid #ffeeba; /* Yellow border */
+    color: #856404; /* Dark yellow text */
+    font-size: 0.9rem; /* Adjusted for consistency */
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+  
+  .advisoryNote p {
+    margin: 0; /* Remove default paragraph margin if it's the only child */
+  }
