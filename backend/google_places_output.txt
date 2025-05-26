@@ -1,331 +1,323 @@
-Search City: Munich
+Search City: Helsinki
 Search Country: Not specified
 Search Type: restaurants
-Effective Text Query: gluten-free restaurants in Munich
+Effective Text Query: gluten-free restaurants in Helsinki
 Google API Type Parameter: restaurant
 
-Total items collected before deduplication: 40
-Total unique operational establishments found after deduplication: 40
+Total items collected before deduplication: 39
+Total unique operational establishments found after deduplication: 39
 Number of duplicate items removed: 0
 
 --- Unique Results from Google Places API (Deduplicated by Place ID) ---
-  1. Name: Palmtreeclub
-     Place ID: ChIJT1km3L51nkcRWQnclLnPdt8
-     Address: Augustenstraße 43, 80333 München, Germany
-     Types: ['cafe', 'bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 716
-     Business Status: OPERATIONAL
-
-  2. Name: Isabella Glutenfreie Pâtisserie
-     Place ID: ChIJuQbLLkJ1nkcRlE59A-OyEw8
-     Address: Hackenstraße 4, 80331 München, Germany
-     Types: ['cafe', 'bakery', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 1096
-     Business Status: OPERATIONAL
-
-  3. Name: Pancake am Tor
-     Place ID: ChIJC_LHXTbfnUcRLir097eg7fg
-     Address: Herzog-Wilhelm-Straße 30, 80331 München, Germany
+  1. Name: Restaurant Ristorante Argegno
+     Place ID: ChIJgy8BkBcLkkYRsJ2WoQhfpBc
+     Address: Eerikinkatu 7, 00100 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 1558
+     Rating: 4.8
+     User Ratings Total: 663
      Business Status: OPERATIONAL
 
-  4. Name: Pizzarei
-     Place ID: ChIJGzHG3W91nkcRAkLZYhKSLxo
-     Address: Sporerstraße 2, 80333 München, Germany
-     Types: ['restaurant', 'cafe', 'bar', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 1279
-     Business Status: OPERATIONAL
-
-  5. Name: La Fantasia
-     Place ID: ChIJBxW2tuh1nkcRZThWDZu9b2g
-     Address: Seeriederstraße 5, 81675 München, Germany
+  2. Name: Restaurant Everest Katajanokka
+     Place ID: ChIJKTmuu8QLkkYRjnjwSv3yKRQ
+     Address: Luotsikatu 12 A, 00160 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 824
+     Rating: 4.6
+     User Ratings Total: 977
      Business Status: OPERATIONAL
 
-  6. Name: Emmi's Kitchen
-     Place ID: ChIJI_qfkGHfnUcRKAhONnOkwUE
-     Address: Buttermelcherstraße 11-15, 80469 München, Germany
+  3. Name: Ravintola Ragu
+     Place ID: ChIJJwFAR8kLkkYRGBui1u3I3tU
+     Address: Ludviginkatu 3-5, 00130 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 1081
+     Business Status: OPERATIONAL
+
+  4. Name: Lappi Ravintola
+     Place ID: ChIJ36bwCcsLkkYRB4sbBayISh0
+     Address: Annankatu 22, 00100 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.5
-     User Ratings Total: 1388
+     User Ratings Total: 2350
      Business Status: OPERATIONAL
 
-  7. Name: Ratskeller München
-     Place ID: ChIJj-sb1op1nkcRSsLJeqIkhOo
-     Address: Marienplatz 8, 80331 München, Germany
-     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 9756
-     Business Status: OPERATIONAL
-
-  8. Name: JOY OF MADHU München
-     Place ID: ChIJZexAX8XfnUcR8Fb8udPnOx8
-     Address: Holzstraße 19, 80469 München, Germany
+  5. Name: Restaurant Levant Bulevardi
+     Place ID: ChIJVcNOXcoLkkYRGJ9EuqaBUpU
+     Address: Finland, Bulevardi 15, 00120 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.9
+     Rating: 4.6
+     User Ratings Total: 1162
+     Business Status: OPERATIONAL
+
+  6. Name: Restaurant Natura
+     Place ID: ChIJpzAgkckLkkYRy_L0q7_9EO0
+     Address: Iso Roobertinkatu 11, 00120 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 558
+     Business Status: OPERATIONAL
+
+  7. Name: Kappeli
+     Place ID: ChIJEZWOH88LkkYR27YLjPxFXoU
+     Address: Eteläesplanadi 1, 00130 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 4701
+     Business Status: OPERATIONAL
+
+  8. Name: Ravintola Green Hippo Punavuori
+     Place ID: ChIJw-QnOKYLkkYRCnLbZOWTc9g
+     Address: Punavuorenkatu 2, 00120 Helsinki, Finland
+     Types: ['restaurant', 'cafe', 'food', 'store', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 1216
+     Business Status: OPERATIONAL
+
+  9. Name: Friends & Brgrs
+     Place ID: ChIJgevcLcwLkkYRuOBeDgU4zt4
+     Address: Mikonkatu 8, 00100 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 4895
+     Business Status: OPERATIONAL
+
+  10. Name: Restaurant Green Hippo - Töölö
+     Place ID: ChIJ4Zx4ZyILkkYRmS5Hg-olUt8
+     Address: Sandelsinkatu 2, 00260 Helsinki, Finland
+     Types: ['restaurant', 'meal_delivery', 'cafe', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 290
+     Business Status: OPERATIONAL
+
+  11. Name: Restaurant Just Vege
+     Place ID: ChIJdS4iRn8JkkYR8rSnmxrpph8
+     Address: Vaasankatu 15, 00500 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 687
+     Business Status: OPERATIONAL
+
+  12. Name: Restaurant Flät no 14
+     Place ID: ChIJD6czL_4LkkYR52QwVxN3dtU
+     Address: Viides linja 14, 00530 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 434
+     Business Status: OPERATIONAL
+
+  13. Name: Restaurant Yes Yes Yes
+     Place ID: ChIJNemmCskLkkYRtUtQ5ZXEdLc
+     Address: Iso Roobertinkatu 1, 00120 Helsinki, Finland
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.2
+     User Ratings Total: 1252
+     Business Status: OPERATIONAL
+
+  14. Name: Zucchini Vegetarian Cafe
+     Place ID: ChIJnd0BLM8LkkYRdCpzxxi1MXg
+     Address: Fabianinkatu 4, 00130 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.8
      User Ratings Total: 295
      Business Status: OPERATIONAL
 
-  9. Name: Pizzesco
-     Place ID: ChIJx5-MpX3fnUcR9Tsy83A7Q2c
-     Address: Rosenheimer Str. 12, 81669 München, Germany
-     Types: ['meal_takeaway', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 2424
+  15. Name: PyShburg
+     Place ID: ChIJP094fHgLkkYRTrv-BvZr3EI
+     Address: Iso Roobertinkatu 44, 00120 Helsinki, Finland
+     Types: ['restaurant', 'food', 'museum', 'point_of_interest', 'establishment']
+     Rating: 4.9
+     User Ratings Total: 151
      Business Status: OPERATIONAL
 
-  10. Name: Max Pett... Das vegane Restaurant
-     Place ID: ChIJ636rWFjfnUcRQnYqEhCOCOY
-     Address: Pettenkoferstraße 8, 80336 München, Germany
+  16. Name: Restaurant Olivia - Kluuvi
+     Place ID: ChIJNz_F_vELkkYR-GdR1zhf7nw
+     Address: Aleksanterinkatu 9, 00100 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 2825
-     Business Status: OPERATIONAL
-
-  11. Name: Secret Garden
-     Place ID: ChIJtfhzszV1nkcRBeh7QXFaiho
-     Address: Heiliggeiststraße 2 A, 80331 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 1165
-     Business Status: OPERATIONAL
-
-  12. Name: Cotidiano Gärtnerplatz
-     Place ID: ChIJN7wi_2DfnUcRk5JVafGkGRU
-     Address: Gärtnerpl. 6, 80469 München, Germany
-     Types: ['restaurant', 'cafe', 'food', 'point_of_interest', 'establishment']
      Rating: 4.2
-     User Ratings Total: 3651
+     User Ratings Total: 606
      Business Status: OPERATIONAL
 
-  13. Name: Ooh Baby I like it raw / München
-     Place ID: ChIJ5QUQAWLfnUcRMvOkrDJRsjM
-     Address: Rumfordstraße 39, 80469 München, Germany
+  17. Name: Dash Coffee & Zestii Kitchens
+     Place ID: ChIJI6baZZkJkkYRHPw5dbTvqXQ
+     Address: Kaarlenkatu 15, 00530 Helsinki, Finland
      Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.9
+     User Ratings Total: 185
+     Business Status: OPERATIONAL
+
+  18. Name: Ravintola Nolla
+     Place ID: ChIJMy0B7tALkkYRFxxwSiFlRBM
+     Address: Fredrikinkatu 22, 00120 Helsinki, Finland
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.6
-     User Ratings Total: 740
+     User Ratings Total: 753
      Business Status: OPERATIONAL
 
-  14. Name: TRATTORIA SANTA MARIA
-     Place ID: ChIJUwesIjjfnUcRxXd6vfv8okk
-     Address: Falkenstraße 38, 81541 München, Germany
+  19. Name: Faselli Italian street food
+     Place ID: ChIJo4YXR_p2jEYRIfyJjXpxgw0
+     Address: Helsinginkatu 21, 00530 Helsinki, Finland
      Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 935
+     Rating: 4.6
+     User Ratings Total: 325
      Business Status: OPERATIONAL
 
-  15. Name: ONE Nation Munich
-     Place ID: ChIJMZXcMOp1nkcRUxAS5mGpTTM
-     Address: Lenbachpl. 7a, 80333 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 1450
+  20. Name: Restaurant La Famiglia
+     Place ID: ChIJr4OpFcwLkkYRUZjaQ4K6CJ0
+     Address: Keskuskatu 3, 00100 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 3.8
+     User Ratings Total: 2392
      Business Status: OPERATIONAL
 
-  16. Name: Green Club München
-     Place ID: ChIJV7EtTxN1nkcR0AxxPXAm4D4
-     Address: Schellingstraße 23, 80799 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 700
-     Business Status: OPERATIONAL
-
-  17. Name: GIGI TRATTORIA
-     Place ID: ChIJAURPc5nfnUcR5OiQpqHi5ws
-     Address: Rumfordstraße 34, 80469 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.1
-     User Ratings Total: 3489
-     Business Status: OPERATIONAL
-
-  18. Name: Augustiner-Keller
-     Place ID: ChIJe8ga9v11nkcRX8CtPNbgTJs
-     Address: Arnulfstraße 52, 80335 München, Germany
-     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 35546
-     Business Status: OPERATIONAL
-
-  19. Name: Hard Rock Cafe
-     Place ID: ChIJyXn4u4t1nkcRF6utwBttGKQ
-     Address: Platzl 1, 80331 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+  21. Name: Putte's Bar & Pizza Kalevankatu
+     Place ID: ChIJL0IKg8sLkkYRWEOQtALGlEE
+     Address: Kalevankatu 6, 00100 Helsinki, Finland
+     Types: ['meal_delivery', 'bar', 'restaurant', 'point_of_interest', 'food', 'establishment']
      Rating: 4.3
-     User Ratings Total: 12481
+     User Ratings Total: 2500
      Business Status: OPERATIONAL
 
-  20. Name: Taverna Naxos
-     Place ID: ChIJZRsKt-p3nkcRC4npIl4H8wo
-     Address: Verdistraße 33, 81247 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+  22. Name: Restaurant Thai Vegan Kitchen
+     Place ID: ChIJh6tahGkJkkYROK78C5S3LNI
+     Address: Lapinlahdenkatu 9, 00180 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
      Rating: 4.7
-     User Ratings Total: 1690
+     User Ratings Total: 706
      Business Status: OPERATIONAL
 
-  21. Name: SIGGIS v/gan dine & co - Gärtnerplatzviertel
-     Place ID: ChIJ5_spEYp1nkcR2sLr7NX_IT8
-     Address: Buttermelcherstraße 17, 80469 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 1806
+  23. Name: Restaurant Olo
+     Place ID: ChIJcbPkLMkLkkYRFeWoki1-0vk
+     Address: Pohjoisesplanadi 5, 00170 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 610
      Business Status: OPERATIONAL
 
-  22. Name: ORANGE BOX
-     Place ID: ChIJhf73vOt1nkcRds9gRrskPyo
-     Address: Türkenstraße 61, 80799 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 614
+  24. Name: plants by us
+     Place ID: ChIJldEWRmcLkkYRC_nAjTqIwlY
+     Address: Mannerheimintie 14-20, Forum 3rd. Floor, 00100 Helsinki, Finland
+     Types: ['cafe', 'restaurant', 'point_of_interest', 'store', 'food', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 55
      Business Status: OPERATIONAL
 
-  23. Name: California Bean
-     Place ID: ChIJa784sft1nkcRUnsfjSLuyK8
-     Address: Dachauer Str. 12, 80335 München, Germany
-     Types: ['cafe', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 2506
-     Business Status: OPERATIONAL
-
-  24. Name: Gasthof Obermaier
-     Place ID: ChIJca9h4R7gnUcRpc_Y9DVA8Q4
-     Address: Truderinger Str. 306, 81825 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 1649
-     Business Status: OPERATIONAL
-
-  25. Name: Wirtshaus am Bavariapark
-     Place ID: ChIJA90z66zYnUcRDGIjg6s8BFA
-     Address: Theresienhöhe 15, 80339 München, Germany
-     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.1
-     User Ratings Total: 4142
-     Business Status: OPERATIONAL
-
-  26. Name: Der kleine Flo
-     Place ID: ChIJe-rD4fV1nkcRNk5AlWoeV5k
-     Address: Josephspitalstraße 4, 80331 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 2758
-     Business Status: OPERATIONAL
-
-  27. Name: Das METTA - glutenfrei und vegan
-     Place ID: ChIJASaWjdJ1nkcRSESvjVlV7-I
-     Address: Barer Str. 48, 80799 München, Germany
-     Types: ['cafe', 'gym', 'store', 'restaurant', 'food', 'point_of_interest', 'health', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 125
-     Business Status: OPERATIONAL
-
-  28. Name: Katzentempel Munich
-     Place ID: ChIJtcZ5bex1nkcRMl_TS4tZslk
-     Address: Türkenstraße 29, 80799 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+  25. Name: Lazy Fox
+     Place ID: ChIJZ9F5BZsLkkYR68YXAJrE1Xo
+     Address: Albertinkatu 36, 00180 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
      Rating: 4.2
-     User Ratings Total: 3201
+     User Ratings Total: 608
      Business Status: OPERATIONAL
 
-  29. Name: Bernis Nudelbrett
-     Place ID: ChIJvS6b2vEBCUERXO2J-3KK8ao
-     Address: Peterspl. 8, 80331 München, Germany
-     Types: ['meal_takeaway', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.1
-     User Ratings Total: 2793
+  26. Name: Ravintola Sansar (Satkar)
+     Place ID: ChIJ3zAqRnULkkYRZ0i3zX3f3Yc
+     Address: Fredrikinkatu 46, 00100 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.9
+     User Ratings Total: 43
      Business Status: OPERATIONAL
 
-  30. Name: Ristorante Risotto
-     Place ID: ChIJcTp0TDJ2nkcRY8vuzQHA428
-     Address: Hirschgartenallee 38, 80639 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 1630
-     Business Status: OPERATIONAL
-
-  31. Name: Green Elephant – Organic Restaurant
-     Place ID: ChIJTecd593ZnUcRMW4jhTMHZ8s
-     Address: Guardinistraße 6, 81375 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 428
-     Business Status: OPERATIONAL
-
-  32. Name: Restaurant & Bar Casa Nostra
-     Place ID: ChIJZfTGlRh1nkcR92A1RPe_u9w
-     Address: Gabelsbergerstraße 97, 80333 München, Germany
-     Types: ['restaurant', 'bar', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 1136
-     Business Status: OPERATIONAL
-
-  33. Name: Mixto Verde Pizzeria Cafe
-     Place ID: ChIJDQnnFFnfnUcR3bvhdVmMedQ
-     Address: Thalkirchner Str. 11, 80337 München, Germany
-     Types: ['bar', 'meal_takeaway', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
+  27. Name: Pizzeria da Chicco
+     Place ID: ChIJow2syS0LkkYRCdcI4DKvF5Q
+     Address: Caloniuksenkatu 3, 00100 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
      Rating: 4.8
-     User Ratings Total: 942
+     User Ratings Total: 322
      Business Status: OPERATIONAL
 
-  34. Name: Ristorante VI VADI Cucina Italiana
-     Place ID: ChIJ03A4l_t1nkcRuPQFEbqiBPM
-     Address: Marsstraße 6, 80335 München, Germany
-     Types: ['meal_delivery', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 773
-     Business Status: OPERATIONAL
-
-  35. Name: Keep Banana Coffee & Gelato
-     Place ID: ChIJgyheZnDfnUcRdY8QD4t1SIE
-     Address: Sendlinger Str. 49, 80331 München, Germany
-     Types: ['cafe', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 451
-     Business Status: OPERATIONAL
-
-  36. Name: Doctor Drooly
-     Place ID: ChIJdR7TBV3fnUcRvlm1_vdsY0o
-     Address: Häberlstraße 7, 80337 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 1304
-     Business Status: OPERATIONAL
-
-  37. Name: Tavernetta
-     Place ID: ChIJJZQsFYl1nkcRoURoemQNjTY
-     Address: Hildegardstraße 9, 80539 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 504
-     Business Status: OPERATIONAL
-
-  38. Name: bodhi | München
-     Place ID: ChIJb8qbNKrYnUcRmTIK1niVTRM
-     Address: Ligsalzstraße 23, 80339 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 2708
-     Business Status: OPERATIONAL
-
-  39. Name: Servus Heidi
-     Place ID: ChIJNynMuAJ2nkcR6X00i_5MLno
-     Address: Landsberger Str. 73, 80339 München, Germany
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 1634
-     Business Status: OPERATIONAL
-
-  40. Name: Hungriges Herz
-     Place ID: ChIJ5yB36WbfnUcR6Q8TEb5Pw1M
-     Address: Fraunhoferstraße 42, 80469 München, Germany
-     Types: ['restaurant', 'meal_delivery', 'cafe', 'meal_takeaway', 'food', 'point_of_interest', 'establishment']
+  28. Name: Ravintola Kolme Kruunua
+     Place ID: ChIJ0fx179ALkkYRQKgGtlGQAA0
+     Address: Liisankatu 5, 00170 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
      Rating: 4.4
-     User Ratings Total: 2274
+     User Ratings Total: 1734
+     Business Status: OPERATIONAL
+
+  29. Name: Restaurant Levant Töölö
+     Place ID: ChIJK1O57IULkkYR_nn18UzC_lQ
+     Address: Runeberginkatu 59, 00260 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 191
+     Business Status: OPERATIONAL
+
+  30. Name: Hani Cafe’chi
+     Place ID: ChIJa9GaibYLkkYR1LzlD1Ml2U4
+     Address: Liisankatu 3, 00170 Helsinki, Finland
+     Types: ['cafe', 'bar', 'restaurant', 'point_of_interest', 'store', 'food', 'establishment']
+     Rating: 4.9
+     User Ratings Total: 514
+     Business Status: OPERATIONAL
+
+  31. Name: Restaurant Karaz
+     Place ID: ChIJEyrZvEkLkkYR4r4OUI3y7Kw
+     Address: 5W8P+6C, 00100 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 607
+     Business Status: OPERATIONAL
+
+  32. Name: Ravintola Nokka
+     Place ID: ChIJaXUuQcULkkYRa6IUULmj8VI
+     Address: Kanavaranta 7 F, 00160 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 1093
+     Business Status: OPERATIONAL
+
+  33. Name: Ravintola Emo
+     Place ID: ChIJP_oDLckLkkYRPraiCa4LnrE
+     Address: Kasarmikatu 44, 00130 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 776
+     Business Status: OPERATIONAL
+
+  34. Name: Baskeri & Basso
+     Place ID: ChIJd8mTo7YLkkYRXL0C9Si-nZk
+     Address: Tehtaankatu 27-29 (sisäpiha), 00150 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 793
+     Business Status: OPERATIONAL
+
+  35. Name: Restaurant Mamma Rosa
+     Place ID: ChIJXwShkC8KkkYRgMfQL_q0pso
+     Address: Runeberginkatu 55, 00260 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 2307
+     Business Status: OPERATIONAL
+
+  36. Name: Restaurant Zetor
+     Place ID: ChIJYY9aZ8wLkkYRKNSayh5JliU
+     Address: Mannerheimintie 3-5, 00100 Helsinki, Finland
+     Types: ['restaurant', 'bar', 'night_club', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.2
+     User Ratings Total: 4143
+     Business Status: OPERATIONAL
+
+  37. Name: Pupu Stockmann
+     Place ID: ChIJ17j2-ssLkkYRQ8RyldI_0b4
+     Address: Aleksanterinkatu 52, 00100 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4
+     User Ratings Total: 293
+     Business Status: OPERATIONAL
+
+  38. Name: Spis
+     Place ID: ChIJYV869MgLkkYRNBKF1nJeYes
+     Address: Kasarmikatu 26, 00130 Helsinki, Finland
+     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 281
+     Business Status: OPERATIONAL
+
+  39. Name: Restaurant Pupu Tennispalatsi
+     Place ID: ChIJv5xGn5sLkkYRsWM1_o_50n4
+     Address: Fredrikinkatu 65, 00100 Helsinki, Finland
+     Types: ['meal_takeaway', 'restaurant', 'point_of_interest', 'food', 'establishment']
+     Rating: 3.9
+     User Ratings Total: 71
      Business Status: OPERATIONAL
 
