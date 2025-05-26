@@ -1,0 +1,80 @@
+/* frontend/src/components/EstablishmentCard/EstablishmentCard.module.css */
+.establishmentCard {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;      /* Subtle border */
+    border-radius: 8px;             /* Rounded corners */
+    padding: 15px;                  /* Padding for mobile */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Softer shadow */
+    display: flex;                  /* Allows for flexible internal layout if needed */
+    flex-direction: column;         /* Stacks name, status, address vertically */
+    text-decoration: none;          /* Remove underline from the link */
+    color: inherit;                 /* Make text color inherit from parent, not link default */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    /* margin-bottom: 15px; /* Optional: if cards are in a flex column, this adds space */
+                           /* If using grid for the list, 'gap' on the grid is better */
+  }
+  
+  .establishmentCard:hover {
+    transform: translateY(-3px);    /* Slight lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Enhanced shadow on hover */
+  }
+  
+  .name {
+    font-size: 1.1rem; /* Slightly larger for emphasis, good for mobile */
+    font-weight: bold;
+    color: #2c3e50;      /* Darker color for name */
+    margin: 0 0 8px 0;  /* Space below the name, before the status */
+    line-height: 1.3;
+  }
+  
+  .gfStatus {
+    display: inline-block; /* Makes the span behave like a block for padding but flow inline */
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;    /* Smaller font for the status badge */
+    font-weight: 500;
+    margin-bottom: 8px;   /* Space below the status badge */
+    text-align: left;     /* Align with name if name is also left-aligned */
+    align-self: flex-start; /* Important: prevents the badge from stretching full width if card is flex */
+  }
+  
+  /* Specific styles for different GF statuses */
+  .gfStatusDedicated {
+    color: white;
+    background-color: #28a745; /* Green */
+  }
+  .gfStatusOptions {
+    color: white;
+    background-color: #007bff; /* Blue */
+  }
+  .gfStatusUnclear {
+    color: white;
+    background-color: #6c757d; /* Gray */
+  }
+  .gfStatusUnknown { /* Fallback style if no specific class is matched */
+    color: #212529; /* Dark text */
+    background-color: #ffc107; /* Warning yellow */
+  }
+  
+  .address {
+    font-size: 0.85rem; /* Slightly smaller font for address */
+    color: #555;         /* Lighter text color for address */
+    margin: 0;            /* Remove default paragraph margin */
+    line-height: 1.4;
+  }
+  
+  /* Media query for larger screens (optional adjustments for card padding or font sizes if needed) */
+  @media (min-width: 768px) {
+    .establishmentCard {
+      padding: 20px; /* Slightly more padding on larger cards */
+    }
+    .name {
+      font-size: 1.2rem;
+    }
+    .gfStatus {
+      font-size: 0.85rem;
+    }
+    .address {
+      font-size: 0.9rem;
+    }
+  }

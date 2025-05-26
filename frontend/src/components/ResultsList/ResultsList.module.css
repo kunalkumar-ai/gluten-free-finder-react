@@ -1,0 +1,56 @@
+/* frontend/src/components/ResultsList/ResultsList.module.css */
+.resultsGrid {
+    display: grid;
+    gap: 15px; /* Gap between cards on mobile */
+    /* By default, grid items will stack (1 column) */
+  }
+  
+  .userMessage { /* Renamed from noResults for more general use */
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-style: italic;
+    background-color: #e9ecef; /* Consistent with App.module.css feedbackMessage */
+    color: #495057;       /* Consistent with App.module.css feedbackMessage */
+  }
+  
+  .rawOutputOnError {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff3cd; /* Light yellow for warning */
+    border: 1px solid #ffeeba;
+    border-radius: 4px;
+  }
+  
+  .rawOutputOnError h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #856404;
+  }
+  
+  .rawOutputOnError pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    max-height: 200px; /* Limit height */
+    overflow-y: auto;  /* Allow scroll */
+    font-size: 0.8rem;
+  }
+  
+  /* Media queries for multi-column layout on larger screens */
+  @media (min-width: 600px) { /* Example: Tablets and up */
+    .resultsGrid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+      gap: 20px; /* Slightly larger gap */
+    }
+  }
+  
+  @media (min-width: 992px) { /* Example: Desktops */
+    .resultsGrid {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+  }

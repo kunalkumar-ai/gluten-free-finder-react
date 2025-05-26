@@ -1,0 +1,46 @@
+/* frontend/src/components/Navigation/Navigation.module.css */
+.mainNav {
+    background-color: #3498db; /* Your original color */
+    padding: 8px 0; /* Adjusted padding for mobile */
+    border-radius: 5px;
+    margin-bottom: 20px; /* Space below navigation */
+  }
+  
+  .navContainer {
+    display: flex;
+    flex-direction: column; /* Stack links vertically on mobile by default */
+    align-items: center; /* Center-align stacked links */
+    gap: 5px; /* Small gap between stacked links */
+  }
+  
+  .navItem {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px; /* Padding for touch targets */
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+    text-align: center; /* Ensure text is centered within the link */
+    width: 90%; /* Make tappable area wider on mobile */
+    max-width: 200px; /* But don't let them get too wide */
+  }
+  
+  .navItem:hover {
+    background-color: #2980b9; /* Your original hover color */
+  }
+  
+  /* Styles for larger screens (e.g., tablets and up) */
+  @media (min-width: 600px) { /* Or your preferred breakpoint for horizontal nav */
+    .mainNav {
+      padding: 10px; /* Restore original padding */
+    }
+    .navContainer {
+      flex-direction: row; /* Links side-by-side */
+      justify-content: center; /* Center links horizontally */
+      gap: 10px; /* Original gap for horizontal links */
+    }
+    .navItem {
+      width: auto; /* Let links take their natural width */
+      padding: 10px 20px; /* Original padding */
+      max-width: none;
+    }
+  }
