@@ -1,0 +1,24 @@
+/* frontend/src/App.module.css */
+.appContainer {
+    width: 100%; /* By default, use full available width */
+    padding: 15px; /* Padding for mobile - gives some breathing room */
+    margin: 0 auto; /* Still useful if a max-width is applied later */
+  }
+  
+  /* For larger screens (e.g., tablets and up), you might want to constrain the width */
+  @media (min-width: 768px) { /* Example breakpoint for tablets */
+    .appContainer {
+      width: 90%;       /* Your desired width for larger screens */
+      max-width: 1600px;/* Your desired max-width */
+      padding: 20px;    /* Your desired padding for larger screens */
+    }
+  }
+  
+  /* You can add more breakpoints if needed, for example: */
+  /*
+  @media (min-width: 1200px) { 
+    .appContainer {
+       // Adjustments for very large desktops if necessary 
+    }
+  }
+  */
