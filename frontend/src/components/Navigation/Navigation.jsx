@@ -7,7 +7,7 @@ function Navigation() {
     { text: "Home", href: "/" },
     // { text: "Gluten-Free News", href: "/news" }, // REMOVED
     // { text: "Apps", href: "/apps" },             // REMOVED
-    { text: "Scanner", href: "/scanner" },
+    //{ text: "Scanner", href: "/scanner" },
   ];
 
   return (
