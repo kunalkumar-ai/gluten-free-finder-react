@@ -1,323 +1,323 @@
-Search City: Helsinki
+Search City: NEW YORK
 Search Country: Not specified
-Search Type: restaurants
-Effective Text Query: gluten-free restaurants in Helsinki
-Google API Type Parameter: restaurant
+Search Type: bakery
+Effective Text Query: gluten-free bakeries in NEW YORK
+Google API Type Parameter: bakery
 
 Total items collected before deduplication: 39
 Total unique operational establishments found after deduplication: 39
 Number of duplicate items removed: 0
 
 --- Unique Results from Google Places API (Deduplicated by Place ID) ---
-  1. Name: Restaurant Ristorante Argegno
-     Place ID: ChIJgy8BkBcLkkYRsJ2WoQhfpBc
-     Address: Eerikinkatu 7, 00100 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 663
-     Business Status: OPERATIONAL
-
-  2. Name: Restaurant Everest Katajanokka
-     Place ID: ChIJKTmuu8QLkkYRjnjwSv3yKRQ
-     Address: Luotsikatu 12 A, 00160 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 977
-     Business Status: OPERATIONAL
-
-  3. Name: Ravintola Ragu
-     Place ID: ChIJJwFAR8kLkkYRGBui1u3I3tU
-     Address: Ludviginkatu 3-5, 00130 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 1081
-     Business Status: OPERATIONAL
-
-  4. Name: Lappi Ravintola
-     Place ID: ChIJ36bwCcsLkkYRB4sbBayISh0
-     Address: Annankatu 22, 00100 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+  1. Name: Senza Gluten by Jemiko - 100% Gluten Free Cafe & Bakery
+     Place ID: ChIJM95IwLZZwokRpZhaBV9TlYY
+     Address: 171 Sullivan St, New York, NY 10012, United States
+     Types: ['cafe', 'bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
      Rating: 4.5
-     User Ratings Total: 2350
+     User Ratings Total: 331
      Business Status: OPERATIONAL
 
-  5. Name: Restaurant Levant Bulevardi
-     Place ID: ChIJVcNOXcoLkkYRGJ9EuqaBUpU
-     Address: Finland, Bulevardi 15, 00120 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 1162
+  2. Name: Noglu
+     Place ID: ChIJO_vFU6JYwokRct0ZO0gNxus
+     Address: 1260 Madison Ave, New York, NY 10128, United States
+     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 3.5
+     User Ratings Total: 756
      Business Status: OPERATIONAL
 
-  6. Name: Restaurant Natura
-     Place ID: ChIJpzAgkckLkkYRy_L0q7_9EO0
-     Address: Iso Roobertinkatu 11, 00120 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 558
-     Business Status: OPERATIONAL
-
-  7. Name: Kappeli
-     Place ID: ChIJEZWOH88LkkYR27YLjPxFXoU
-     Address: Eteläesplanadi 1, 00130 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 4701
-     Business Status: OPERATIONAL
-
-  8. Name: Ravintola Green Hippo Punavuori
-     Place ID: ChIJw-QnOKYLkkYRCnLbZOWTc9g
-     Address: Punavuorenkatu 2, 00120 Helsinki, Finland
-     Types: ['restaurant', 'cafe', 'food', 'store', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 1216
-     Business Status: OPERATIONAL
-
-  9. Name: Friends & Brgrs
-     Place ID: ChIJgevcLcwLkkYRuOBeDgU4zt4
-     Address: Mikonkatu 8, 00100 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 4895
-     Business Status: OPERATIONAL
-
-  10. Name: Restaurant Green Hippo - Töölö
-     Place ID: ChIJ4Zx4ZyILkkYRmS5Hg-olUt8
-     Address: Sandelsinkatu 2, 00260 Helsinki, Finland
-     Types: ['restaurant', 'meal_delivery', 'cafe', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 290
-     Business Status: OPERATIONAL
-
-  11. Name: Restaurant Just Vege
-     Place ID: ChIJdS4iRn8JkkYR8rSnmxrpph8
-     Address: Vaasankatu 15, 00500 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 687
-     Business Status: OPERATIONAL
-
-  12. Name: Restaurant Flät no 14
-     Place ID: ChIJD6czL_4LkkYR52QwVxN3dtU
-     Address: Viides linja 14, 00530 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 434
-     Business Status: OPERATIONAL
-
-  13. Name: Restaurant Yes Yes Yes
-     Place ID: ChIJNemmCskLkkYRtUtQ5ZXEdLc
-     Address: Iso Roobertinkatu 1, 00120 Helsinki, Finland
-     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.2
-     User Ratings Total: 1252
-     Business Status: OPERATIONAL
-
-  14. Name: Zucchini Vegetarian Cafe
-     Place ID: ChIJnd0BLM8LkkYRdCpzxxi1MXg
-     Address: Fabianinkatu 4, 00130 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 295
-     Business Status: OPERATIONAL
-
-  15. Name: PyShburg
-     Place ID: ChIJP094fHgLkkYRTrv-BvZr3EI
-     Address: Iso Roobertinkatu 44, 00120 Helsinki, Finland
-     Types: ['restaurant', 'food', 'museum', 'point_of_interest', 'establishment']
-     Rating: 4.9
-     User Ratings Total: 151
-     Business Status: OPERATIONAL
-
-  16. Name: Restaurant Olivia - Kluuvi
-     Place ID: ChIJNz_F_vELkkYR-GdR1zhf7nw
-     Address: Aleksanterinkatu 9, 00100 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.2
-     User Ratings Total: 606
-     Business Status: OPERATIONAL
-
-  17. Name: Dash Coffee & Zestii Kitchens
-     Place ID: ChIJI6baZZkJkkYRHPw5dbTvqXQ
-     Address: Kaarlenkatu 15, 00530 Helsinki, Finland
-     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.9
-     User Ratings Total: 185
-     Business Status: OPERATIONAL
-
-  18. Name: Ravintola Nolla
-     Place ID: ChIJMy0B7tALkkYRFxxwSiFlRBM
-     Address: Fredrikinkatu 22, 00120 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 753
-     Business Status: OPERATIONAL
-
-  19. Name: Faselli Italian street food
-     Place ID: ChIJo4YXR_p2jEYRIfyJjXpxgw0
-     Address: Helsinginkatu 21, 00530 Helsinki, Finland
-     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 325
-     Business Status: OPERATIONAL
-
-  20. Name: Restaurant La Famiglia
-     Place ID: ChIJr4OpFcwLkkYRUZjaQ4K6CJ0
-     Address: Keskuskatu 3, 00100 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 3.8
-     User Ratings Total: 2392
-     Business Status: OPERATIONAL
-
-  21. Name: Putte's Bar & Pizza Kalevankatu
-     Place ID: ChIJL0IKg8sLkkYRWEOQtALGlEE
-     Address: Kalevankatu 6, 00100 Helsinki, Finland
-     Types: ['meal_delivery', 'bar', 'restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 2500
-     Business Status: OPERATIONAL
-
-  22. Name: Restaurant Thai Vegan Kitchen
-     Place ID: ChIJh6tahGkJkkYROK78C5S3LNI
-     Address: Lapinlahdenkatu 9, 00180 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 706
-     Business Status: OPERATIONAL
-
-  23. Name: Restaurant Olo
-     Place ID: ChIJcbPkLMkLkkYRFeWoki1-0vk
-     Address: Pohjoisesplanadi 5, 00170 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 610
-     Business Status: OPERATIONAL
-
-  24. Name: plants by us
-     Place ID: ChIJldEWRmcLkkYRC_nAjTqIwlY
-     Address: Mannerheimintie 14-20, Forum 3rd. Floor, 00100 Helsinki, Finland
-     Types: ['cafe', 'restaurant', 'point_of_interest', 'store', 'food', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 55
-     Business Status: OPERATIONAL
-
-  25. Name: Lazy Fox
-     Place ID: ChIJZ9F5BZsLkkYR68YXAJrE1Xo
-     Address: Albertinkatu 36, 00180 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.2
-     User Ratings Total: 608
-     Business Status: OPERATIONAL
-
-  26. Name: Ravintola Sansar (Satkar)
-     Place ID: ChIJ3zAqRnULkkYRZ0i3zX3f3Yc
-     Address: Fredrikinkatu 46, 00100 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.9
+  3. Name: The Love Bakery - ONLINE ORDERS ONLY.
+     Place ID: ChIJmaCukB0tDogRR_TCGPftJfQ
+     Address: 150 Ludlow St, New York, NY 10002, United States
+     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 5
      User Ratings Total: 43
      Business Status: OPERATIONAL
 
-  27. Name: Pizzeria da Chicco
-     Place ID: ChIJow2syS0LkkYRCdcI4DKvF5Q
-     Address: Caloniuksenkatu 3, 00100 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 322
-     Business Status: OPERATIONAL
-
-  28. Name: Ravintola Kolme Kruunua
-     Place ID: ChIJ0fx179ALkkYRQKgGtlGQAA0
-     Address: Liisankatu 5, 00170 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 1734
-     Business Status: OPERATIONAL
-
-  29. Name: Restaurant Levant Töölö
-     Place ID: ChIJK1O57IULkkYR_nn18UzC_lQ
-     Address: Runeberginkatu 59, 00260 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 191
-     Business Status: OPERATIONAL
-
-  30. Name: Hani Cafe’chi
-     Place ID: ChIJa9GaibYLkkYR1LzlD1Ml2U4
-     Address: Liisankatu 3, 00170 Helsinki, Finland
-     Types: ['cafe', 'bar', 'restaurant', 'point_of_interest', 'store', 'food', 'establishment']
-     Rating: 4.9
-     User Ratings Total: 514
-     Business Status: OPERATIONAL
-
-  31. Name: Restaurant Karaz
-     Place ID: ChIJEyrZvEkLkkYR4r4OUI3y7Kw
-     Address: 5W8P+6C, 00100 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 607
-     Business Status: OPERATIONAL
-
-  32. Name: Ravintola Nokka
-     Place ID: ChIJaXUuQcULkkYRa6IUULmj8VI
-     Address: Kanavaranta 7 F, 00160 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 1093
-     Business Status: OPERATIONAL
-
-  33. Name: Ravintola Emo
-     Place ID: ChIJP_oDLckLkkYRPraiCa4LnrE
-     Address: Kasarmikatu 44, 00130 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 776
-     Business Status: OPERATIONAL
-
-  34. Name: Baskeri & Basso
-     Place ID: ChIJd8mTo7YLkkYRXL0C9Si-nZk
-     Address: Tehtaankatu 27-29 (sisäpiha), 00150 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+  4. Name: Baked Cravings
+     Place ID: ChIJI7Fh2wL2wokRt0S8vgjwuBo
+     Address: 1673 Lexington Ave, New York, NY 10029, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
      Rating: 4.7
-     User Ratings Total: 793
+     User Ratings Total: 427
      Business Status: OPERATIONAL
 
-  35. Name: Restaurant Mamma Rosa
-     Place ID: ChIJXwShkC8KkkYRgMfQL_q0pso
-     Address: Runeberginkatu 55, 00260 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 2307
+  5. Name: By the Way Bakery
+     Place ID: ChIJCT3jrb1YwokRvuD50zqFjss
+     Address: 1236 Lexington Ave, New York, NY 10028, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 409
      Business Status: OPERATIONAL
 
-  36. Name: Restaurant Zetor
-     Place ID: ChIJYY9aZ8wLkkYRKNSayh5JliU
-     Address: Mannerheimintie 3-5, 00100 Helsinki, Finland
-     Types: ['restaurant', 'bar', 'night_club', 'point_of_interest', 'food', 'establishment']
-     Rating: 4.2
-     User Ratings Total: 4143
-     Business Status: OPERATIONAL
-
-  37. Name: Pupu Stockmann
-     Place ID: ChIJ17j2-ssLkkYRQ8RyldI_0b4
-     Address: Aleksanterinkatu 52, 00100 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+  6. Name: Posh Pop Bakeshop
+     Place ID: ChIJ-YCPWQxZwokRn0GwiaTFAQQ
+     Address: 192 Bleecker St, New York, NY 10012, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
      Rating: 4
-     User Ratings Total: 293
+     User Ratings Total: 777
      Business Status: OPERATIONAL
 
-  38. Name: Spis
-     Place ID: ChIJYV869MgLkkYRNBKF1nJeYes
-     Address: Kasarmikatu 26, 00130 Helsinki, Finland
-     Types: ['restaurant', 'point_of_interest', 'food', 'establishment']
+  7. Name: Posh Pop Bakeshop
+     Place ID: ChIJOwDQ8ENZwokRDi3mvX-MKTM
+     Address: 315 W 39th St, New York, NY 10018, United States
+     Types: ['cafe', 'bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 58
+     Business Status: OPERATIONAL
+
+  8. Name: Everybody Eats
+     Place ID: ChIJl8AkhVVawokRZv4EvtEkWTs
+     Address: 294 3rd Ave, Brooklyn, NY 11215, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 92
+     Business Status: OPERATIONAL
+
+  9. Name: By the Way Bakery
+     Place ID: ChIJSeVlVYJYwokRjpt2QnPaflM
+     Address: 2440 Broadway, New York, NY 10024, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 321
+     Business Status: OPERATIONAL
+
+  10. Name: Unregular Bakery
+     Place ID: ChIJ52QMLUtZwokRZwW4R7FUo2M
+     Address: 124 4th Ave, New York, NY 10003, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
      Rating: 4.8
-     User Ratings Total: 281
+     User Ratings Total: 853
      Business Status: OPERATIONAL
 
-  39. Name: Restaurant Pupu Tennispalatsi
-     Place ID: ChIJv5xGn5sLkkYRsWM1_o_50n4
-     Address: Fredrikinkatu 65, 00100 Helsinki, Finland
-     Types: ['meal_takeaway', 'restaurant', 'point_of_interest', 'food', 'establishment']
-     Rating: 3.9
-     User Ratings Total: 71
+  11. Name: Magnolia Bakery - Rockefeller Center
+     Place ID: ChIJdWPaMf9YwokR5yrqB2DEXNc
+     Address: 1240 6th Ave, New York, NY 10020, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 7560
+     Business Status: OPERATIONAL
+
+  12. Name: Big Booty Bread Co
+     Place ID: ChIJNQWc_7pZwokRtRTCvPI8kHg
+     Address: 261 W 23rd St, New York, NY 10011, United States
+     Types: ['bakery', 'clothing_store', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 377
+     Business Status: OPERATIONAL
+
+  13. Name: NY Bakery and Desserts
+     Place ID: ChIJx6V9OoJZwokRPVJDQ5gA8nU
+     Address: 512 7th Ave, New York, NY 10018, United States
+     Types: ['bakery', 'cafe', 'storage', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 2980
+     Business Status: OPERATIONAL
+
+  14. Name: Buttercup BakeShop
+     Place ID: ChIJaUHNruNYwokRx4EUHWZqD1g
+     Address: 973 2nd Ave, New York, NY 10022, United States
+     Types: ['cafe', 'bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 884
+     Business Status: OPERATIONAL
+
+  15. Name: Sugar Sweet Sunshine Bakery
+     Place ID: ChIJme6ybIFZwokRaVisOt57fCw
+     Address: 365 Grand St, New York, NY 10002, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 691
+     Business Status: OPERATIONAL
+
+  16. Name: Happy Zoe Vegan Bakery
+     Place ID: ChIJTSX5qcdZwokRfVmgTWBDxZI
+     Address: 102 B Nassau Ave, Brooklyn, NY 11222, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 449
+     Business Status: OPERATIONAL
+
+  17. Name: Levain Bakery – NoHo, NYC
+     Place ID: ChIJdXpUxMtZwokRq904Bbqnuw0
+     Address: 340 Lafayette St, New York, NY 10012, United States
+     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 3054
+     Business Status: OPERATIONAL
+
+  18. Name: Little Cupcake Bakeshop
+     Place ID: ChIJJ3ZdWI9ZwokR23PXSej8iqw
+     Address: 30 Prince St, New York, NY 10012, United States
+     Types: ['bakery', 'cafe', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.2
+     User Ratings Total: 1651
+     Business Status: OPERATIONAL
+
+  19. Name: Sans Bakery
+     Place ID: ChIJAQAAN9NewokR2dCgPoJCF3w
+     Address: The Falchi Building, 3100 47th Ave, Long Island City, NY 11101, United States
+     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 18
+     Business Status: OPERATIONAL
+
+  20. Name: Mia's Brooklyn Bakery
+     Place ID: ChIJb6wLHk5awokRxFwHikoBsnQ
+     Address: 139 Smith St, Brooklyn, NY 11201, United States
+     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 3132
+     Business Status: OPERATIONAL
+
+  21. Name: The Protein Bakery
+     Place ID: ChIJl1EvDKNZwokRRUvt0vY5twU
+     Address: 144 W 19th St, New York, NY 10011, United States
+     Types: ['bakery', 'health', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 119
+     Business Status: OPERATIONAL
+
+  22. Name: Clementine Bakery
+     Place ID: ChIJ53fC_5VbwokRaTVVX0NrNZo
+     Address: 395 Classon Ave, Brooklyn, NY 11238, United States
+     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 1044
+     Business Status: OPERATIONAL
+
+  23. Name: Empire Cake
+     Place ID: ChIJVVVVVcZZwokRZNH0tdJIhY8
+     Address: 112 8th Ave, New York, NY 10011, United States
+     Types: ['bakery', 'cafe', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 783
+     Business Status: OPERATIONAL
+
+  24. Name: Funny Face Bakery
+     Place ID: ChIJ26ciZR1ZwokRJJ1xIDHnCKY
+     Address: 319 Lafayette St, New York, NY 10012, United States
+     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 245
+     Business Status: OPERATIONAL
+
+  25. Name: Padoca Bakery + Cakes
+     Place ID: ChIJwc5zFsJYwokRk4HHVMtS74A
+     Address: 210 E 67th St, New York, NY 10065, United States
+     Types: ['bakery', 'cafe', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 342
+     Business Status: OPERATIONAL
+
+  26. Name: Funny Face Bakery
+     Place ID: ChIJF1mkwpxZwokRvZZDgpMBU6Y
+     Address: 6 Fulton St, New York, NY 10038, United States
+     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 357
+     Business Status: OPERATIONAL
+
+  27. Name: Charlotte Patisserie
+     Place ID: ChIJr9ChH1BawokRn-65kANU1nY
+     Address: 201 Court St, Brooklyn, NY 11201, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 167
+     Business Status: OPERATIONAL
+
+  28. Name: Mia's Brooklyn Bakery
+     Place ID: ChIJcePhlShZwokR-aflUFkOA84
+     Address: 716 7th Ave, New York, NY 10036, United States
+     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 466
+     Business Status: OPERATIONAL
+
+  29. Name: Michaeli Bakery
+     Place ID: ChIJ3R8TuhdbwokRhk8J3gQ_p50
+     Address: 115A Division St, New York, NY 10002, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 374
+     Business Status: OPERATIONAL
+
+  30. Name: Off the Wheat- Sweets and Eats
+     Place ID: ChIJheg7vBBZwokRtAnAiQhFw_w
+     Address: Union Square W, New York, NY 10003, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.9
+     User Ratings Total: 13
+     Business Status: OPERATIONAL
+
+  31. Name: Bradley Bake Shop Gluten-free
+     Place ID: ChIJVVXFKf35wokR-l9nM5bNNPc
+     Address: 55B River Rd, Bogota, NJ 07603, United States
+     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 156
+     Business Status: OPERATIONAL
+
+  32. Name: Dominique Ansel Bakery
+     Place ID: ChIJP0KOWoxZwokRmvPiQAIaH1A
+     Address: 189 Spring St, New York, NY 10012, United States
+     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 8645
+     Business Status: OPERATIONAL
+
+  33. Name: Baking Mama
+     Place ID: ChIJX12NqlhXwokRwLmhiC24Mg8
+     Address: 88 Hudson St, Hoboken, NJ 07030, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 136
+     Business Status: OPERATIONAL
+
+  34. Name: Russ & Daughters
+     Place ID: ChIJ7VEEjYNZwokRS0bdsXA3uyg
+     Address: 179 E Houston St, New York, NY 10002, United States
+     Types: ['meal_takeaway', 'grocery_or_supermarket', 'bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 4283
+     Business Status: OPERATIONAL
+
+  35. Name: Ladurée
+     Place ID: ChIJM767a4xZwokRXyq8NCoE33I
+     Address: 398 W Broadway, New York, NY 10012, United States
+     Types: ['cafe', 'bakery', 'park', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 3503
+     Business Status: OPERATIONAL
+
+  36. Name: Modern Bread and Bagel
+     Place ID: ChIJ38ApNi1ZwokRtQP2nJLHp-c
+     Address: 139 W 14th St, New York, NY 10011, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 533
+     Business Status: OPERATIONAL
+
+  37. Name: Sugar Sweet Sunshine Bakery
+     Place ID: ChIJi7ngLWZZwokR4wzNzjwjNxY
+     Address: 88 Essex St, New York, NY 10002, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 3.8
+     User Ratings Total: 53
+     Business Status: OPERATIONAL
+
+  38. Name: Petit Chou
+     Place ID: ChIJd5Fjv9NZwokR5ssUKnN5kPI
+     Address: 229 1st Ave, New York, NY 10003, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 395
+     Business Status: OPERATIONAL
+
+  39. Name: Knead Love Bakery
+     Place ID: ChIJETg-qjJfwokRppASIDJIzy8
+     Address: New York, NY 10003, United States
+     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.7
+     User Ratings Total: 15
      Business Status: OPERATIONAL
 
