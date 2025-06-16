@@ -4,3 +4,4 @@ flask-cors==4.0.0
 google-generativeai==0.3.0
 python-dotenv==1.0.0
 requests
+supabase==2.5.0
