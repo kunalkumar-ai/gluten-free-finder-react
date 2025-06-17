@@ -32,13 +32,12 @@ html, body, #root, .App, .App > div {
 
 /* --- Style for the SIMPLE BLUE user location dot --- */
 .user-location-dot {
-  background-color: #4A90E2; /* Blue color */
+  background-color: #4A90E2;
   width: 16px;
   height: 16px;
   border-radius: 50%;
   border: 2px solid #FFFFFF;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  /* Animation property has been removed */
 }
 
 
@@ -59,38 +58,45 @@ html, body, #root, .App, .App > div {
   animation: slide-up 0.5s ease-out;
 }
 
-.place-detail-card h3 {
-  margin: 0 0 4px 0;
-  font-size: 1.2em;
-  color: #333;
-}
-
-.place-detail-card p {
-  margin: 0 0 8px 0;
-  color: #666;
-  font-size: 0.9em;
-}
-
-.close-button {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #eee;
-  border: none;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-weight: bold;
-  cursor: pointer;
-}
+.place-detail-card h3 { margin: 0 0 4px 0; font-size: 1.2em; color: #333; }
+.place-detail-card p { margin: 0 0 8px 0; color: #666; font-size: 0.9em; }
+.close-button { position: absolute; top: 8px; right: 8px; background: #eee; border: none; border-radius: 50%; width: 24px; height: 24px; font-weight: bold; cursor: pointer; }
 
 @keyframes slide-up {
-  from {
-    transform: translate(-50%, 100px);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, 0);
-    opacity: 1;
-  }
+  from { transform: translate(-50%, 100px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+
+/* --- NEW: Styles for Filter Buttons --- */
+.filter-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Make sure they are on top of the map */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 6px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  gap: 6px;
+}
+
+.filter-button {
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #555;
+}
+
+.filter-button.active {
+  background-color: #00A986;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
