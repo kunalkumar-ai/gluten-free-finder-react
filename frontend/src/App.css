@@ -1,5 +1,4 @@
 /* --- Base Styles --- */
-/* This ensures the entire page structure can support a full-height map */
 html, body, #root, .App, .App > div {
   height: 100%;
   width: 100%;
@@ -11,13 +10,13 @@ html, body, #root, .App, .App > div {
 }
 
 .leaflet-container {
-  height: 100%; /* Use 100% to fill its parent container */
+  height: 100%;
   width: 100%;
 }
 
-/* --- Style for the new green restaurant dot --- */
+/* --- Style for the restaurant dot --- */
 .restaurant-icon {
-  background-color: #00A986; /* A nice green color */
+  background-color: #00A986;
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -31,6 +30,18 @@ html, body, #root, .App, .App > div {
   transform: scale(1.2);
 }
 
+/* --- Style for the SIMPLE BLUE user location dot --- */
+.user-location-dot {
+  background-color: #4A90E2; /* Blue color */
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  /* Animation property has been removed */
+}
+
+
 /* --- Style for the Details Card --- */
 .place-detail-card {
   position: absolute;
@@ -43,7 +54,7 @@ html, body, #root, .App, .App > div {
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   padding: 16px;
-  z-index: 1000; /* Ensures it's on top of the map */
+  z-index: 1000;
   box-sizing: border-box;
   animation: slide-up 0.5s ease-out;
 }

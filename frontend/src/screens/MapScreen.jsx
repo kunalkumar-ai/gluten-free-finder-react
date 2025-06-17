@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 
 // --- Leaflet CSS ---
@@ -8,7 +8,14 @@ import 'leaflet/dist/leaflet.css';
 // --- Custom Icons ---
 import { restaurantIcon } from '../components/icons/restaurantIcon.js';
 
-// A new component for the details card, styled via App.css
+// Define the icon for the user's location using CSS
+const userLocationIcon = new L.DivIcon({
+  className: 'user-location-dot',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8] // Center the icon
+});
+
+// A component for the details card that appears at the bottom
 const PlaceDetailCard = ({ place, onClose }) => {
   if (!place) return null;
   
@@ -29,11 +36,10 @@ const MapScreen = () => {
   const [selectedPlace, setSelectedPlace] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [map, setMap] = useState(null); // State to hold the map instance
+  const [map, setMap] = useState(null);
 
   const backendUrl = 'http://192.168.233.81:5007';
 
-  // This effect runs only once to get the user's location and fetch data
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -57,13 +63,11 @@ const MapScreen = () => {
       (geoError) => {
         setError('Could not get your location.');
         setLoading(false);
-        setPosition({ lat: 52.52, lng: 13.40 }); // Fallback location
+        setPosition({ lat: 52.52, lng: 13.40 });
       }
     );
   }, [backendUrl]);
 
-  // This new effect runs when the position is found and the map is ready.
-  // It will fly to the user's location once, and that's it.
   useEffect(() => {
     if (map && position) {
       map.flyTo(position, 14, {
@@ -80,16 +84,26 @@ const MapScreen = () => {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <MapContainer 
-        center={position || [52.52, 13.40]} // Initial center before location is found
+        center={position || [52.52, 13.40]} 
         zoom={14} 
         style={{ height: '100%', width: '100%' }}
-        whenCreated={setMap} // Get the map instance once it's created
+        whenCreated={setMap}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
+        {position && (
+            <Marker 
+                position={position} 
+                icon={userLocationIcon}
+                zIndexOffset={1000} // Ensures this marker is on top of others
+            >
+                <Popup>You are here</Popup>
+            </Marker>
+        )}
+
         {places.map(place => {
           if (place.geometry && place.geometry.location) {
             const placePosition = {
@@ -104,7 +118,7 @@ const MapScreen = () => {
                 icon={restaurantIcon}
                 eventHandlers={{
                   click: () => {
-                    setSelectedPlace(place); 
+                    setSelectedPlace(place);
                   },
                 }}
               />
