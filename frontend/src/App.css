@@ -1,42 +1,85 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* --- Base Styles --- */
+/* This ensures the entire page structure can support a full-height map */
+html, body, #root, .App, .App > div {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.leaflet-container {
+  height: 100%; /* Use 100% to fill its parent container */
+  width: 100%;
 }
 
-@keyframes logo-spin {
+/* --- Style for the new green restaurant dot --- */
+.restaurant-icon {
+  background-color: #00A986; /* A nice green color */
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.restaurant-icon:hover {
+  transform: scale(1.2);
+}
+
+/* --- Style for the Details Card --- */
+.place-detail-card {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 400px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 16px;
+  z-index: 1000; /* Ensures it's on top of the map */
+  box-sizing: border-box;
+  animation: slide-up 0.5s ease-out;
+}
+
+.place-detail-card h3 {
+  margin: 0 0 4px 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.place-detail-card p {
+  margin: 0 0 8px 0;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #eee;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@keyframes slide-up {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%, 100px);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, 0);
+    opacity: 1;
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
