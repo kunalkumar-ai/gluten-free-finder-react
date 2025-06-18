@@ -21,16 +21,33 @@ const userLocationIcon = new L.DivIcon({
 // A component for the details card that appears at the bottom
 const PlaceDetailCard = ({ place, onClose }) => {
   if (!place) return null;
+
+  // Construct the Google Maps URL using the place_id for accuracy
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}`;
   
   return (
     <div className="place-detail-card">
       <button className="close-button" onClick={onClose}>×</button>
-      <h3>{place.name}</h3>
-      {/* NEW: Display the GF Status in the details card */}
-      <p><strong>Status: {place.gf_status || 'Offers GF'}</strong></p>
-      <p>{place.address}</p>
-      <p><strong>Distance:</strong> {place.distance ? `${place.distance.toFixed(2)} km` : 'N/A'}</p>
-      <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
+      <div style={{ paddingRight: '40px' }}> {/* Add padding to prevent text from overlapping the new button */}
+        <h3>{place.name}</h3>
+        <p><strong>Status: {place.gf_status || 'Offers GF'}</strong></p>
+        <p>{place.address}</p>
+        <p><strong>Distance:</strong> {place.distance ? `${place.distance.toFixed(2)} km` : 'N/A'}</p>
+        <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
+      </div>
+      
+      {/* NEW: Link to Google Maps */}
+      <a 
+        href={googleMapsUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="direction-link"
+        aria-label="Get directions on Google Maps"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+        </svg>
+      </a>
     </div>
   );
 };
