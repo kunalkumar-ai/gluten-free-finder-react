@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// FIX: Added 'Popup' to the import list
+// FIX: Added 'Popup' to the import list from your original file
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 
@@ -8,6 +8,8 @@ import 'leaflet/dist/leaflet.css';
 
 // --- Custom Icons ---
 import { restaurantIcon } from '../components/icons/restaurantIcon.js';
+// NEW: Import the dedicatedIcon
+import { dedicatedIcon } from '../components/icons/dedicatedIcon.js';
 
 // Define the icon for the user's location using CSS
 const userLocationIcon = new L.DivIcon({
@@ -24,6 +26,8 @@ const PlaceDetailCard = ({ place, onClose }) => {
     <div className="place-detail-card">
       <button className="close-button" onClick={onClose}>×</button>
       <h3>{place.name}</h3>
+      {/* NEW: Display the GF Status in the details card */}
+      <p><strong>Status: {place.gf_status || 'Offers GF'}</strong></p>
       <p>{place.address}</p>
       <p><strong>Distance:</strong> {place.distance ? `${place.distance.toFixed(2)} km` : 'N/A'}</p>
       <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
@@ -32,7 +36,7 @@ const PlaceDetailCard = ({ place, onClose }) => {
 };
 
 // A component for the filter buttons
-const FilterButtons = ({ activeFilter, onFilterChange }) => {
+const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   const filters = ['restaurants', 'cafes', 'bakery'];
 
   return (
@@ -42,6 +46,7 @@ const FilterButtons = ({ activeFilter, onFilterChange }) => {
           key={filter}
           className={`filter-button ${activeFilter === filter ? 'active' : ''}`}
           onClick={() => onFilterChange(filter)}
+          disabled={disabled}
         >
           {filter.charAt(0).toUpperCase() + filter.slice(1)}
         </button>
@@ -52,10 +57,10 @@ const FilterButtons = ({ activeFilter, onFilterChange }) => {
 
 
 const MapScreen = () => {
-  const [position, setPosition] = useState(null); // Will hold the user's location
+  const [position, setPosition] = useState(null);
   const [places, setPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null); 
-  const [dataLoading, setDataLoading] = useState(false); // For when we fetch places data
+  const [dataLoading, setDataLoading] = useState(false);
   const [error, setError] = useState(null);
   const [map, setMap] = useState(null);
   const [activeFilter, setActiveFilter] = useState('restaurants');
@@ -67,23 +72,21 @@ const MapScreen = () => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
-        setPosition({ lat: latitude, lng: longitude }); // This will trigger the data fetch
+        setPosition({ lat: latitude, lng: longitude });
       },
       (geoError) => {
         setError('Could not get your location. Please enable location services.');
-        // If location is denied, we can't show the map. The error message will be displayed.
       }
     );
   }, []);
 
   // Effect to fetch data when position or filter changes
   useEffect(() => {
-    // Only run if we have a position
     if (!position) return;
 
     setDataLoading(true);
     setError(null);
-    setPlaces([]); // Clear old places while new ones are loading
+    setPlaces([]);
     setSelectedPlace(null);
 
     const fetchURL = `${backendUrl}/get-restaurants?lat=${position.lat}&lon=${position.lng}&type=${activeFilter}`;
@@ -99,28 +102,25 @@ const MapScreen = () => {
       .finally(() => {
         setDataLoading(false); 
       });
-  }, [position, activeFilter, backendUrl]); // Re-run when filter or position changes
+  }, [position, activeFilter, backendUrl]);
 
 
   // --- RENDER LOGIC ---
 
-  // While we are waiting for the user's location, show a loading screen.
   if (!position && !error) {
     return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
   }
 
-  // If there was an error getting the location, show the error message.
-  if (error) {
+  if (error && places.length === 0) {
     return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '20px', textAlign: 'center'}}>Error: {error}</div>;
   }
 
-  // If we have the position, render the map.
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <FilterButtons activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+      <FilterButtons activeFilter={activeFilter} onFilterChange={setActiveFilter} disabled={dataLoading} />
       
       <MapContainer 
-        center={position} // The map is now created with the correct center from the start
+        center={position || [52.52, 13.40]} // Use fallback if position is not yet set
         zoom={14} 
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
@@ -142,11 +142,14 @@ const MapScreen = () => {
 
         {places.map(place => {
           if (place.geometry && place.geometry.location) {
+            // --- NEW: Logic to choose the correct icon ---
+            const iconToUse = place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon;
+            
             return (
               <Marker 
                 key={place.place_id} 
                 position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
-                icon={restaurantIcon}
+                icon={iconToUse} // Use the conditionally chosen icon
                 eventHandlers={{
                   click: () => setSelectedPlace(place),
                 }}
