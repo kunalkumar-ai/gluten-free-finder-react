@@ -39,8 +39,8 @@ html, body, #root, .App, .App > div {
 /* NEW: Style for the "Dedicated GF" RED icon */
 .dedicated-icon {
   background-color: #d9534f; /* A strong red color */
-  width: 30px;             /* Make it bigger */
-  height: 30px;
+  width: 22px;             /* Make it bigger */
+  height: 22px;
   border-radius: 50%;
   border: 2px solid #FFFFFF;
   box-shadow: 0 2px 5px rgba(0,0,0,0.6); /* A slightly stronger shadow */
