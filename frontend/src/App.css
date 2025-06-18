@@ -14,9 +14,9 @@ html, body, #root, .App, .App > div {
   width: 100%;
 }
 
-/* --- Style for the restaurant dot --- */
+/* --- Icons --- */
 .restaurant-icon {
-  background-color: #00A986;
+  background-color: #00A986; /* Green for "Offers GF" */
   width: 18px;
   height: 18px;
   border-radius: 50%;
@@ -25,12 +25,8 @@ html, body, #root, .App, .App > div {
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
+.restaurant-icon:hover { transform: scale(1.2); }
 
-.restaurant-icon:hover {
-  transform: scale(1.2);
-}
-
-/* --- Style for the SIMPLE BLUE user location dot --- */
 .user-location-dot {
   background-color: #4A90E2;
   width: 16px;
@@ -40,8 +36,21 @@ html, body, #root, .App, .App > div {
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
+/* NEW: Style for the "Dedicated GF" RED icon */
+.dedicated-icon {
+  background-color: #d9534f; /* A strong red color */
+  width: 22px;             /* Make it bigger */
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.6); /* A slightly stronger shadow */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.dedicated-icon:hover { transform: scale(1.2); }
 
-/* --- Style for the Details Card --- */
+
+/* --- UI Cards & Buttons --- */
 .place-detail-card {
   position: absolute;
   bottom: 20px;
@@ -53,55 +62,13 @@ html, body, #root, .App, .App > div {
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   padding: 16px;
-  z-index: 1000;
+  z-index: 1001; /* Above list button */
   box-sizing: border-box;
   animation: slide-up 0.5s ease-out;
 }
-
 .place-detail-card h3 { margin: 0 0 4px 0; font-size: 1.2em; color: #333; }
 .place-detail-card p { margin: 0 0 8px 0; color: #666; font-size: 0.9em; }
 .close-button { position: absolute; top: 8px; right: 8px; background: #eee; border: none; border-radius: 50%; width: 24px; height: 24px; font-weight: bold; cursor: pointer; }
-
-@keyframes slide-up {
-  from { transform: translate(-50%, 100px); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
-}
-
-
-/* --- NEW: Styles for Filter Buttons --- */
-.filter-container {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000; /* Make sure they are on top of the map */
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 6px;
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  display: flex;
-  gap: 6px;
-}
-
-.filter-button {
-  background-color: transparent;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 16px;
-  font-size: 0.9em;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  color: #555;
-}
-
-.filter-button.active {
-  background-color: #00A986;
-  color: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
-
-/* NEW: Style for the Google Maps direction icon link */
 .direction-link {
   position: absolute;
   bottom: 16px;
@@ -118,6 +85,161 @@ html, body, #root, .App, .App > div {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: background-color 0.2s;
 }
-.direction-link:hover {
-  background-color: #357ABD;
+.direction-link:hover { background-color: #357ABD; }
+
+.filter-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 6px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  gap: 6px;
+}
+.filter-button {
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #555;
+}
+.filter-button.active {
+  background-color: #00A986;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+@keyframes slide-up {
+  from { transform: translate(-50%, 100px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* --- Styles for List View --- */
+.list-view-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background-color: #222;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.list-view-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0;
+  background-color: #f8f8f8;
+  z-index: 1002; /* Above everything */
+  display: flex;
+  flex-direction: column;
+  animation: panel-slide-up 0.4s ease-out;
+}
+
+.list-view-header {
+  padding: 16px;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list-view-header h2 {
+  margin: 0;
+  font-size: 1.4em;
+}
+
+.list-view-content {
+  overflow-y: auto;
+  flex-grow: 1;
+  padding: 8px 0;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-item-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 16px;
+}
+
+.list-item-icon.dedicated {
+  background-color: #d9534f; /* Red to match the map icon */
+}
+
+.list-item-icon.offers {
+  background-color: #00A986;
+}
+
+.list-item-info {
+  flex-grow: 1;
+}
+
+.list-item-info h4 {
+  margin: 0 0 2px 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.list-item-info p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #777;
+}
+
+@keyframes panel-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+/* NEW: Style for Loading/Instructional Messages */
+.map-message-overlay {
+  position: absolute;
+  top: 80px; /* Position below filters */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 1000;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #555;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }

@@ -50,6 +50,8 @@ def find_gluten_free_restaurants_places_api(api_key, type_, city_name=None, coun
             
             if data.get("status") == "OK":
                 for result in data.get("results", []):
+                    print(f"Checking Place: {result.get('name')}, Has Geometry: {'geometry' in result}")
+
                     if result.get('business_status') == 'OPERATIONAL':
                         place_details = {
                             "name": result.get("name"), "address": result.get("vicinity") or result.get("formatted_address"),
