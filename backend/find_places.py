@@ -118,31 +118,51 @@ def find_gluten_free_restaurants_places_api(api_key, type_, city_name=None, coun
     return final_places_list[:20]
 
 
+# In find_places.py, replace the current get_gemini_description function with this one.
+
 def get_gemini_description(establishments_list, api_key, type_, city_name=None):
     if not api_key:
         return "Error: Gemini API key missing."
 
+    location_context = f"in {city_name}" if city_name else "near the user's current location"
+
     if not establishments_list:
-        location_str = f"in {city_name}" if city_name else "near your location"
-        return f"No {type_} found matching your criteria {location_str}."
+        return f"No {type_} found matching your criteria {location_context}."
 
     establishment_details_for_prompt = []
     for r in establishments_list:
+        # Include distance and types to give Gemini more context for its analysis
         distance_str = f", Distance: {r['distance']:.2f} km" if r.get('distance') is not None else ""
+        types_str = ", ".join(r.get('types', []))
         detail = (f"Name: {r.get('name', 'N/A')}, "
-                  f"Address: {r.get('address', 'N/A')}"
-                  f"{distance_str}")
+                  f"Address: {r.get('address', 'N/A')}, "
+                  f"Google Types: [{types_str}]{distance_str}")
         establishment_details_for_prompt.append(f"- {detail}")
 
     establishment_block_for_gemini = "\n".join(establishment_details_for_prompt)
-    
-    location_context = f"in {city_name}" if city_name else "near the user's current location"
+
+    # This is the detailed, multi-step prompt for intelligent analysis
+    gf_status_definitions = (
+        "Gluten-Free (GF) Status Definitions:\n"
+        "1. 'Dedicated GF': Classify if the name contains 'gluten-free' or regional equivalents (e.g., 'glutenfrei', 'sans gluten').\n"
+        "2. 'Offers GF': Classify if it's a standard restaurant. The initial search used a 'gluten-free' keyword, so this is the likely category.\n"
+        "3. 'Status Unclear': Classify if the name/type is ambiguous (e.g., a standard bakery not stating GF)."
+    )
 
     prompt = (
-        f"You are a helpful gluten-free dining assistant. The user is looking for '{type_}' {location_context}.\n\n"
-        f"Here is a list of places found, sorted by proximity:\n"
+        f"You are a meticulous gluten-free dining investigator for a user looking for '{type_}' {location_context}.\n"
+        f"Here is a list of potential establishments:\n"
         f"{establishment_block_for_gemini}\n\n"
-        f"Please provide a brief, friendly summary of these options. Mention the first one or two places by name as the closest options. Keep the summary concise."
+        f"Your task: For EACH establishment, assess its likely Gluten-Free (GF) status using its Name and Google Types.\n"
+        f"{gf_status_definitions}\n\n"
+        f"Output Formatting:\n"
+        f"Create a numbered list. For EACH establishment, provide its Name and your assessed GF Status in the format: '[Number]. [Establishment Name] - [[Assessed GF Status]]'.\n"
+        f"For example:\n"
+        f"1. Purely GF Eats - [Dedicated GF]\n"
+        f"2. City Pizzeria - [Offers GF]\n"
+        f"3. Old Mill Bakery - [Status Unclear]\n\n"
+        f"IMPORTANT: SORT by GF Status. List 'Dedicated GF' first, then 'Offers GF', and finally 'Status Unclear'.\n"
+        f"If no establishments are found, return ONLY the message: 'No {type_} found matching your criteria {location_context}.'"
     )
 
     gemini_api_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api_key}"
@@ -158,7 +178,6 @@ def get_gemini_description(establishments_list, api_key, type_, city_name=None):
     except Exception as e:
         print(f"❌ Error calling Gemini API: {e}")
         return f"Error: Could not get a summary from the Gemini API."
-
 
 if __name__ == "__main__":
     pass
