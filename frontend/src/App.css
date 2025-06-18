@@ -1,42 +1,123 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* --- Base Styles --- */
+html, body, #root, .App, .App > div {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.leaflet-container {
+  height: 100%;
+  width: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* --- Style for the restaurant dot --- */
+.restaurant-icon {
+  background-color: #00A986;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.restaurant-icon:hover {
+  transform: scale(1.2);
 }
 
-.card {
-  padding: 2em;
+/* --- Style for the SIMPLE BLUE user location dot --- */
+.user-location-dot {
+  background-color: #4A90E2;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-.read-the-docs {
-  color: #888;
+
+/* --- Style for the Details Card --- */
+.place-detail-card {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  max-width: 400px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 16px;
+  z-index: 1000;
+  box-sizing: border-box;
+  animation: slide-up 0.5s ease-out;
+}
+
+.place-detail-card h3 { margin: 0 0 4px 0; font-size: 1.2em; color: #333; }
+.place-detail-card p { margin: 0 0 8px 0; color: #666; font-size: 0.9em; }
+.close-button { position: absolute; top: 8px; right: 8px; background: #eee; border: none; border-radius: 50%; width: 24px; height: 24px; font-weight: bold; cursor: pointer; }
+
+@keyframes slide-up {
+  from { transform: translate(-50%, 100px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+
+/* --- NEW: Styles for Filter Buttons --- */
+.filter-container {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Make sure they are on top of the map */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 6px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  gap: 6px;
+}
+
+.filter-button {
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: #555;
+}
+
+.filter-button.active {
+  background-color: #00A986;
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* NEW: Style for the Google Maps direction icon link */
+.direction-link {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #4A90E2;
+  border-radius: 50%;
+  color: white;
+  text-decoration: none;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.2s;
+}
+.direction-link:hover {
+  background-color: #357ABD;
 }

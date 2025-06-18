@@ -1,323 +1,291 @@
-Search City: NEW YORK
+Search City: new delhi
 Search Country: Not specified
-Search Type: bakery
-Effective Text Query: gluten-free bakeries in NEW YORK
-Google API Type Parameter: bakery
+Search Type: restaurants
+Effective Text Query: gluten-free restaurants in new delhi
+Google API Type Parameter: restaurant
 
-Total items collected before deduplication: 39
-Total unique operational establishments found after deduplication: 39
+Total items collected before deduplication: 35
+Total unique operational establishments found after deduplication: 35
 Number of duplicate items removed: 0
 
 --- Unique Results from Google Places API (Deduplicated by Place ID) ---
-  1. Name: Senza Gluten by Jemiko - 100% Gluten Free Cafe & Bakery
-     Place ID: ChIJM95IwLZZwokRpZhaBV9TlYY
-     Address: 171 Sullivan St, New York, NY 10012, United States
-     Types: ['cafe', 'bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 331
-     Business Status: OPERATIONAL
-
-  2. Name: Noglu
-     Place ID: ChIJO_vFU6JYwokRct0ZO0gNxus
-     Address: 1260 Madison Ave, New York, NY 10128, United States
-     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 3.5
-     User Ratings Total: 756
-     Business Status: OPERATIONAL
-
-  3. Name: The Love Bakery - ONLINE ORDERS ONLY.
-     Place ID: ChIJmaCukB0tDogRR_TCGPftJfQ
-     Address: 150 Ludlow St, New York, NY 10002, United States
-     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 5
-     User Ratings Total: 43
-     Business Status: OPERATIONAL
-
-  4. Name: Baked Cravings
-     Place ID: ChIJI7Fh2wL2wokRt0S8vgjwuBo
-     Address: 1673 Lexington Ave, New York, NY 10029, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+  1. Name: Free of gluten
+     Place ID: ChIJsUgrXk4dDTkRdsWaGv63_i0
+     Address: 11/78, Moti Bagh II, Satya Niketan, South Moti Bagh, New Delhi, Delhi 110021, India
+     Types: ['cafe', 'bakery', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.7
-     User Ratings Total: 427
+     User Ratings Total: 82
      Business Status: OPERATIONAL
 
-  5. Name: By the Way Bakery
-     Place ID: ChIJCT3jrb1YwokRvuD50zqFjss
-     Address: 1236 Lexington Ave, New York, NY 10028, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+  2. Name: Greenr Cafe
+     Place ID: ChIJJxBRbtnjDDkRz1fwxir4ono
+     Address: N -4, Market, N Block, Greater Kailash I, New Delhi, Delhi 110047, India
+     Types: ['store', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.5
-     User Ratings Total: 409
+     User Ratings Total: 1020
      Business Status: OPERATIONAL
 
-  6. Name: Posh Pop Bakeshop
-     Place ID: ChIJ-YCPWQxZwokRn0GwiaTFAQQ
-     Address: 192 Bleecker St, New York, NY 10012, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4
-     User Ratings Total: 777
-     Business Status: OPERATIONAL
-
-  7. Name: Posh Pop Bakeshop
-     Place ID: ChIJOwDQ8ENZwokRDi3mvX-MKTM
-     Address: 315 W 39th St, New York, NY 10018, United States
-     Types: ['cafe', 'bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 58
-     Business Status: OPERATIONAL
-
-  8. Name: Everybody Eats
-     Place ID: ChIJl8AkhVVawokRZv4EvtEkWTs
-     Address: 294 3rd Ave, Brooklyn, NY 11215, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 92
-     Business Status: OPERATIONAL
-
-  9. Name: By the Way Bakery
-     Place ID: ChIJSeVlVYJYwokRjpt2QnPaflM
-     Address: 2440 Broadway, New York, NY 10024, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 321
-     Business Status: OPERATIONAL
-
-  10. Name: Unregular Bakery
-     Place ID: ChIJ52QMLUtZwokRZwW4R7FUo2M
-     Address: 124 4th Ave, New York, NY 10003, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 853
-     Business Status: OPERATIONAL
-
-  11. Name: Magnolia Bakery - Rockefeller Center
-     Place ID: ChIJdWPaMf9YwokR5yrqB2DEXNc
-     Address: 1240 6th Ave, New York, NY 10020, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
+  3. Name: Greenr Cafe
+     Place ID: ChIJqVTYlnodDTkRv_lfOLsqwZg
+     Address: 4, Market, Basant Lok, Vasant Vihar, New Delhi, Delhi 110057, India
+     Types: ['cafe', 'health', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.4
-     User Ratings Total: 7560
+     User Ratings Total: 1056
      Business Status: OPERATIONAL
 
-  12. Name: Big Booty Bread Co
-     Place ID: ChIJNQWc_7pZwokRtRTCvPI8kHg
-     Address: 261 W 23rd St, New York, NY 10011, United States
-     Types: ['bakery', 'clothing_store', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 377
-     Business Status: OPERATIONAL
-
-  13. Name: NY Bakery and Desserts
-     Place ID: ChIJx6V9OoJZwokRPVJDQ5gA8nU
-     Address: 512 7th Ave, New York, NY 10018, United States
-     Types: ['bakery', 'cafe', 'storage', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 2980
-     Business Status: OPERATIONAL
-
-  14. Name: Buttercup BakeShop
-     Place ID: ChIJaUHNruNYwokRx4EUHWZqD1g
-     Address: 973 2nd Ave, New York, NY 10022, United States
-     Types: ['cafe', 'bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 884
-     Business Status: OPERATIONAL
-
-  15. Name: Sugar Sweet Sunshine Bakery
-     Place ID: ChIJme6ybIFZwokRaVisOt57fCw
-     Address: 365 Grand St, New York, NY 10002, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 691
-     Business Status: OPERATIONAL
-
-  16. Name: Happy Zoe Vegan Bakery
-     Place ID: ChIJTSX5qcdZwokRfVmgTWBDxZI
-     Address: 102 B Nassau Ave, Brooklyn, NY 11222, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.6
-     User Ratings Total: 449
-     Business Status: OPERATIONAL
-
-  17. Name: Levain Bakery – NoHo, NYC
-     Place ID: ChIJdXpUxMtZwokRq904Bbqnuw0
-     Address: 340 Lafayette St, New York, NY 10012, United States
-     Types: ['bakery', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 3054
-     Business Status: OPERATIONAL
-
-  18. Name: Little Cupcake Bakeshop
-     Place ID: ChIJJ3ZdWI9ZwokR23PXSej8iqw
-     Address: 30 Prince St, New York, NY 10012, United States
-     Types: ['bakery', 'cafe', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.2
-     User Ratings Total: 1651
-     Business Status: OPERATIONAL
-
-  19. Name: Sans Bakery
-     Place ID: ChIJAQAAN9NewokR2dCgPoJCF3w
-     Address: The Falchi Building, 3100 47th Ave, Long Island City, NY 11101, United States
-     Types: ['bakery', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 18
-     Business Status: OPERATIONAL
-
-  20. Name: Mia's Brooklyn Bakery
-     Place ID: ChIJb6wLHk5awokRxFwHikoBsnQ
-     Address: 139 Smith St, Brooklyn, NY 11201, United States
-     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 3132
-     Business Status: OPERATIONAL
-
-  21. Name: The Protein Bakery
-     Place ID: ChIJl1EvDKNZwokRRUvt0vY5twU
-     Address: 144 W 19th St, New York, NY 10011, United States
-     Types: ['bakery', 'health', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 119
-     Business Status: OPERATIONAL
-
-  22. Name: Clementine Bakery
-     Place ID: ChIJ53fC_5VbwokRaTVVX0NrNZo
-     Address: 395 Classon Ave, Brooklyn, NY 11238, United States
-     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 1044
-     Business Status: OPERATIONAL
-
-  23. Name: Empire Cake
-     Place ID: ChIJVVVVVcZZwokRZNH0tdJIhY8
-     Address: 112 8th Ave, New York, NY 10011, United States
-     Types: ['bakery', 'cafe', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 783
-     Business Status: OPERATIONAL
-
-  24. Name: Funny Face Bakery
-     Place ID: ChIJ26ciZR1ZwokRJJ1xIDHnCKY
-     Address: 319 Lafayette St, New York, NY 10012, United States
-     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+  4. Name: Diggin Cafe
+     Place ID: ChIJtYT6jJ7iDDkRgBocyn5pOpI
+     Address: Santushti Shopping Complex, 11, Lok Kalyan Marg, opp. to Samrat Hotel, Chanakyapuri, New Delhi, Delhi, 110021, India
+     Types: ['restaurant', 'lodging', 'food', 'point_of_interest', 'establishment']
      Rating: 4.4
-     User Ratings Total: 245
+     User Ratings Total: 16080
      Business Status: OPERATIONAL
 
-  25. Name: Padoca Bakery + Cakes
-     Place ID: ChIJwc5zFsJYwokRk4HHVMtS74A
-     Address: 210 E 67th St, New York, NY 10065, United States
-     Types: ['bakery', 'cafe', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.4
-     User Ratings Total: 342
-     Business Status: OPERATIONAL
-
-  26. Name: Funny Face Bakery
-     Place ID: ChIJF1mkwpxZwokRvZZDgpMBU6Y
-     Address: 6 Fulton St, New York, NY 10038, United States
-     Types: ['bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.5
-     User Ratings Total: 357
-     Business Status: OPERATIONAL
-
-  27. Name: Charlotte Patisserie
-     Place ID: ChIJr9ChH1BawokRn-65kANU1nY
-     Address: 201 Court St, Brooklyn, NY 11201, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 167
-     Business Status: OPERATIONAL
-
-  28. Name: Mia's Brooklyn Bakery
-     Place ID: ChIJcePhlShZwokR-aflUFkOA84
-     Address: 716 7th Ave, New York, NY 10036, United States
-     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 466
-     Business Status: OPERATIONAL
-
-  29. Name: Michaeli Bakery
-     Place ID: ChIJ3R8TuhdbwokRhk8J3gQ_p50
-     Address: 115A Division St, New York, NY 10002, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.7
-     User Ratings Total: 374
-     Business Status: OPERATIONAL
-
-  30. Name: Off the Wheat- Sweets and Eats
-     Place ID: ChIJheg7vBBZwokRtAnAiQhFw_w
-     Address: Union Square W, New York, NY 10003, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+  5. Name: Mistaya ( HomeBakers)
+     Place ID: ChIJdV1yACnjDDkRAhvtN8BTkhI
+     Address: Shanti Niwas, Block B 7, Arjun Nagar, Safdarjung Enclave, New Delhi, Delhi 110029, India
+     Types: ['bakery', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.9
-     User Ratings Total: 13
+     User Ratings Total: 95
      Business Status: OPERATIONAL
 
-  31. Name: Bradley Bake Shop Gluten-free
-     Place ID: ChIJVVXFKf35wokR-l9nM5bNNPc
-     Address: 55B River Rd, Bogota, NJ 07603, United States
-     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 156
-     Business Status: OPERATIONAL
-
-  32. Name: Dominique Ansel Bakery
-     Place ID: ChIJP0KOWoxZwokRmvPiQAIaH1A
-     Address: 189 Spring St, New York, NY 10012, United States
-     Types: ['bakery', 'cafe', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.3
-     User Ratings Total: 8645
-     Business Status: OPERATIONAL
-
-  33. Name: Baking Mama
-     Place ID: ChIJX12NqlhXwokRwLmhiC24Mg8
-     Address: 88 Hudson St, Hoboken, NJ 07030, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 4.8
-     User Ratings Total: 136
-     Business Status: OPERATIONAL
-
-  34. Name: Russ & Daughters
-     Place ID: ChIJ7VEEjYNZwokRS0bdsXA3uyg
-     Address: 179 E Houston St, New York, NY 10002, United States
-     Types: ['meal_takeaway', 'grocery_or_supermarket', 'bakery', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+  6. Name: Olive Bar & Kitchen
+     Place ID: ChIJ_dAgW_HiDDkR3xsbkQeGqgo
+     Address: Mile 6, One Style, 8, Kalka Das Marg, Seth Sarai, Mehrauli, New Delhi, Delhi 110030, India
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.6
-     User Ratings Total: 4283
+     User Ratings Total: 8947
      Business Status: OPERATIONAL
 
-  35. Name: Ladurée
-     Place ID: ChIJM767a4xZwokRXyq8NCoE33I
-     Address: 398 W Broadway, New York, NY 10012, United States
-     Types: ['cafe', 'bakery', 'park', 'restaurant', 'store', 'food', 'point_of_interest', 'establishment']
+  7. Name: The Potbelly Rooftop Cafe
+     Place ID: ChIJvfMIRRTiDDkRLEkBVuMXEmw
+     Address: Top Floor, 116 C, behind UCO Bank, Shahpur Jat, New Delhi, Delhi 110049, India
+     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.3
-     User Ratings Total: 3503
+     User Ratings Total: 2934
      Business Status: OPERATIONAL
 
-  36. Name: Modern Bread and Bagel
-     Place ID: ChIJ38ApNi1ZwokRtQP2nJLHp-c
-     Address: 139 W 14th St, New York, NY 10011, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+  8. Name: The Arthouse Cafe
+     Place ID: ChIJk8-4XHb9DDkRAFXwKkQIgCA
+     Address: N-35, Block N, Connaught Place, New Delhi, Delhi 110001, India
+     Types: ['art_gallery', 'cafe', 'bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4
+     User Ratings Total: 2424
+     Business Status: OPERATIONAL
+
+  9. Name: The Chatter House
+     Place ID: ChIJKUqVV8_jDDkRUGY-FfTpap4
+     Address: S 2-3 & F-15, Lower Ground Floor, Epicuria Mall, Nehru Place, New Delhi, Delhi 110019, India
+     Types: ['restaurant', 'bar', 'food', 'point_of_interest', 'establishment']
      Rating: 4.3
-     User Ratings Total: 533
+     User Ratings Total: 2253
      Business Status: OPERATIONAL
 
-  37. Name: Sugar Sweet Sunshine Bakery
-     Place ID: ChIJi7ngLWZZwokR4wzNzjwjNxY
-     Address: 88 Essex St, New York, NY 10002, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
-     Rating: 3.8
-     User Ratings Total: 53
+  10. Name: Caffè Tonino
+     Place ID: ChIJCVd4ITj9DDkRvVKGQ1YGcXA
+     Address: Plaza Cinema Building No 9, Block H, Connaught Place, New Delhi, Delhi 110001, India
+     Types: ['cafe', 'bar', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.2
+     User Ratings Total: 5112
      Business Status: OPERATIONAL
 
-  38. Name: Petit Chou
-     Place ID: ChIJd5Fjv9NZwokR5ssUKnN5kPI
-     Address: 229 1st Ave, New York, NY 10003, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+  11. Name: Sorrento
+     Place ID: ChIJqxZShMriDDkRpKWstdJgQTQ
+     Address: Lobby Level Shangri-La Eros New Delhi, 19, Ashoka Rd, Connaught Place, New Delhi, Delhi 110001, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 950
+     Business Status: OPERATIONAL
+
+  12. Name: Indian Accent
+     Place ID: ChIJd-3rnjD9DDkRJixh51I7E_0
+     Address: The Lodhi, Lodhi Rd, CGO Complex, Pragati Vihar, New Delhi, Delhi 110003, India
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.7
-     User Ratings Total: 395
+     User Ratings Total: 8022
      Business Status: OPERATIONAL
 
-  39. Name: Knead Love Bakery
-     Place ID: ChIJETg-qjJfwokRppASIDJIzy8
-     Address: New York, NY 10003, United States
-     Types: ['bakery', 'store', 'food', 'point_of_interest', 'establishment']
+  13. Name: Diva - The Italian Restaurant
+     Place ID: ChIJ____P9XjDDkRgrLoW_RCPBg
+     Address: M-8A, M Block Market, Greater Kailash II, New Delhi, Delhi 110048, India
+     Types: ['bar', 'meal_takeaway', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 1856
+     Business Status: OPERATIONAL
+
+  14. Name: Andrea's Eatery
+     Place ID: ChIJXSOsMozhDDkRkaFtPs5qur0
+     Address: First floor, Select Citywalk Mall, Shop No, 48-51, Saket, New Delhi, Delhi 110017, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 1351
+     Business Status: OPERATIONAL
+
+  15. Name: AnnaMaya FoodHall - Andaz Delhi
+     Place ID: ChIJ139372gcDTkRDKXqHQZ7An0
+     Address: Ground Floor, Asset No.1, Aerocity, New Delhi, Delhi 110037, India
+     Types: ['restaurant', 'bakery', 'store', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 4401
+     Business Status: OPERATIONAL
+
+  16. Name: Tamra Restaurant
+     Place ID: ChIJO5BCXDf9DDkRICL3HR_Jge4
+     Address: Level 1 Shangri-La Eros New Delhi, 19, Ashoka Rd, Connaught Place, New Delhi, Delhi 110001, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 4144
+     Business Status: OPERATIONAL
+
+  17. Name: FIO - Cookhouse & Bar
+     Place ID: ChIJm06TT8_jDDkRLbbS4Ag3LsY
+     Address: R-1, MRTS, Epicuria Mall Nehru Place Metro Station, New Delhi, Delhi 110019, India
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 2644
+     Business Status: OPERATIONAL
+
+  18. Name: Getafix Cafe
+     Place ID: ChIJAQAA8TPiDDkRKZsC3ANV_00
+     Address: HS 17, Ground Floor, Kailash Colony Market, Greater Kailash-1, Kailash Colony, Greater Kailash, New Delhi, Delhi 110048, India
+     Types: ['cafe', 'store', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.2
+     User Ratings Total: 1065
+     Business Status: OPERATIONAL
+
+  19. Name: GLUTEN FREE HUB
+     Place ID: ChIJA6gDEpIPDTkRdwlT7oMvI9M
+     Address: P-2, rz 7, Delhi, 110043, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 5
+     User Ratings Total: 2
+     Business Status: OPERATIONAL
+
+  20. Name: Amici Cafe
+     Place ID: ChIJA-nLRVfiDDkR8wLQng5GcTs
+     Address: Shop No. 8, Defence Colony Main Market, New Delhi, Delhi 110024, India
+     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 3.9
+     User Ratings Total: 616
+     Business Status: OPERATIONAL
+
+  21. Name: Big Yellow Door
+     Place ID: ChIJ3VwKMxIdDTkROvWTjQo4RV0
+     Address: H 8, Satya Niketan Rd, Opp. Venkateswara College, Moti Bagh II, Satya Niketan, South Moti Bagh, New Delhi, Delhi 110021, India
+     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.3
+     User Ratings Total: 7020
+     Business Status: OPERATIONAL
+
+  22. Name: Coast Café
+     Place ID: ChIJlVVxenXiDDkR0ONp1eDBSO0
+     Address: 2nd & 3rd Floor, above OGAAN,H2, Hauz Khas, New Delhi, Delhi 110016, India
+     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'store', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 1634
+     Business Status: OPERATIONAL
+
+  23. Name: EVOO - Delhi
+     Place ID: ChIJN1VVJQPiDDkRgUjG6h0t9LY
+     Address: Ground Floor, B-2, Shivalik Rd, Block B, Shivalik Colony, Malviya Nagar, New Delhi, Delhi 110017, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 2279
+     Business Status: OPERATIONAL
+
+  24. Name: SAMBARPOT
+     Place ID: ChIJK65VZFHjDDkR4mcQf02lMCs
+     Address: I Ground Floor, 1A, Block I, Lajpat Nagar II, Lajpat Nagar, New Delhi, Delhi 110024, India
+     Types: ['meal_takeaway', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.8
+     User Ratings Total: 4809
+     Business Status: OPERATIONAL
+
+  25. Name: Delhi Pavilion
+     Place ID: ChIJLfRcaPThDDkROLoOlmt9ZyY
+     Address: Saket District Centre, District Centre, Sector 6, Pushp Vihar, New Delhi, Delhi 110017, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 1375
+     Business Status: OPERATIONAL
+
+  26. Name: K3 - New Delhi's Food Theatre
+     Place ID: ChIJ1R_SFmkcDTkRKZ_2Cwjo0Ss
+     Address: J W Marriott Hotel, Aerocity, Indira Gandhi International Airport, New Delhi, Delhi 110037, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 1636
+     Business Status: OPERATIONAL
+
+  27. Name: The Qube
+     Place ID: ChIJ_RRHrH4dDTkRRX7kOG2Z2AI
+     Address: Africa Ave, Diplomatic Enclave, Chanakyapuri, New Delhi, Delhi 110023, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 489
+     Business Status: OPERATIONAL
+
+  28. Name: Society Of Salad (Formerly UnCafe)
+     Place ID: ChIJTRT-pHgdDTkRJ8aEck19kY0
+     Address: S-35A, Market, Block S, Green Park, New Delhi, Delhi 110016, India
+     Types: ['cafe', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 279
+     Business Status: OPERATIONAL
+
+  29. Name: Shang Palace
+     Place ID: ChIJGxdfhMriDDkRdEeuGm_NaYY
+     Address: Lobby Level, Shangri-La Eros New Delhi, 19, Ashoka Rd, Connaught Place, New Delhi, Delhi 110001, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
      Rating: 4.7
-     User Ratings Total: 15
+     User Ratings Total: 959
+     Business Status: OPERATIONAL
+
+  30. Name: HOP HOUSE OF PROTEINS
+     Place ID: ChIJAUrTDkXjDDkRBgYTyFJU4wc
+     Address: 33, Maharishi Dayanand Marg, Corner Market, Sadhna Enclave, Malviya Nagar, New Delhi, Delhi 110017, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.6
+     User Ratings Total: 255
+     Business Status: OPERATIONAL
+
+  31. Name: Sattvik restaurant
+     Place ID: ChIJueZhyJjhDDkRaWUB8lNEVlo
+     Address: Select Citywalk Mall, Saket District Centre, District Centre, Sector 6, Pushp Vihar, New Delhi, Delhi 110017, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 1490
+     Business Status: OPERATIONAL
+
+  32. Name: Delhi Club House
+     Place ID: ChIJnaOnxZ8dDTkRsuz6CxgFXWQ
+     Address: Sangam Courtyard, Major Somnath Marg, Sector 9, Rama Krishna Puram, New Delhi, Delhi 110022, India
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.5
+     User Ratings Total: 2551
+     Business Status: OPERATIONAL
+
+  33. Name: Tonino Ristorante
+     Place ID: ChIJVVVVVTEeDTkRB8mVmktQNPY
+     Address: Khasra No.76, 27, Mehrauli-Gurgaon Rd, near Metro Pillar No.38, New Manglapuri, Mehrauli, New Delhi, Delhi 110030, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 3002
+     Business Status: OPERATIONAL
+
+  34. Name: Sly Granny
+     Place ID: ChIJOR96IYvjDDkRQ9yeudLRe6A
+     Address: 4, Khan Market, Rabindra Nagar, New Delhi, Delhi 110003, India
+     Types: ['bar', 'restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.4
+     User Ratings Total: 1362
+     Business Status: OPERATIONAL
+
+  35. Name: Yogi's Gfree
+     Place ID: ChIJE0cBbsMEDTkR3sC0GZeRbLI
+     Address: J3GC+X2X, 586, site 1, Shankar Garden, Vikaspuri, new, Delhi, 110018, India
+     Types: ['restaurant', 'food', 'point_of_interest', 'establishment']
+     Rating: 4.1
+     User Ratings Total: 36
      Business Status: OPERATIONAL
 
