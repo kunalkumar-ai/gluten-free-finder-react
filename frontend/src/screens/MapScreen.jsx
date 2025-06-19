@@ -91,7 +91,9 @@ const MapScreen = () => {
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
 
-  const backendUrl = 'http://192.168.233.81:5007';
+  //const backendUrl = 'http://192.168.233.81:5007';
+  const backendUrl = 'http://localhost:5007';
+
 
   // Get user's initial location ONCE
   useEffect(() => {
@@ -156,7 +158,7 @@ const MapScreen = () => {
   if (!hasSearched && !loading) {
     message = "Select a filter";
   } else if (loading) {
-    message = `Searching ${activeFilter}...`;
+    message = `Searching GF ${activeFilter}...`;
   } else if (error) {
     message = `Error: ${error}`;
   }
