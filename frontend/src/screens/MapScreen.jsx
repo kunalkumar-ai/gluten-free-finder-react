@@ -92,7 +92,9 @@ const MapScreen = () => {
   const [map, setMap] = useState(null);
 
   //const backendUrl = 'http://192.168.233.81:5007';
-  const backendUrl = 'http://localhost:5007';
+  //const backendUrl = 'http://localhost:5007';
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
+
 
 
   // Get user's initial location ONCE
