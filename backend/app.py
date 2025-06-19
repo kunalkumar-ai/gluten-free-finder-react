@@ -1,9 +1,13 @@
+# app.py
+
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 import dotenv
 import json 
 import traceback 
+import threading # NEW: To run database saves in the background
+from supabase import create_client, Client # NEW: Supabase imports
 
 from find_places import find_gluten_free_restaurants_places_api as find_places, categorize_places_with_gemini
 
@@ -15,9 +19,43 @@ CORS(app)
 # API Key validation
 GEMINI_API_KEY_FROM_ENV = os.getenv('GEMINI_API_KEY')
 GOOGLE_PLACES_API_KEY_FROM_ENV = os.getenv('GOOGLE_PLACES_API_KEY')
-if not GEMINI_API_KEY_FROM_ENV or not GOOGLE_PLACES_API_KEY_FROM_ENV:
-    raise ValueError("Both GEMINI_API_KEY and GOOGLE_PLACES_API_KEY must be set.")
+
+# NEW: Supabase configuration
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_KEY = os.getenv("SUPABASE_KEY")
+
+if not all([GEMINI_API_KEY_FROM_ENV, GOOGLE_PLACES_API_KEY_FROM_ENV, SUPABASE_URL, SUPABASE_KEY]):
+    raise ValueError("All API keys and Supabase credentials must be set in the .env file.")
+
+# NEW: Initialize the Supabase client
+supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # --- END CONFIGURATION ---
+
+
+# NEW: Function to save data to the single 'search_live' table in the background
+def save_to_supabase_async(lat, lon, search_type, gemini_result):
+    """Saves a single search record to the Supabase 'search_live' table."""
+    try:
+        # Prepare the row to be inserted
+        data_to_save = {
+            'latitude': lat,
+            'longitude': lon,
+            'search_type': search_type,
+            'results': gemini_result # The 'results' column is JSONB, so it can take the list directly
+        }
+        
+        # Insert the data into the 'search_live' table
+        response = supabase.table('search_live').insert(data_to_save).execute()
+
+        # Optional: Check if the insert was successful
+        if response.data:
+            print(f"Successfully saved search (lat: {lat}, lon: {lon}) to Supabase.")
+        else:
+            print(f"Failed to save search to Supabase. Response: {response.error}")
+
+    except Exception as e:
+        print(f"Error saving data to Supabase in background thread: {e}")
+        traceback.print_exc()
 
 
 # --- MAIN API ROUTE ---
@@ -29,51 +67,46 @@ def get_establishments_route():
     lon = request.args.get('lon', type=float)
     type_ = request.args.get('type', 'restaurants')
     country = request.args.get('country', None)
+
+    # MODIFIED: Ensure we have lat/lon for saving
+    if lat is None or lon is None:
+        return jsonify({"error": "Latitude and longitude are required."}), 400
     
     try:
         # Step 1: Get the full list of places from Google
-        places_list = find_places(
-            api_key=GOOGLE_PLACES_API_KEY_FROM_ENV,
-            type_=type_,
-            city_name=city,
-            country_filter=country,
-            lat=lat,
-            lon=lon
-        )
+        places_list = find_places(api_key=GOOGLE_PLACES_API_KEY_FROM_ENV, type_=type_, city_name=city, country_filter=country, lat=lat, lon=lon)
 
         if not places_list:
             return jsonify({"error": f"No {type_} found matching your criteria."}), 404
 
         # Step 2: Get the categorization for the list from Gemini
-        categorization = categorize_places_with_gemini(
-            api_key=GEMINI_API_KEY_FROM_ENV,
-            places_list=places_list,
-            type_=type_,
-            city_name=city
-        )
+        categorization = categorize_places_with_gemini(api_key=GEMINI_API_KEY_FROM_ENV, places_list=places_list, type_=type_, city_name=city)
 
         # Step 3: Combine data, add gf_status, and filter
         enriched_places = []
         for place in places_list:
             place_id = place.get('place_id')
-            # Get the status from Gemini's response, default to 'Offers GF' if not found
             status = categorization.get(place_id, 'Offers GF') 
-            
-            # Filter out "Status Unclear"
             if status != 'Status Unclear':
                 place['gf_status'] = status
                 enriched_places.append(place)
         
-        # Step 4: Sort the final list to show "Dedicated GF" first
-        # We give "Dedicated GF" a lower sort order (0) so it comes first.
-        enriched_places.sort(key=lambda p: (0 if p.get('gf_status') == 'Dedicated GF' else 1))
-
-        # Sort by distance if it's a location search
+        # Step 4: Sort the final list
         if lat is not None and lon is not None:
              enriched_places.sort(key=lambda p: (0 if p.get('gf_status') == 'Dedicated GF' else 1, p.get('distance', 999)))
+        else:
+            enriched_places.sort(key=lambda p: (0 if p.get('gf_status') == 'Dedicated GF' else 1))
 
+        # --- NEW: Save the results to Supabase in the background ---
+        if enriched_places:
+            # Start a new thread to run the save function without blocking the response
+            save_thread = threading.Thread(
+                target=save_to_supabase_async, 
+                args=(lat, lon, type_, enriched_places) # Pass the parameters to the function
+            )
+            save_thread.start()
+        # --- END NEW SECTION ---
 
-        # NOTE: Caching and other routes would be here. For now, focusing on the core logic.
         return jsonify({"raw_data": enriched_places})
 
     except Exception as e:
