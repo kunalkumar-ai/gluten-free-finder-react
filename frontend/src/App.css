@@ -36,7 +36,6 @@ html, body, #root, .App, .App > div {
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
 }
 
-/* NEW: Style for the "Dedicated GF" RED icon */
 .dedicated-icon {
   background-color: #d9534f; /* A strong red color */
   width: 22px;             /* Make it bigger */
@@ -143,25 +142,49 @@ html, body, #root, .App, .App > div {
   gap: 8px;
 }
 
+/* MODIFIED: This rule has been updated for the slide animation */
 .list-view-panel {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  top: 0;
-  background-color: #f8f8f8;
-  z-index: 1002; /* Above everything */
+  height: 60vh; /* Panel will take up 60% of the screen height */
+  background-color: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
   display: flex;
   flex-direction: column;
-  animation: panel-slide-up 0.4s ease-out;
+
+  /* The new animation logic */
+  transform: translateY(100%); /* Start hidden at the bottom */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* NEW: This class will be added by React to trigger the slide-up animation */
+.list-view-panel.open {
+  transform: translateY(0);
+}
+
+/* MODIFIED: This rule has been updated to make the header clickable */
 .list-view-header {
-  padding: 16px;
+  padding: 8px 16px;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* Center the handle and title vertically */
   align-items: center;
+  cursor: pointer; /* Suggests it's clickable */
+  user-select: none; /* Prevents text selection when clicking */
+}
+
+/* NEW: A little handle bar for better UI */
+.handle-bar {
+  width: 40px;
+  height: 5px;
+  background-color: #ccc;
+  border-radius: 3px;
+  margin-bottom: 8px; /* Space between handle and title */
 }
 
 .list-view-header h2 {
@@ -219,14 +242,8 @@ html, body, #root, .App, .App > div {
   color: #777;
 }
 
-@keyframes panel-slide-up {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
+/* DELETED: The @keyframes panel-slide-up is no longer needed */
+
 /* NEW: Style for Loading/Instructional Messages */
 .map-message-overlay {
   position: absolute;

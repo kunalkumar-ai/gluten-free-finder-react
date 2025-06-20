@@ -36,10 +36,10 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   return (
     <div className="filter-container">
       {filters.map(filter => (
-        <button 
-          key={filter} 
-          className={`filter-button ${activeFilter === filter ? 'active' : ''}`} 
-          onClick={() => onFilterChange(filter)} 
+        <button
+          key={filter}
+          className={`filter-button ${activeFilter === filter ? 'active' : ''}`}
+          onClick={() => onFilterChange(filter)}
           disabled={disabled}>
           {filter.charAt(0).toUpperCase() + filter.slice(1)}
         </button>
@@ -48,18 +48,25 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   );
 };
 
-const ListViewPanel = ({ places, onClose }) => {
+// --- NECESSARY CHANGES START HERE ---
+
+const ListViewPanel = ({ places, onClose, isOpen }) => { // 1. Added isOpen prop
   const sortedPlaces = [...places].sort((a, b) => {
     if (a.gf_status === 'Dedicated GF' && b.gf_status !== 'Dedicated GF') return -1;
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
     return 0;
   });
 
+  // 2. Dynamically set class based on isOpen prop for CSS animation
+  const panelClassName = `list-view-panel ${isOpen ? 'open' : ''}`;
+
   return (
-    <div className="list-view-panel">
-      <div className="list-view-header">
+    <div className={panelClassName}>
+      {/* 3. Header is now clickable to close and has a handle */}
+      <div className="list-view-header" onClick={onClose}>
+        <div className="handle-bar"></div>
         <h2>Nearby Places</h2>
-        <button className="close-button" onClick={onClose}>×</button>
+        {/* The old close button is removed from here */}
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
@@ -83,7 +90,7 @@ const ListViewPanel = ({ places, onClose }) => {
 const MapScreen = () => {
   const [position, setPosition] = useState(null);
   const [places, setPlaces] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null); 
+  const [selectedPlace, setSelectedPlace] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
@@ -91,11 +98,7 @@ const MapScreen = () => {
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
 
-  //const backendUrl = 'http://192.168.233.81:5007';
-  //const backendUrl = 'http://localhost:5007';
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
-
-
 
   // Get user's initial location ONCE
   useEffect(() => {
@@ -169,19 +172,18 @@ const MapScreen = () => {
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <FilterButtons activeFilter={activeFilter} onFilterChange={handleFilterSearch} disabled={loading} />
       
-      {/* FIX: Only render the message overlay if there is a message to show */}
       {message && (
-        <div 
-          className="map-message-overlay" 
+        <div
+          className="map-message-overlay"
           style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
         >
           {message}
         </div>
       )}
 
-      <MapContainer 
-        center={position || [52.52, 13.40]} 
-        zoom={13} 
+      <MapContainer
+        center={position || [52.52, 13.40]}
+        zoom={13}
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
       >
@@ -194,8 +196,8 @@ const MapScreen = () => {
 
         {places.map(place => (
           place.geometry && place.geometry.location && (
-            <Marker 
-              key={place.place_id} 
+            <Marker
+              key={place.place_id}
               position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
               icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
               eventHandlers={{ click: () => setSelectedPlace(place) }}
@@ -204,19 +206,25 @@ const MapScreen = () => {
         ))}
       </MapContainer>
       
-      {!isListViewOpen ? (
-        places.length > 0 && !loading && (
-          <button className="list-view-button" onClick={() => setListViewOpen(true)}>
-            Offers ({places.length})
-          </button>
-        )
-      ) : (
-        <ListViewPanel places={places} onClose={() => setListViewOpen(false)} />
+      {/* 4. The "Offers" button is now only shown when the panel is closed */}
+      {!isListViewOpen && places.length > 0 && !loading && (
+        <button className="list-view-button" onClick={() => setListViewOpen(true)}>
+          Offers ({places.length})
+        </button>
       )}
+      
+      {/* 5. Pass the isOpen prop to the panel */}
+      <ListViewPanel
+        places={places}
+        onClose={() => setListViewOpen(false)}
+        isOpen={isListViewOpen}
+      />
       
       <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
     </div>
   );
 };
+
+// --- NECESSARY CHANGES END HERE ---
 
 export default MapScreen;
