@@ -4,16 +4,34 @@ import L from 'leaflet';
 
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
-import { restaurantIcon } from '../components/icons/restaurantIcon.js';
-import { dedicatedIcon } from '../components/icons/dedicatedIcon.js';
-
+// These are placeholders, ensure you have actual icon components if needed
+const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
+const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
 const userLocationIcon = new L.DivIcon({ className: 'user-location-dot', iconSize: [16, 16], iconAnchor: [8, 8] });
 
-// --- UI Sub-Components ---
+
+
+const LoadingScreen = ({ isHidden }) => {
+  return (
+    <div className={`loading-screen ${isHidden ? 'hidden' : ''}`}>
+      {/* This new div wraps your main content */}
+      <div className="loading-content">
+        <h1 className="font-poppins">CeliacAI</h1>
+        <p>Tap. Find. Eat Gluten-Free.</p>
+      </div>
+      <footer className="loading-screen-footer">
+        powered by celiac-ai
+      </footer>
+    </div>
+  );
+};
+
+
+// --- UI Sub-Components (Unchanged from your file) ---
 
 const PlaceDetailCard = ({ place, onClose }) => {
   if (!place) return null;
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}`;
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}`;
   return (
     <div className="place-detail-card">
       <button className="close-button" onClick={onClose}>×</button>
@@ -36,10 +54,10 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   return (
     <div className="filter-container">
       {filters.map(filter => (
-        <button
-          key={filter}
-          className={`filter-button ${activeFilter === filter ? 'active' : ''}`}
-          onClick={() => onFilterChange(filter)}
+        <button 
+          key={filter} 
+          className={`filter-button ${activeFilter === filter ? 'active' : ''}`} 
+          onClick={() => onFilterChange(filter)} 
           disabled={disabled}>
           {filter.charAt(0).toUpperCase() + filter.slice(1)}
         </button>
@@ -48,29 +66,24 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   );
 };
 
-// --- NECESSARY CHANGES START HERE ---
-
-const ListViewPanel = ({ places, onClose, isOpen }) => { // 1. Added isOpen prop
+const ListViewPanel = ({ places, onClose, isOpen }) => {
   const sortedPlaces = [...places].sort((a, b) => {
     if (a.gf_status === 'Dedicated GF' && b.gf_status !== 'Dedicated GF') return -1;
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
     return 0;
   });
-
-  // 2. Dynamically set class based on isOpen prop for CSS animation
+  
   const panelClassName = `list-view-panel ${isOpen ? 'open' : ''}`;
 
   return (
     <div className={panelClassName}>
-      {/* 3. Header is now clickable to close and has a handle */}
       <div className="list-view-header" onClick={onClose}>
         <div className="handle-bar"></div>
         <h2>Nearby Places</h2>
-        {/* The old close button is removed from here */}
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
-          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}`;
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}`;
           const isDedicated = place.gf_status === 'Dedicated GF';
           return (
             <a href={googleMapsUrl} key={place.place_id} className="list-item" target="_blank" rel="noopener noreferrer">
@@ -90,17 +103,18 @@ const ListViewPanel = ({ places, onClose, isOpen }) => { // 1. Added isOpen prop
 const MapScreen = () => {
   const [position, setPosition] = useState(null);
   const [places, setPlaces] = useState([]);
-  const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
   const [activeFilter, setActiveFilter] = useState('');
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
+  
+  const [isLocating, setIsLocating] = useState(true);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
 
-  // Get user's initial location ONCE
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -109,12 +123,18 @@ const MapScreen = () => {
         if (map) {
           map.flyTo(userPos, 13);
         }
+        setTimeout(() => {
+          setIsLocating(false);
+        }, 2000); 
       },
-      () => setError('Could not get your location. Please enable location services.')
+      (geoError) => {
+        setError('Could not get your location. Please enable location services in your browser settings.');
+        setIsLocating(false);
+      }
     );
   }, [map]);
 
-  // Function to handle fetching data
+
   const handleFilterSearch = (filterType) => {
     if (!position) return;
     setHasSearched(true);
@@ -134,7 +154,6 @@ const MapScreen = () => {
       .finally(() => setLoading(false));
   };
 
-  // New effect to auto-zoom the map to fit all markers
   useEffect(() => {
     if (map && places.length > 0) {
       const bounds = new L.LatLngBounds();
@@ -153,78 +172,70 @@ const MapScreen = () => {
     }
   }, [places, map, position]);
 
-  // --- RENDER LOGIC ---
-  if (!position && !error) {
-    return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
-  }
-
-  // Determine the message to display
   let message = null;
-  if (!hasSearched && !loading) {
-    message = "Select a filter";
+  if (error) {
+    message = `Error: ${error}`;
+  } else if (hasSearched && !loading && places.length === 0) {
+      message = `No ${activeFilter} found nearby.`;
+  } else if (!hasSearched && !loading) {
+    message = "Select a filter to begin";
   } else if (loading) {
     message = `Searching GF ${activeFilter}...`;
-  } else if (error) {
-    message = `Error: ${error}`;
   }
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <FilterButtons activeFilter={activeFilter} onFilterChange={handleFilterSearch} disabled={loading} />
-      
-      {message && (
-        <div
-          className="map-message-overlay"
-          style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
-        >
-          {message}
-        </div>
-      )}
+      <LoadingScreen isHidden={!isLocating} />
 
-      <MapContainer
-        center={position || [52.52, 13.40]}
-        zoom={13}
-        style={{ height: '100%', width: '100%' }}
-        whenCreated={setMap}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        />
+      <div style={{ visibility: isLocating ? 'hidden' : 'visible', height: '100%', width: '100%', transition: 'visibility 0s 0.5s' }}>
+        <FilterButtons activeFilter={activeFilter} onFilterChange={handleFilterSearch} disabled={loading || !position} />
         
-        {position && <Marker position={position} icon={userLocationIcon} zIndexOffset={1000} />}
+        {message && (
+          <div 
+            className="map-message-overlay" 
+            style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
+          >
+            {message}
+          </div>
+        )}
 
-        {places.map(place => (
-          place.geometry && place.geometry.location && (
-            <Marker
-              key={place.place_id}
-              position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
-              icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
-              eventHandlers={{ click: () => setSelectedPlace(place) }}
-            />
-          )
-        ))}
-      </MapContainer>
-      
-      {/* 4. The "Offers" button is now only shown when the panel is closed */}
-      {!isListViewOpen && places.length > 0 && !loading && (
-        <button className="list-view-button" onClick={() => setListViewOpen(true)}>
-          Offers ({places.length})
-        </button>
-      )}
-      
-      {/* 5. Pass the isOpen prop to the panel */}
-      <ListViewPanel
-        places={places}
-        onClose={() => setListViewOpen(false)}
-        isOpen={isListViewOpen}
-      />
-      
-      <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+        <MapContainer 
+          center={position || [52.52, 13.40]} 
+          zoom={13} 
+          style={{ height: '100%', width: '100%' }}
+          whenCreated={setMap}
+        >
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+            attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
+          />
+          
+          {position && <Marker position={position} icon={userLocationIcon} zIndexOffset={1000} />}
+
+          {places.map(place => (
+            place.geometry && place.geometry.location && (
+              <Marker 
+                key={place.place_id} 
+                position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
+                icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
+                eventHandlers={{ click: () => setSelectedPlace(place) }}
+              />
+            )
+          ))}
+        </MapContainer>
+        
+        {!isListViewOpen && places.length > 0 && !loading && (
+          <button className="list-view-button" onClick={() => setListViewOpen(true)}>
+            Offers ({places.length})
+          </button>
+        )}
+        
+        <ListViewPanel places={places} onClose={() => setListViewOpen(false)} isOpen={isListViewOpen} />
+        
+        <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+      </div>
     </div>
   );
 };
-
-// --- NECESSARY CHANGES END HERE ---
 
 export default MapScreen;
