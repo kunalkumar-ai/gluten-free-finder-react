@@ -242,7 +242,9 @@ html, body, #root, .App, .App > div {
   color: #777;
 }
 
-/* Style for Loading/Instructional Messages */
+/* DELETED: The @keyframes panel-slide-up is no longer needed */
+
+/* NEW: Style for Loading/Instructional Messages */
 .map-message-overlay {
   position: absolute;
   top: 80px; /* Position below filters */
@@ -257,61 +259,4 @@ html, body, #root, .App, .App > div {
   font-weight: 500;
   color: #555;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* --- Styles for the Initial Loading Screen --- */
-
-.loading-screen {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  /* Earthy & Organic theme background */
-  background-color: #f5f5dc; /* Warm, inviting beige */
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2000;
-  transition: opacity 0.5s ease-out;
-}
-
-.loading-content {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading-screen.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.loading-screen h1 {
-  font-family: 'Lora', serif; /* Use the new Lora font */
-  font-size: 2.8em;
-  font-weight: 600;
-  /* Earthy & Organic theme title color */
-  color: #22570f; /* Deep forest green */
-  margin-bottom: 8px;
-  letter-spacing: -1px;
-}
-
-.loading-screen p {
-  font-size: 1.1em;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  /* Earthy & Organic theme tagline color */
-  color: #8d4925; /* Warm terracotta */
-}
-
-.loading-screen-footer {
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  text-align: right;
-  font-size: 0.8em;
-  /* Earthy & Organic theme footer color */
-  color: #a98c78; /* Softer brown for the footer */
 }
