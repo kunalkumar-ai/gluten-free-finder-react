@@ -17,8 +17,8 @@ html, body, #root, .App, .App > div {
 /* --- Icons --- */
 .restaurant-icon {
   background-color: #00A986; /* Green for "Offers GF" */
-  width: 22px;
-  height: 22px;
+  width:50px;
+  height: 50px;
   border-radius: 50%;
   border: 2px solid #FFFFFF;
   box-shadow: 0 1px 3px rgba(0,0,0,0.4);
