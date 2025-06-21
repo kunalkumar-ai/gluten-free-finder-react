@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
-import { restaurantIcon } from '../components/icons/restaurantIcon.js';
-import { dedicatedIcon } from '../components/icons/dedicatedIcon.js';
-
+// These are placeholders, ensure you have actual icon components if needed
+const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
+const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
 const userLocationIcon = new L.DivIcon({ className: 'user-location-dot', iconSize: [16, 16], iconAnchor: [8, 8] });
 
-// --- UI Sub-Components ---
+
+// --- UI Sub-Components (Unchanged) ---
 
 const PlaceDetailCard = ({ place, onClose }) => {
   if (!place) return null;
-  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}`;
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
   return (
     <div className="place-detail-card">
       <button className="close-button" onClick={onClose}>×</button>
@@ -54,7 +55,7 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
     return 0;
   });
-
+  
   const panelClassName = `list-view-panel ${isOpen ? 'open' : ''}`;
 
   return (
@@ -65,7 +66,7 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
-          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}&query_place_id=${place.place_id}`;
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
           const isDedicated = place.gf_status === 'Dedicated GF';
           return (
             <a href={googleMapsUrl} key={place.place_id} className="list-item" target="_blank" rel="noopener noreferrer">
@@ -86,87 +87,116 @@ const MapScreen = () => {
   const [position, setPosition] = useState(null);
   const [places, setPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hasSearched, setHasSearched] = useState(false);
-  // --- CHANGE #1: Set the default active filter state to 'restaurants' ---
-  const [activeFilter, setActiveFilter] = useState('restaurants');
+  const [activeFilter, setActiveFilter] = useState(''); // Start with no active filter
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
+  
+  const fetchControllerRef = useRef(null);
+  const initialSearchDone = useRef(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
 
-  // Get user's initial location ONCE
+  // This useEffect just gets the location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
         setPosition(userPos);
+        setLoading(false); // We have a location, stop the main loading
         if (map) {
           map.flyTo(userPos, 13);
         }
       },
-      () => setError('Could not get your location. Please enable location services.')
+      () => {
+        setLoading(false);
+        setError('Could not get your location. Please enable location services.');
+      }
     );
   }, [map]);
-
-  // Function to handle fetching data
-  const handleFilterSearch = (filterType) => {
+  
+  // --- NEW LOGIC ---
+  // This function ONLY sets state. It updates the UI.
+  const startSearch = (filterType) => {
     if (!position) return;
-    setHasSearched(true);
+
+    // Cancel any previous search
+    if (fetchControllerRef.current) {
+      fetchControllerRef.current.abort();
+    }
+    
+    // This is the key: update the UI state immediately
     setLoading(true);
     setActiveFilter(filterType);
     setError(null);
     setPlaces([]);
     setSelectedPlace(null);
     setListViewOpen(false);
-
-    const fetchURL = `${backendUrl}/get-restaurants?lat=${position.lat}&lon=${position.lng}&type=${filterType}`;
-    
-    fetch(fetchURL)
-      .then(res => res.json())
-      .then(data => data.error ? setError(data.error) : setPlaces(data.raw_data || []))
-      .catch(() => setError(`Could not fetch gluten-free ${filterType}.`))
-      .finally(() => setLoading(false));
   };
 
-  // New effect to auto-zoom the map to fit all markers
+  // This new useEffect WATCHES for the activeFilter to change,
+  // and THEN it performs the network request.
   useEffect(() => {
-    if (map && places.length > 0) {
-      const bounds = new L.LatLngBounds();
-      places.forEach(place => {
-        if(place.geometry && place.geometry.location) {
-          bounds.extend([place.geometry.location.lat, place.geometry.location.lng]);
+    // Don't run this on the initial load or if there's no filter selected
+    if (!activeFilter || !position) {
+      return;
+    }
+
+    const controller = new AbortController();
+    fetchControllerRef.current = controller;
+
+    const fetchURL = `${backendUrl}/get-restaurants?lat=${position.lat}&lon=${position.lng}&type=${activeFilter}`;
+    
+    fetch(fetchURL, { signal: controller.signal })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          setError(data.error);
+        } else {
+          setPlaces(data.raw_data || []);
+        }
+      })
+      .catch(err => {
+        if (err.name === 'AbortError') {
+          console.log('Fetch aborted for:', activeFilter);
+        } else {
+          setError(`Could not fetch gluten-free ${activeFilter}.`);
+        }
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) {
+          setLoading(false);
         }
       });
-      if (position) {
-        bounds.extend([position.lat, position.lng]);
-      }
       
-      if (bounds.isValid()) {
-        map.fitBounds(bounds, { padding: [50, 50] });
-      }
-    }
-  }, [places, map, position]);
+  }, [activeFilter, position]); // It runs when activeFilter or position changes
 
-  // --- CHANGE #2: Add a new useEffect to trigger the search automatically ---
+
+  // This useEffect handles the very first automatic search
   useEffect(() => {
-    // If we have the user's position, but haven't performed a search yet...
-    if (position && !hasSearched) {
-      // ...then automatically start a search for restaurants.
-      handleFilterSearch('restaurants');
+    if (position && !initialSearchDone.current) {
+      // Start the default search
+      startSearch('restaurants');
+      initialSearchDone.current = true;
     }
-  }, [position, hasSearched]); // This effect runs when position or hasSearched changes
-
+  }, [position]);
+  
+  // This useEffect cleans up on unmount
+  useEffect(() => {
+    return () => {
+      if (fetchControllerRef.current) {
+        fetchControllerRef.current.abort();
+      }
+    };
+  }, []);
 
   // --- RENDER LOGIC ---
   if (!position && !error) {
     return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
   }
 
-  // Determine the message to display
   let message = null;
-  // This logic automatically updates. "Select a filter" won't show initially because 'loading' will be true.
   if (loading) {
     message = `Searching GF ${activeFilter}...`;
   } else if (error) {
@@ -175,7 +205,8 @@ const MapScreen = () => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <FilterButtons activeFilter={activeFilter} onFilterChange={handleFilterSearch} disabled={loading} />
+      {/* The onFilterChange prop now calls our new `startSearch` function */}
+      <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} />
       
       {message && (
         <div
