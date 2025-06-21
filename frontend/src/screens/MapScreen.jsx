@@ -48,25 +48,20 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   );
 };
 
-// --- NECESSARY CHANGES START HERE ---
-
-const ListViewPanel = ({ places, onClose, isOpen }) => { // 1. Added isOpen prop
+const ListViewPanel = ({ places, onClose, isOpen }) => {
   const sortedPlaces = [...places].sort((a, b) => {
     if (a.gf_status === 'Dedicated GF' && b.gf_status !== 'Dedicated GF') return -1;
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
     return 0;
   });
 
-  // 2. Dynamically set class based on isOpen prop for CSS animation
   const panelClassName = `list-view-panel ${isOpen ? 'open' : ''}`;
 
   return (
     <div className={panelClassName}>
-      {/* 3. Header is now clickable to close and has a handle */}
       <div className="list-view-header" onClick={onClose}>
         <div className="handle-bar"></div>
         <h2>Nearby Places</h2>
-        {/* The old close button is removed from here */}
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
@@ -94,7 +89,8 @@ const MapScreen = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasSearched, setHasSearched] = useState(false);
-  const [activeFilter, setActiveFilter] = useState('');
+  // --- CHANGE #1: Set the default active filter state to 'restaurants' ---
+  const [activeFilter, setActiveFilter] = useState('restaurants');
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
 
@@ -153,6 +149,16 @@ const MapScreen = () => {
     }
   }, [places, map, position]);
 
+  // --- CHANGE #2: Add a new useEffect to trigger the search automatically ---
+  useEffect(() => {
+    // If we have the user's position, but haven't performed a search yet...
+    if (position && !hasSearched) {
+      // ...then automatically start a search for restaurants.
+      handleFilterSearch('restaurants');
+    }
+  }, [position, hasSearched]); // This effect runs when position or hasSearched changes
+
+
   // --- RENDER LOGIC ---
   if (!position && !error) {
     return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
@@ -160,9 +166,8 @@ const MapScreen = () => {
 
   // Determine the message to display
   let message = null;
-  if (!hasSearched && !loading) {
-    message = "Select a filter";
-  } else if (loading) {
+  // This logic automatically updates. "Select a filter" won't show initially because 'loading' will be true.
+  if (loading) {
     message = `Searching GF ${activeFilter}...`;
   } else if (error) {
     message = `Error: ${error}`;
@@ -189,7 +194,7 @@ const MapScreen = () => {
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
         />
         
         {position && <Marker position={position} icon={userLocationIcon} zIndexOffset={1000} />}
@@ -206,14 +211,12 @@ const MapScreen = () => {
         ))}
       </MapContainer>
       
-      {/* 4. The "Offers" button is now only shown when the panel is closed */}
       {!isListViewOpen && places.length > 0 && !loading && (
         <button className="list-view-button" onClick={() => setListViewOpen(true)}>
           Offers ({places.length})
         </button>
       )}
       
-      {/* 5. Pass the isOpen prop to the panel */}
       <ListViewPanel
         places={places}
         onClose={() => setListViewOpen(false)}
@@ -224,7 +227,5 @@ const MapScreen = () => {
     </div>
   );
 };
-
-// --- NECESSARY CHANGES END HERE ---
 
 export default MapScreen;
