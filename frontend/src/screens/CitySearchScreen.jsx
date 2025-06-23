@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
-
-// We can reuse the same sub-components from MapScreen.
-// For a larger project, you would move these into their own files.
 
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
@@ -81,12 +78,18 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
   );
 };
 
-// This is the new search bar UI for this page
+// CORRECTION 1: Moved ChangeMapView to be its own component
+function ChangeMapView({ coords }) {
+    const map = useMap();
+    map.flyTo(coords, 13);
+    return null; // This component renders nothing to the screen
+}
+
 const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       if (cityInput.trim()) {
-        onSearch(); // The search function will get the city from the state
+        onSearch();
       }
     };
   
@@ -107,13 +110,13 @@ const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) 
         </form>
         <button onClick={onReset} className="reset-location-button" aria-label="Reset to my location" title="Reset to my location">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+              <path fillRule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
               <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
             </svg>
         </button>
       </div>
     );
-  };
+};
 
 
 // --- The Main City Search Screen Component ---
@@ -131,7 +134,6 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
   const fetchControllerRef = useRef(null);
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
 
-  // This function is called ONLY when the search button is clicked
   const handleSearch = async () => {
     if (!cityInput.trim() || !activeFilter) {
       setError("Please enter a city and select a filter.");
@@ -143,7 +145,6 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
     setPlaces([]);
     setListViewOpen(false);
 
-    // Cancel any previous search
     if (fetchControllerRef.current) {
         fetchControllerRef.current.abort();
     }
@@ -151,7 +152,6 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
     fetchControllerRef.current = controller;
 
     try {
-      // Step 1: Get coordinates for the city
       const coordsResponse = await fetch(`${backendUrl}/find-city-coordinates?city=${cityInput}`, { signal: controller.signal });
       const cityCoords = await coordsResponse.json();
 
@@ -159,12 +159,9 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
         throw new Error(cityCoords.error || "Could not find that city.");
       }
       
+      // CORRECTION 2: Added the missing setSearchCoordinates call
       setSearchCoordinates(cityCoords);
-      if (map) {
-        map.flyTo(cityCoords, 13);
-      }
       
-      // Step 2: Get restaurants for those coordinates
       const placesURL = `${backendUrl}/get-restaurants?lat=${cityCoords.lat}&lon=${cityCoords.lng}&type=${activeFilter}&city=${encodeURIComponent(cityInput)}`;
       const placesResponse = await fetch(placesURL, { signal: controller.signal });
       const placesData = await placesResponse.json();
@@ -186,6 +183,7 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
     }
   };
 
+
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <CitySearchBar
@@ -206,7 +204,7 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
       {!loading && error && <div className="map-message-overlay">{`Error: ${error}`}</div>}
 
       <MapContainer
-        center={[51.505, -0.09]} // Default to a central location
+        center={[51.505, -0.09]}
         zoom={6}
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
@@ -215,6 +213,8 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
         />
+
+        {searchCoordinates && <ChangeMapView coords={searchCoordinates} />}
 
         {places.map(place => (
           place.geometry && place.geometry.location && (
