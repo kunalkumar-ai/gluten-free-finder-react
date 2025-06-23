@@ -2,15 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 
+// We can reuse the same sub-components from MapScreen.
+// For a larger project, you would move these into their own files.
+
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
-// These are placeholders, ensure you have actual icon components if needed
 const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
 const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
-const userLocationIcon = new L.DivIcon({ className: 'user-location-dot', iconSize: [16, 16], iconAnchor: [8, 8] });
 
-
-// --- UI Sub-Components (Unchanged) ---
+// --- UI Sub-Components ---
 
 const PlaceDetailCard = ({ place, onClose }) => {
   if (!place) return null;
@@ -80,156 +80,134 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
     </div>
   );
 };
-const CitySearchToggle = ({ onClick }) => (
-  <div className="city-search-toggle-container">
-    <button onClick={onClick} className="city-search-toggle-button">
-      Search by City Instead
-    </button>
-  </div>
-);
 
-// --- Main Map Screen Component ---
-const MapScreen = ({ onNavigateToCitySearch }) => {
-  const [position, setPosition] = useState(null);
+// This is the new search bar UI for this page
+const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) => {
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (cityInput.trim()) {
+        onSearch(); // The search function will get the city from the state
+      }
+    };
+  
+    return (
+      <div className="city-search-bar-container">
+        <form onSubmit={handleSubmit} style={{display: 'flex', flexGrow: 1}}>
+          <input
+            type="text"
+            value={cityInput}
+            onChange={(e) => setCityInput(e.target.value)}
+            placeholder="Enter city name..."
+            className="city-search-input"
+            disabled={loading}
+          />
+          <button type="submit" className="city-search-button" disabled={loading}>
+            Search
+          </button>
+        </form>
+        <button onClick={onReset} className="reset-location-button" aria-label="Reset to my location" title="Reset to my location">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+              <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+            </svg>
+        </button>
+      </div>
+    );
+  };
+
+
+// --- The Main City Search Screen Component ---
+const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
+  const [cityInput, setCityInput] = useState('');
+  const [searchCoordinates, setSearchCoordinates] = useState(null);
   const [places, setPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [activeFilter, setActiveFilter] = useState(''); // Start with no active filter
+  const [activeFilter, setActiveFilter] = useState('restaurants');
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
   
   const fetchControllerRef = useRef(null);
-  const initialSearchDone = useRef(false);
-
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
 
-  // This useEffect just gets the location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        setPosition(userPos);
-        setLoading(false); // We have a location, stop the main loading
-        if (map) {
-          map.flyTo(userPos, 13);
-        }
-      },
-      () => {
-        // This part is unchanged
-        setLoading(false);
-        setError('Could not get your location. Please enable location services.');
-        // NEW: Tell the app to switch to the city search view
-        onNavigateToCitySearch();
-      }
-    );
-  }, [map]);
-  
-  // --- NEW LOGIC ---
-  // This function ONLY sets state. It updates the UI.
-  const startSearch = (filterType) => {
-    if (!position) return;
-
-    // Cancel any previous search
-    if (fetchControllerRef.current) {
-      fetchControllerRef.current.abort();
-    }
-    
-    // This is the key: update the UI state immediately
-    setLoading(true);
-    setActiveFilter(filterType);
-    setError(null);
-    setPlaces([]);
-    setSelectedPlace(null);
-    setListViewOpen(false);
-  };
-
-  // This new useEffect WATCHES for the activeFilter to change,
-  // and THEN it performs the network request.
-  useEffect(() => {
-    // Don't run this on the initial load or if there's no filter selected
-    if (!activeFilter || !position) {
+  // This function is called ONLY when the search button is clicked
+  const handleSearch = async () => {
+    if (!cityInput.trim() || !activeFilter) {
+      setError("Please enter a city and select a filter.");
       return;
     }
 
+    setLoading(true);
+    setError(null);
+    setPlaces([]);
+    setListViewOpen(false);
+
+    // Cancel any previous search
+    if (fetchControllerRef.current) {
+        fetchControllerRef.current.abort();
+    }
     const controller = new AbortController();
     fetchControllerRef.current = controller;
 
-    const fetchURL = `${backendUrl}/get-restaurants?lat=${position.lat}&lon=${position.lng}&type=${activeFilter}`;
-    
-    fetch(fetchURL, { signal: controller.signal })
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setPlaces(data.raw_data || []);
-        }
-      })
-      .catch(err => {
-        if (err.name === 'AbortError') {
-          console.log('Fetch aborted for:', activeFilter);
-        } else {
-          setError(`Could not fetch gluten-free ${activeFilter}.`);
-        }
-      })
-      .finally(() => {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
-      });
-      
-  }, [activeFilter, position]); // It runs when activeFilter or position changes
+    try {
+      // Step 1: Get coordinates for the city
+      const coordsResponse = await fetch(`${backendUrl}/find-city-coordinates?city=${cityInput}`, { signal: controller.signal });
+      const cityCoords = await coordsResponse.json();
 
-
-  // This useEffect handles the very first automatic search
-  useEffect(() => {
-    if (position && !initialSearchDone.current) {
-      // Start the default search
-      startSearch('restaurants');
-      initialSearchDone.current = true;
-    }
-  }, [position]);
-  
-  // This useEffect cleans up on unmount
-  useEffect(() => {
-    return () => {
-      if (fetchControllerRef.current) {
-        fetchControllerRef.current.abort();
+      if (!coordsResponse.ok) {
+        throw new Error(cityCoords.error || "Could not find that city.");
       }
-    };
-  }, []);
+      
+      setSearchCoordinates(cityCoords);
+      if (map) {
+        map.flyTo(cityCoords, 13);
+      }
+      
+      // Step 2: Get restaurants for those coordinates
+      const placesURL = `${backendUrl}/get-restaurants?lat=${cityCoords.lat}&lon=${cityCoords.lng}&type=${activeFilter}&city=${encodeURIComponent(cityInput)}`;
+      const placesResponse = await fetch(placesURL, { signal: controller.signal });
+      const placesData = await placesResponse.json();
 
-  // --- RENDER LOGIC ---
-  if (!position && !error) {
-    return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
-  }
+      if (!placesResponse.ok) {
+          throw new Error(placesData.error || "Could not fetch places.");
+      }
+      
+      setPlaces(placesData.raw_data || []);
 
-  let message = null;
-  if (loading) {
-    message = `Searching GF ${activeFilter}...`;
-  } else if (error) {
-    message = `Error: ${error}`;
-  }
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        setError(err.message);
+      }
+    } finally {
+      if (!controller.signal.aborted) {
+        setLoading(false);
+      }
+    }
+  };
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {/* The onFilterChange prop now calls our new `startSearch` function */}
-      {position && <CitySearchToggle onClick={onNavigateToCitySearch} />}
-      <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} />
+      <CitySearchBar
+        onSearch={handleSearch}
+        cityInput={cityInput}
+        setCityInput={setCityInput}
+        onReset={onNavigateToLiveSearch}
+        loading={loading}
+      />
       
-      {message && (
-        <div
-          className="map-message-overlay"
-          style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
-        >
-          {message}
-        </div>
-      )}
+      <FilterButtons 
+        activeFilter={activeFilter} 
+        onFilterChange={setActiveFilter} 
+        disabled={loading} 
+      />
+      
+      {loading && <div className="map-message-overlay">Searching...</div>}
+      {!loading && error && <div className="map-message-overlay">{`Error: ${error}`}</div>}
 
       <MapContainer
-        center={position || [52.52, 13.40]}
-        zoom={13}
+        center={[51.505, -0.09]} // Default to a central location
+        zoom={6}
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
       >
@@ -237,8 +215,6 @@ const MapScreen = ({ onNavigateToCitySearch }) => {
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
         />
-        
-        {position && <Marker position={position} icon={userLocationIcon} zIndexOffset={1000} />}
 
         {places.map(place => (
           place.geometry && place.geometry.location && (
@@ -258,15 +234,10 @@ const MapScreen = ({ onNavigateToCitySearch }) => {
         </button>
       )}
       
-      <ListViewPanel
-        places={places}
-        onClose={() => setListViewOpen(false)}
-        isOpen={isListViewOpen}
-      />
-      
+      <ListViewPanel places={places} onClose={() => setListViewOpen(false)} isOpen={isListViewOpen} />
       <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
     </div>
   );
 };
 
-export default MapScreen;
+export default CitySearchScreen;
