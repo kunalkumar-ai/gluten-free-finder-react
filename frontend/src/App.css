@@ -113,13 +113,13 @@ html, body, #root, .App, .App > div {
 
 
 .city-search-toggle-button {
-  background-color: white;
-  color: #333;
-  border: 1px solid #ccc;
+  background-color: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #bbdefb;
   padding: 10px 16px;
   border-radius: 22px;
   font-size: 0.9em;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: all 0.2s ease-in-out;
@@ -129,7 +129,7 @@ html, body, #root, .App, .App > div {
 }
 
 .city-search-toggle-button:hover {
-  border-color: #999;
+  border-color: #bbdefb;
   box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
