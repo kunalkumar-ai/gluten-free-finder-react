@@ -281,6 +281,9 @@ html, body, #root, .App, .App > div {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
   transition: all 0.2s ease-in-out;
   color: #333;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .city-search-toggle-button:hover {
@@ -351,3 +354,5 @@ html, body, #root, .App, .App > div {
 .reset-location-button:hover {
   background-color: #357ABD; /* A darker blue for hover */
 }
+
+
