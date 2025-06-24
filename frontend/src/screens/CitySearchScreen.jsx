@@ -119,7 +119,7 @@ const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) 
             type="text"
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
-            placeholder="Enter city name and press enter..."
+            placeholder="Enter location and press enter..."
             className="city-search-input"
             disabled={loading}
           />
