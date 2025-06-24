@@ -1,31 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapScreen from './screens/MapScreen';
-// NEW: Import the CitySearchScreen component
 import CitySearchScreen from './screens/CitySearchScreen';
 import './App.css';
 
 function App() {
-  // State to manage which view is shown, defaults to 'live'
   const [currentView, setCurrentView] = useState('live');
+  
+  // NEW: State for user's position and location error will be managed here
+  const [userPosition, setUserPosition] = useState(null);
+  const [locationError, setLocationError] = useState(null);
 
-  // Function to switch to the city search view
+  // NEW: Geolocation logic is now in App.jsx
+  useEffect(() => {
+    // This runs only once when the app starts
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        setUserPosition(userPos);
+      },
+      () => {
+        setLocationError('Location permission denied.');
+        // If permission is denied, force the view to city search
+        setCurrentView('city');
+      }
+    );
+  }, []); // Empty dependency array means this runs only once on mount
+
   const navigateToCitySearch = () => {
     setCurrentView('city');
   };
 
-  // Function to switch back to the live search view
   const navigateToLiveSearch = () => {
-    setCurrentView('live');
+    // Only allow navigating back to live if we have a position
+    if (userPosition) {
+      setCurrentView('live');
+    } else {
+      // If they denied permission initially, show the error again
+      alert('You need to enable location permission in your browser settings to use the live map.');
+    }
   };
 
   return (
     <div className="App">
-      {/* Conditionally render the correct view based on state */}
       {currentView === 'live' ? (
-        <MapScreen onNavigateToCitySearch={navigateToCitySearch} />
+        <MapScreen 
+          onNavigateToCitySearch={navigateToCitySearch} 
+          userPosition={userPosition}
+          locationError={locationError}
+        />
       ) : (
-        // MODIFIED: Replaced the placeholder with the actual component
-        <CitySearchScreen onNavigateToLiveSearch={navigateToLiveSearch} />
+        <CitySearchScreen 
+          onNavigateToLiveSearch={navigateToLiveSearch} 
+          userPosition={userPosition}
+        />
       )}
     </div>
   );
