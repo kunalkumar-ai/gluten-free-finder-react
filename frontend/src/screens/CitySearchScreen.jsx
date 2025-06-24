@@ -109,9 +109,7 @@ function ChangeMapView({ coords }) {
 const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (cityInput.trim()) {
-        onSearch();
-      }
+      onSearch();
     };
   
     return (
@@ -214,7 +212,15 @@ const CitySearchScreen = ({ onNavigateToLiveSearch, userPosition }) => {
     });
 }, [searchCoordinates, activeFilter]); // It runs when coordinates or filter change
 
-
+// NEW: This useEffect resets the search when the input is cleared
+useEffect(() => {
+  // If the input is empty, reset the search state
+  if (cityInput.trim() === '') {
+    setSearchCoordinates(null);
+    setPlaces([]);
+    setError(null);
+  }
+}, [cityInput]); // This hook watches only the cityInput text
 // Prepare the message variable before the return statement
 let message = null;
 if (loading) {
