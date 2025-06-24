@@ -8,9 +8,10 @@ import json
 import traceback 
 import threading # NEW: To run database saves in the background
 from supabase import create_client, Client # NEW: Supabase imports
-
+import requests
 from find_places import find_gluten_free_restaurants_places_api as find_places, categorize_places_with_gemini
-
+from datetime import datetime, timedelta
+from fuzzywuzzy import fuzz
 # --- CONFIGURATION ---
 dotenv.load_dotenv()
 app = Flask(__name__)
@@ -32,30 +33,66 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY)
 # --- END CONFIGURATION ---
 
 
-# NEW: Function to save data to the single 'search_live' table in the background
-def save_to_supabase_async(lat, lon, search_type, gemini_result):
+def save_to_supabase_async(lat, lon, search_type, gemini_result, city_name=None):
     """Saves a single search record to the Supabase 'search_live' table."""
     try:
-        # Prepare the row to be inserted
         data_to_save = {
             'latitude': lat,
             'longitude': lon,
             'search_type': search_type,
-            'results': gemini_result # The 'results' column is JSONB, so it can take the list directly
+            'results': gemini_result
         }
+        # If a city_name is provided, convert it to lowercase and add it
+        if city_name:
+            data_to_save['city_name'] = city_name.lower()
         
-        # Insert the data into the 'search_live' table
         response = supabase.table('search_live').insert(data_to_save).execute()
 
-        # Optional: Check if the insert was successful
         if response.data:
-            print(f"Successfully saved search (lat: {lat}, lon: {lon}) to Supabase.")
+            print(f"Successfully saved search (lat: {lat}, lon: {lon}, city: {city_name}) to Supabase.")
         else:
             print(f"Failed to save search to Supabase. Response: {response.error}")
 
     except Exception as e:
         print(f"Error saving data to Supabase in background thread: {e}")
         traceback.print_exc()
+
+
+# NEW: Route to find coordinates for a city
+@app.route('/find-city-coordinates', methods=['GET'])
+def find_city_coordinates_route():
+    city_name = request.args.get('city')
+    if not city_name:
+        return jsonify({"error": "A 'city' parameter is required."}), 400
+
+    url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+    params = {
+        "input": city_name,
+        "inputtype": "textquery",
+        "fields": "geometry",
+        "key": GOOGLE_PLACES_API_KEY_FROM_ENV
+    }
+
+    try:
+        response = requests.get(url, params=params)
+        response.raise_for_status()  # Raise an exception for bad status codes (4xx or 5xx)
+        data = response.json()
+
+        if data.get("status") == "OK" and data.get("candidates"):
+            location = data["candidates"][0]["geometry"]["location"]
+            return jsonify({"lat": location["lat"], "lng": location["lng"]})
+        else:
+            return jsonify({"error": f"Could not find coordinates for city: {city_name}"}), 404
+
+    except requests.exceptions.RequestException as e:
+        print(f"Error calling Google Places API: {e}")
+        return jsonify({"error": "Failed to communicate with Google Places API."}), 500
+    except Exception as e:
+        print(f"An unexpected error occurred in find_city_coordinates_route: {e}")
+        traceback.print_exc()
+        return jsonify({"error": "An unexpected server error occurred."}), 500
+
+
 
 
 # In app.py
@@ -73,10 +110,24 @@ def get_establishments_route():
     if lat is None or lon is None:
         return jsonify({"error": "Latitude and longitude are required."}), 400
 
-    # --- NEW: CACHE CHECKING LOGIC ---
+# --- UPDATED CACHE CHECKING LOGIC ---
     try:
-        print(f"Checking cache for type: {type_} at lat: {lat}, lon: {lon}")
-        # Call the database function we created in the Supabase SQL Editor
+        # Step 1: Check for a cached result by city name if provided
+        if city:
+            print(f"Checking cache for city: '{city}' and type: '{type_}'")
+            
+            # Calculate the timestamp for 7 days ago
+            seven_days_ago = (datetime.now() - timedelta(days=7)).isoformat()
+            
+            # Query for a case-insensitive city name and type match within the last 7 days
+            cached_city_search = supabase.table('search_live').select('results').ilike('city_name', city).eq('search_type', type_).gte('created_at', seven_days_ago).limit(1).execute()
+            
+            if cached_city_search.data:
+                print(f"CITY CACHE HIT! Returning data for '{city}'.")
+                return jsonify({"raw_data": cached_city_search.data[0]['results']})
+
+        # Step 2: If no city cache hit, fall back to GPS proximity check
+        print(f"Checking GPS cache for type: {type_} at lat: {lat}, lon: {lon}")
         cached_response = supabase.rpc(
             'find_nearby_searches',
             {
@@ -87,10 +138,8 @@ def get_establishments_route():
             }
         ).execute()
 
-        # If the function returned data, we have a cache hit!
         if cached_response.data:
-            print("CACHE HIT! Returning data from Supabase.")
-            # The 'results' column from the cached row contains the list of places
+            print("GPS PROXIMITY CACHE HIT! Returning data from Supabase.")
             cached_places = cached_response.data[0]['results']
             return jsonify({"raw_data": cached_places})
 
@@ -98,7 +147,7 @@ def get_establishments_route():
 
     except Exception as e:
         print(f"Error checking cache, proceeding to fetch fresh data. Error: {e}")
-    # --- END NEW CACHE LOGIC ---
+    # --- END UPDATED CACHE LOGIC ---
 
 
     try:
@@ -130,7 +179,7 @@ def get_establishments_route():
         if enriched_places:
             save_thread = threading.Thread(
                 target=save_to_supabase_async,
-                args=(lat, lon, type_, enriched_places)
+                args=(lat, lon, type_, enriched_places,city)
             )
             save_thread.start()
         # --- END ---

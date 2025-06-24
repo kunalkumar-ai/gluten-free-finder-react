@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
+import { calculateDistance } from '../utils/distance.js';
 
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
-// These are placeholders, ensure you have actual icon components if needed
 const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
 const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
 const userLocationIcon = new L.DivIcon({ className: 'user-location-dot', iconSize: [16, 16], iconAnchor: [8, 8] });
 
+// --- UI Sub-Components (These are unchanged) ---
 
-// --- UI Sub-Components (Unchanged) ---
-
-const PlaceDetailCard = ({ place, onClose }) => {
+const PlaceDetailCard = ({ place, onClose, userPosition }) => {
   if (!place) return null;
+
+  // NEW: Calculate smart distance if userPosition and place geometry are available
+  const smartDistance = userPosition && place.geometry
+    ? calculateDistance(userPosition, place.geometry.location)
+    : null;
+
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
   return (
     <div className="place-detail-card">
@@ -22,7 +27,12 @@ const PlaceDetailCard = ({ place, onClose }) => {
         <h3>{place.name}</h3>
         <p><strong>Status: {place.gf_status}</strong></p>
         <p>{place.address}</p>
-        <p><strong>Distance:</strong> {place.distance ? `${place.distance.toFixed(2)} km` : 'N/A'}</p>
+        
+        {/* MODIFIED: Conditionally display the smart distance */}
+        {smartDistance !== null && (
+          <p><strong>Distance:</strong> {`${smartDistance.toFixed(2)} km`}</p>
+        )}
+
         <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
       </div>
       <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="direction-link" aria-label="Get directions">
@@ -33,6 +43,7 @@ const PlaceDetailCard = ({ place, onClose }) => {
 };
 
 const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
+  // ... (no changes in this component)
   const filters = ['restaurants', 'cafes', 'bakery'];
   return (
     <div className="filter-container">
@@ -49,7 +60,7 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   );
 };
 
-const ListViewPanel = ({ places, onClose, isOpen }) => {
+const ListViewPanel = ({ places, onClose, isOpen, userPosition }) => {
   const sortedPlaces = [...places].sort((a, b) => {
     if (a.gf_status === 'Dedicated GF' && b.gf_status !== 'Dedicated GF') return -1;
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
@@ -66,13 +77,22 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
+          // NEW: Calculate smart distance for each item in the list
+          const smartDistance = userPosition && place.geometry
+            ? calculateDistance(userPosition, place.geometry.location)
+            : null;
+
           const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
           const isDedicated = place.gf_status === 'Dedicated GF';
           return (
             <a href={googleMapsUrl} key={place.place_id} className="list-item" target="_blank" rel="noopener noreferrer">
               <div className={`list-item-icon ${isDedicated ? 'dedicated' : 'offers'}`}></div>
               <div className="list-item-info"><h4>{place.name}</h4><p>{isDedicated ? 'Dedicated Gluten-Free' : 'Offers Gluten-Free'}</p></div>
-              <p>{place.distance ? `${place.distance.toFixed(2)} km` : ''}</p>
+              
+              {/* MODIFIED: Conditionally display the smart distance */}
+              {smartDistance !== null && (
+                <p>{`${smartDistance.toFixed(2)} km`}</p>
+              )}
             </a>
           );
         })}
@@ -81,15 +101,28 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
   );
 };
 
+const CitySearchToggle = ({ onClick }) => (
+  // ... (no changes in this component)
+  <div className="city-search-toggle-container">
+    <button onClick={onClick} className="city-search-toggle-button">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+      </svg>
+      Find a City
+    </button>
+  </div>
+);
+
 
 // --- Main Map Screen Component ---
-const MapScreen = () => {
-  const [position, setPosition] = useState(null);
+// MODIFIED: It now receives props from App.jsx
+const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
+  // REMOVED: Geolocation state is now managed in App.jsx
   const [places, setPlaces] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeFilter, setActiveFilter] = useState(''); // Start with no active filter
+  const [loading, setLoading] = useState(true); // This now means "loading places"
+  const [error, setError] = useState(null); // This now means "error fetching places"
+  const [activeFilter, setActiveFilter] = useState('');
   const [isListViewOpen, setListViewOpen] = useState(false);
   const [map, setMap] = useState(null);
   
@@ -97,36 +130,11 @@ const MapScreen = () => {
   const initialSearchDone = useRef(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
-
-  // This useEffect just gets the location
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        setPosition(userPos);
-        setLoading(false); // We have a location, stop the main loading
-        if (map) {
-          map.flyTo(userPos, 13);
-        }
-      },
-      () => {
-        setLoading(false);
-        setError('Could not get your location. Please enable location services.');
-      }
-    );
-  }, [map]);
   
-  // --- NEW LOGIC ---
-  // This function ONLY sets state. It updates the UI.
-  const startSearch = (filterType) => {
-    if (!position) return;
+  // REMOVED: The Geolocation useEffect has been moved to App.jsx
 
-    // Cancel any previous search
-    if (fetchControllerRef.current) {
-      fetchControllerRef.current.abort();
-    }
-    
-    // This is the key: update the UI state immediately
+  const startSearch = (filterType) => {
+    if (!userPosition) return;
     setLoading(true);
     setActiveFilter(filterType);
     setError(null);
@@ -135,54 +143,38 @@ const MapScreen = () => {
     setListViewOpen(false);
   };
 
-  // This new useEffect WATCHES for the activeFilter to change,
-  // and THEN it performs the network request.
+  // MODIFIED: This useEffect now uses the userPosition prop
   useEffect(() => {
-    // Don't run this on the initial load or if there's no filter selected
-    if (!activeFilter || !position) {
+    if (!activeFilter || !userPosition) {
       return;
     }
-
     const controller = new AbortController();
     fetchControllerRef.current = controller;
-
-    const fetchURL = `${backendUrl}/get-restaurants?lat=${position.lat}&lon=${position.lng}&type=${activeFilter}`;
+    const fetchURL = `${backendUrl}/get-restaurants?lat=${userPosition.lat}&lon=${userPosition.lng}&type=${activeFilter}`;
     
     fetch(fetchURL, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
-        if (data.error) {
-          setError(data.error);
-        } else {
-          setPlaces(data.raw_data || []);
-        }
+        if (data.error) { setError(data.error); } 
+        else { setPlaces(data.raw_data || []); }
       })
       .catch(err => {
-        if (err.name === 'AbortError') {
-          console.log('Fetch aborted for:', activeFilter);
-        } else {
-          setError(`Could not fetch gluten-free ${activeFilter}.`);
-        }
+        if (err.name !== 'AbortError') { setError(`Could not fetch gluten-free ${activeFilter}.`); }
       })
       .finally(() => {
-        if (!controller.signal.aborted) {
-          setLoading(false);
-        }
+        if (!controller.signal.aborted) { setLoading(false); }
       });
-      
-  }, [activeFilter, position]); // It runs when activeFilter or position changes
+  }, [activeFilter, userPosition]);
 
-
-  // This useEffect handles the very first automatic search
+  // MODIFIED: This useEffect now uses the userPosition prop
   useEffect(() => {
-    if (position && !initialSearchDone.current) {
-      // Start the default search
+    if (userPosition && !initialSearchDone.current) {
+      setLoading(true); // Start loading when we have a position
       startSearch('restaurants');
       initialSearchDone.current = true;
     }
-  }, [position]);
+  }, [userPosition]);
   
-  // This useEffect cleans up on unmount
   useEffect(() => {
     return () => {
       if (fetchControllerRef.current) {
@@ -192,33 +184,34 @@ const MapScreen = () => {
   }, []);
 
   // --- RENDER LOGIC ---
-  if (!position && !error) {
+  if (!userPosition && !locationError) {
     return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>Finding your location...</div>;
   }
+
+  // Use the locationError from props
+  const displayError = error || locationError;
 
   let message = null;
   if (loading) {
     message = `Searching GF ${activeFilter}...`;
-  } else if (error) {
-    message = `Error: ${error}`;
+  } else if (displayError) {
+    message = `Error: ${displayError}`;
   }
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {/* The onFilterChange prop now calls our new `startSearch` function */}
-      <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} />
-      
-      {message && (
-        <div
-          className="map-message-overlay"
-          style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
-        >
-          {message}
-        </div>
-      )}
+      <div className="top-ui-container">
+        {userPosition && <CitySearchToggle onClick={onNavigateToCitySearch} />}
+        <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} disabled={!userPosition} />
+        {message && (
+          <div className="map-message-overlay">
+            {message}
+          </div>
+        )}
+      </div>
 
       <MapContainer
-        center={position || [52.52, 13.40]}
+        center={userPosition || [52.52, 13.40]}
         zoom={13}
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
@@ -228,7 +221,7 @@ const MapScreen = () => {
           attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
         />
         
-        {position && <Marker position={position} icon={userLocationIcon} zIndexOffset={1000} />}
+        {userPosition && <Marker position={userPosition} icon={userLocationIcon} zIndexOffset={1000} />}
 
         {places.map(place => (
           place.geometry && place.geometry.location && (
@@ -252,9 +245,14 @@ const MapScreen = () => {
         places={places}
         onClose={() => setListViewOpen(false)}
         isOpen={isListViewOpen}
+        userPosition={userPosition}
       />
       
-      <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+      <PlaceDetailCard 
+        place={selectedPlace} 
+        onClose={() => setSelectedPlace(null)} 
+        userPosition={userPosition}
+      />
     </div>
   );
 };
