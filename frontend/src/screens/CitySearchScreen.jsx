@@ -119,7 +119,7 @@ const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) 
             type="text"
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
-            placeholder="Enter city name and press enter..."
+            placeholder="Enter location and press enter..."
             className="city-search-input"
             disabled={loading}
           />
@@ -257,6 +257,7 @@ return (
       zoom={6}
       style={{ height: '100%', width: '100%' }}
       whenCreated={setMap}
+      zoomControl={false}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"

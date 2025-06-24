@@ -215,6 +215,7 @@ const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
         zoom={13}
         style={{ height: '100%', width: '100%' }}
         whenCreated={setMap}
+        zoomControl={false}
       >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
