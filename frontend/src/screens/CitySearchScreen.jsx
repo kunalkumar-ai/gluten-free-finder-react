@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
-
+import { calculateDistance } from '../utils/distance.js';
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
 const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
@@ -9,8 +9,14 @@ const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
 
 // --- UI Sub-Components ---
 
-const PlaceDetailCard = ({ place, onClose }) => {
+const PlaceDetailCard = ({ place, onClose, userPosition }) => {
   if (!place) return null;
+
+  // NEW: Calculate smart distance if userPosition is available
+  const smartDistance = userPosition && place.geometry
+    ? calculateDistance(userPosition, place.geometry.location)
+    : null;
+
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
   return (
     <div className="place-detail-card">
@@ -19,7 +25,12 @@ const PlaceDetailCard = ({ place, onClose }) => {
         <h3>{place.name}</h3>
         <p><strong>Status: {place.gf_status}</strong></p>
         <p>{place.address}</p>
-        <p><strong>Distance:</strong> {place.distance ? `${place.distance.toFixed(2)} km` : 'N/A'}</p>
+        
+        {/* MODIFIED: Conditionally display the smart distance */}
+        {smartDistance !== null && (
+          <p><strong>Distance:</strong> {`${smartDistance.toFixed(2)} km`}</p>
+        )}
+
         <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
       </div>
       <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="direction-link" aria-label="Get directions">
@@ -46,8 +57,9 @@ const FilterButtons = ({ activeFilter, onFilterChange, disabled }) => {
   );
 };
 
-const ListViewPanel = ({ places, onClose, isOpen }) => {
+const ListViewPanel = ({ places, onClose, isOpen, userPosition }) => {
   const sortedPlaces = [...places].sort((a, b) => {
+    // ... sort logic is unchanged
     if (a.gf_status === 'Dedicated GF' && b.gf_status !== 'Dedicated GF') return -1;
     if (a.gf_status !== 'Dedicated GF' && b.gf_status === 'Dedicated GF') return 1;
     return 0;
@@ -63,13 +75,22 @@ const ListViewPanel = ({ places, onClose, isOpen }) => {
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
+          // NEW: Calculate smart distance for each item
+          const smartDistance = userPosition && place.geometry
+            ? calculateDistance(userPosition, place.geometry.location)
+            : null;
+
           const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
           const isDedicated = place.gf_status === 'Dedicated GF';
           return (
             <a href={googleMapsUrl} key={place.place_id} className="list-item" target="_blank" rel="noopener noreferrer">
               <div className={`list-item-icon ${isDedicated ? 'dedicated' : 'offers'}`}></div>
               <div className="list-item-info"><h4>{place.name}</h4><p>{isDedicated ? 'Dedicated Gluten-Free' : 'Offers Gluten-Free'}</p></div>
-              <p>{place.distance ? `${place.distance.toFixed(2)} km` : ''}</p>
+              
+              {/* MODIFIED: Conditionally display the smart distance */}
+              {smartDistance !== null && (
+                <p>{`${smartDistance.toFixed(2)} km`}</p>
+              )}
             </a>
           );
         })}
@@ -120,7 +141,7 @@ const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) 
 
 
 // --- The Main City Search Screen Component ---
-const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
+const CitySearchScreen = ({ onNavigateToLiveSearch, userPosition }) => {
   const [cityInput, setCityInput] = useState('');
   const [searchCoordinates, setSearchCoordinates] = useState(null);
   const [places, setPlaces] = useState([]);
@@ -246,8 +267,17 @@ return (
       </button>
     )}
     
-    <ListViewPanel places={places} onClose={() => setListViewOpen(false)} isOpen={isListViewOpen} />
-    <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+    <ListViewPanel 
+        places={places} 
+        onClose={() => setListViewOpen(false)} 
+        isOpen={isListViewOpen}
+        userPosition={userPosition}
+    />
+    <PlaceDetailCard 
+        place={selectedPlace} 
+        onClose={() => setSelectedPlace(null)} 
+        userPosition={userPosition}
+    />
   </div>
 );
 }; 
