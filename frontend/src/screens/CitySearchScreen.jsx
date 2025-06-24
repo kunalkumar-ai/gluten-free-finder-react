@@ -257,6 +257,7 @@ return (
       zoom={6}
       style={{ height: '100%', width: '100%' }}
       whenCreated={setMap}
+      zoomControl={false}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
