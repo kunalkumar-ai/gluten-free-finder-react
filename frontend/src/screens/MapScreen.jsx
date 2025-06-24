@@ -218,19 +218,23 @@ const MapScreen = ({ onNavigateToCitySearch }) => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {/* The onFilterChange prop now calls our new `startSearch` function */}
-      {position && <CitySearchToggle onClick={onNavigateToCitySearch} />}
-      <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} />
-      
-      {message && (
-        <div
-          className="map-message-overlay"
-          style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
-        >
-          {message}
-        </div>
-      )}
+      {/* NEW: A single container for all top UI elements */}
+      <div className="top-ui-container">
+        {position && <CitySearchToggle onClick={onNavigateToCitySearch} />}
+        
+        <FilterButtons activeFilter={activeFilter} onFilterChange={startSearch} disabled={!position} />
+        
+        {message && (
+          <div
+            className="map-message-overlay"
+            style={{backgroundColor: error ? '#ffebee' : 'rgba(255, 255, 255, 0.9)', color: error ? '#c62828' : '#555'}}
+          >
+            {message}
+          </div>
+        )}
+      </div>
 
+      {/* The MapContainer and other components remain outside the top container */}
       <MapContainer
         center={position || [52.52, 13.40]}
         zoom={13}

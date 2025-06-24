@@ -184,8 +184,19 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
   };
 
 
-  return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+// Prepare the message variable before the return statement
+let message = null;
+if (loading) {
+  message = "Searching...";
+} else if (error) {
+  message = `Error: ${error}`;
+}
+
+return (
+  <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+
+    {/* NEW: A single container for all top UI elements */}
+    <div className="top-ui-container">
       <CitySearchBar
         onSearch={handleSearch}
         cityInput={cityInput}
@@ -200,44 +211,45 @@ const CitySearchScreen = ({ onNavigateToLiveSearch }) => {
         disabled={loading} 
       />
       
-      {loading && <div className="map-message-overlay">Searching...</div>}
-      {!loading && error && <div className="map-message-overlay">{`Error: ${error}`}</div>}
-
-      <MapContainer
-        center={[51.505, -0.09]}
-        zoom={6}
-        style={{ height: '100%', width: '100%' }}
-        whenCreated={setMap}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
-        />
-
-        {searchCoordinates && <ChangeMapView coords={searchCoordinates} />}
-
-        {places.map(place => (
-          place.geometry && place.geometry.location && (
-            <Marker
-              key={place.place_id}
-              position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
-              icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
-              eventHandlers={{ click: () => setSelectedPlace(place) }}
-            />
-          )
-        ))}
-      </MapContainer>
-      
-      {!isListViewOpen && places.length > 0 && !loading && (
-        <button className="list-view-button" onClick={() => setListViewOpen(true)}>
-          Offers ({places.length})
-        </button>
-      )}
-      
-      <ListViewPanel places={places} onClose={() => setListViewOpen(false)} isOpen={isListViewOpen} />
-      <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+      {message && <div className="map-message-overlay">{message}</div>}
     </div>
-  );
-};
+
+
+    <MapContainer
+      center={[51.505, -0.09]}
+      zoom={6}
+      style={{ height: '100%', width: '100%' }}
+      whenCreated={setMap}
+    >
+      <TileLayer
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'
+      />
+
+      {searchCoordinates && <ChangeMapView coords={searchCoordinates} />}
+
+      {places.map(place => (
+        place.geometry && place.geometry.location && (
+          <Marker
+            key={place.place_id}
+            position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
+            icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
+            eventHandlers={{ click: () => setSelectedPlace(place) }}
+          />
+        )
+      ))}
+    </MapContainer>
+    
+    {!isListViewOpen && places.length > 0 && !loading && (
+      <button className="list-view-button" onClick={() => setListViewOpen(true)}>
+        Offers ({places.length})
+      </button>
+    )}
+    
+    <ListViewPanel places={places} onClose={() => setListViewOpen(false)} isOpen={isListViewOpen} />
+    <PlaceDetailCard place={selectedPlace} onClose={() => setSelectedPlace(null)} />
+  </div>
+);
+}; 
 
 export default CitySearchScreen;
