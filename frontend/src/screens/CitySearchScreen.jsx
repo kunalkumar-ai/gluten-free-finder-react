@@ -109,9 +109,7 @@ function ChangeMapView({ coords }) {
 const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (cityInput.trim()) {
-        onSearch();
-      }
+      onSearch();
     };
   
     return (
@@ -121,13 +119,10 @@ const CitySearchBar = ({ onSearch, cityInput, setCityInput, onReset, loading }) 
             type="text"
             value={cityInput}
             onChange={(e) => setCityInput(e.target.value)}
-            placeholder="Enter city name..."
+            placeholder="Enter city name and press enter..."
             className="city-search-input"
             disabled={loading}
           />
-          <button type="submit" className="city-search-button" disabled={loading}>
-            Search
-          </button>
         </form>
         <button onClick={onReset} className="reset-location-button" aria-label="Reset to my location" title="Reset to my location">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
@@ -156,55 +151,76 @@ const CitySearchScreen = ({ onNavigateToLiveSearch, userPosition }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5007';
 
   const handleSearch = async () => {
-    if (!cityInput.trim() || !activeFilter) {
-      setError("Please enter a city and select a filter.");
+    if (!cityInput.trim()) {
+      setError("Please enter a city.");
       return;
     }
-
     setLoading(true);
     setError(null);
-    setPlaces([]);
-    setListViewOpen(false);
-
-    if (fetchControllerRef.current) {
-        fetchControllerRef.current.abort();
-    }
-    const controller = new AbortController();
-    fetchControllerRef.current = controller;
-
     try {
-      const coordsResponse = await fetch(`${backendUrl}/find-city-coordinates?city=${cityInput}`, { signal: controller.signal });
+      // This function now ONLY fetches coordinates and sets the state.
+      const coordsResponse = await fetch(`${backendUrl}/find-city-coordinates?city=${cityInput}`);
       const cityCoords = await coordsResponse.json();
-
       if (!coordsResponse.ok) {
         throw new Error(cityCoords.error || "Could not find that city.");
       }
-      
-      // CORRECTION 2: Added the missing setSearchCoordinates call
       setSearchCoordinates(cityCoords);
-      
-      const placesURL = `${backendUrl}/get-restaurants?lat=${cityCoords.lat}&lon=${cityCoords.lng}&type=${activeFilter}&city=${encodeURIComponent(cityInput)}`;
-      const placesResponse = await fetch(placesURL, { signal: controller.signal });
-      const placesData = await placesResponse.json();
-
-      if (!placesResponse.ok) {
-          throw new Error(placesData.error || "Could not fetch places.");
-      }
-      
-      setPlaces(placesData.raw_data || []);
-
     } catch (err) {
-      if (err.name !== 'AbortError') {
-        setError(err.message);
-      }
-    } finally {
-      if (!controller.signal.aborted) {
-        setLoading(false);
-      }
+      setError(err.message);
+      setLoading(false); // Set loading false only on error here
     }
   };
 
+// NEW: This useEffect makes the search "reactive"
+  useEffect(() => {
+  // Don't run if we don't have coordinates or a filter
+  if (!searchCoordinates || !activeFilter) {
+    return;
+  }
 
+  // This logic is now inside the useEffect
+  setLoading(true);
+  setError(null);
+  setPlaces([]);
+  setListViewOpen(false);
+
+  if (fetchControllerRef.current) {
+    fetchControllerRef.current.abort();
+  }
+  const controller = new AbortController();
+  fetchControllerRef.current = controller;
+
+  const placesURL = `${backendUrl}/get-restaurants?lat=${searchCoordinates.lat}&lon=${searchCoordinates.lng}&type=${activeFilter}&city=${encodeURIComponent(cityInput)}`;
+  
+  fetch(placesURL, { signal: controller.signal })
+    .then(res => res.json())
+    .then(placesData => {
+      if (placesData.error) {
+        throw new Error(placesData.error || "Could not fetch places.");
+      }
+      setPlaces(placesData.raw_data || []);
+    })
+    .catch(err => {
+      if (err.name !== 'AbortError') {
+        setError(err.message);
+      }
+    })
+    .finally(() => {
+      if (!controller.signal.aborted) {
+        setLoading(false);
+      }
+    });
+}, [searchCoordinates, activeFilter]); // It runs when coordinates or filter change
+
+// NEW: This useEffect resets the search when the input is cleared
+useEffect(() => {
+  // If the input is empty, reset the search state
+  if (cityInput.trim() === '') {
+    setSearchCoordinates(null);
+    setPlaces([]);
+    setError(null);
+  }
+}, [cityInput]); // This hook watches only the cityInput text
 // Prepare the message variable before the return statement
 let message = null;
 if (loading) {
