@@ -111,9 +111,6 @@ html, body, #root, .App, .App > div {
   width: auto;
 }
 
-.city-search-toggle-container {
-  /* No extra styles needed */
-}
 
 .city-search-toggle-button {
   background-color: white;
