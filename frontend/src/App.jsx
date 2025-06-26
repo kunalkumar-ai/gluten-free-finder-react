@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MapScreen from './screens/MapScreen';
 import CitySearchScreen from './screens/CitySearchScreen';
 import './App.css';
+import ReactGA from "react-ga4";
 
 function App() {
   const [currentView, setCurrentView] = useState('live');
@@ -10,21 +11,33 @@ function App() {
   const [userPosition, setUserPosition] = useState(null);
   const [locationError, setLocationError] = useState(null);
 
-  // NEW: Geolocation logic is now in App.jsx
-  useEffect(() => {
-    // This runs only once when the app starts
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        setUserPosition(userPos);
-      },
-      () => {
-        setLocationError('Location permission denied.');
-        // If permission is denied, force the view to city search
-        setCurrentView('city');
-      }
-    );
-  }, []); // Empty dependency array means this runs only once on mount
+// NEW: Geolocation logic is now in App.jsx
+useEffect(() => {
+  // --- NEW: Initialize Google Analytics ---
+  const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+  // Only initialize if the Measurement ID is found
+  if (measurementId) {
+    ReactGA.initialize(measurementId);
+    console.log("Google Analytics Initialized"); // For debugging
+  }
+  // --- END ---
+
+  // This is your existing geolocation logic
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      setUserPosition(userPos);
+    },
+    () => {
+      setLocationError('Location permission denied.');
+      // If permission is denied, force the view to city search
+      setCurrentView('city');
+    }
+  );
+}, []);
+
+
 
   const navigateToCitySearch = () => {
     setCurrentView('city');
