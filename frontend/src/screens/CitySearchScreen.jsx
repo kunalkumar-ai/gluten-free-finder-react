@@ -2,8 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { calculateDistance } from '../utils/distance.js';
+import ReactGA from "react-ga4";
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
+
 const restaurantIcon = new L.DivIcon({ className: 'restaurant-icon' });
 const dedicatedIcon = new L.DivIcon({ className: 'dedicated-icon' });
 
@@ -198,7 +200,19 @@ const CitySearchScreen = ({ onNavigateToLiveSearch, userPosition }) => {
       if (placesData.error) {
         throw new Error(placesData.error || "Could not fetch places.");
       }
-      setPlaces(placesData.raw_data || []);
+      
+      const placesFound = placesData.raw_data || [];
+      setPlaces(placesFound);
+
+      // NEW: Send event to Google Analytics if results were found
+      if (placesFound.length > 0) {
+        ReactGA.event({
+          category: "Search",
+          action: "City Search Success",
+          label: `${cityInput} - ${activeFilter}`, // e.g., 'Berlin - restaurants'
+          value: placesFound.length
+        });
+      }
     })
     .catch(err => {
       if (err.name !== 'AbortError') {

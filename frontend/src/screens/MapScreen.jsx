@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import L from 'leaflet';
 import { calculateDistance } from '../utils/distance.js';
+import ReactGA from "react-ga4";
 
 // --- Leaflet CSS & Custom Icons ---
 import 'leaflet/dist/leaflet.css';
@@ -155,8 +156,22 @@ const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
     fetch(fetchURL, { signal: controller.signal })
       .then(res => res.json())
       .then(data => {
-        if (data.error) { setError(data.error); } 
-        else { setPlaces(data.raw_data || []); }
+        if (data.error) { 
+          setError(data.error); 
+        } else { 
+          const placesFound = data.raw_data || [];
+          setPlaces(placesFound);
+
+          // NEW: Send event to Google Analytics if results were found
+          if (placesFound.length > 0) {
+            ReactGA.event({
+              category: "Search",
+              action: "Live Search Success",
+              label: activeFilter, // e.g., 'restaurants'
+              value: placesFound.length // The number of results found
+            });
+          }
+        }
       })
       .catch(err => {
         if (err.name !== 'AbortError') { setError(`Could not fetch gluten-free ${activeFilter}.`); }
