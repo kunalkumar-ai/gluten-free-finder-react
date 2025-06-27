@@ -82,9 +82,10 @@ const ListViewPanel = ({ places, onClose, isOpen, userPosition }) => {
 
   return (
     <div className={panelClassName}>
-      <div className="list-view-header" onClick={onClose}>
+      <div className="list-view-header">
         <div className="handle-bar"></div>
         <h2>Nearby Places</h2>
+        <button onClick={onClose} className="list-view-close-button">×</button>
       </div>
       <div className="list-view-content">
         {sortedPlaces.map(place => {
