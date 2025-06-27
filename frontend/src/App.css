@@ -1,5 +1,5 @@
 /* --- Base Styles --- */
-html, body, #root, .App, .App > div {
+html, body, #root, .App > div {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -7,6 +7,13 @@ html, body, #root, .App, .App > div {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+}
+
+/* NEW: Separated .App rule to add necessary properties */
+.App {
+  height: 100%;
+  width: 100%;
+  position: relative; /* This is important for child positioning */
 }
 
 .leaflet-container {
@@ -381,13 +388,16 @@ html, body, #root, .App, .App > div {
 /* --- Styles for Feedback Form --- */
 
 .floating-feedback-button {
-  position: fixed;
-  bottom: 20px;
+  position: absolute; /* Changed from fixed to work within the .App container */
+  top: 0;
+  bottom: 0;
   left: 20px;
+  margin-top: auto; /* This vertically centers the button */
+  margin-bottom: auto; /* This vertically centers the button */
   z-index: 1002;
-  width: 44px;
-  height: 44px;
-  background-color: #00A986; /* A friendly, attractive violet */
+  width: 36px;
+  height: 36px;
+  background-color: #00A986; /* This is the purple color we discussed */
   color: white;
   border-radius: 50%;
   border: none;
