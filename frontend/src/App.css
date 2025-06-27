@@ -349,3 +349,27 @@ html, body, #root, .App, .App > div {
   font-size: 0.9em;
   color: #777;
 }
+
+.list-view-close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background-color 0.2s;
+}
+
+.list-view-close-button:hover {
+  background-color: #e0e0e0;
+}
