@@ -93,7 +93,28 @@ def find_city_coordinates_route():
         return jsonify({"error": "An unexpected server error occurred."}), 500
 
 
+# NEW: Route to submit user feedback
+@app.route('/submit-feedback', methods=['POST'])
+def submit_feedback_route():
+    data = request.get_json()
+    content = data.get('content')
 
+    if not content:
+        return jsonify({"error": "Feedback content is required."}), 400
+
+    try:
+        response = supabase.table('feedback').insert({"content": content}).execute()
+
+        if response.data:
+            return jsonify({"message": "Feedback submitted successfully."}), 201
+        else:
+            print(f"Failed to save feedback to Supabase. Response: {response.error}")
+            return jsonify({"error": "Failed to save feedback."}), 500
+
+    except Exception as e:
+        print(f"An unexpected error occurred in submit_feedback_route: {e}")
+        traceback.print_exc()
+        return jsonify({"error": "An unexpected server error occurred."}), 500
 
 # In app.py
 
