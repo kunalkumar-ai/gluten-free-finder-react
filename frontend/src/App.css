@@ -388,15 +388,12 @@ html, body, #root, .App > div {
 /* --- Styles for Feedback Form --- */
 
 .floating-feedback-button {
-  position: absolute; /* Changed from fixed to work within the .App container */
-  top: 0;
-  bottom: 0;
-  left: 20px;
-  margin-top: auto; /* This vertically centers the button */
-  margin-bottom: auto; /* This vertically centers the button */
+  position: fixed; /* Use fixed positioning for the corner */
+  bottom: 20px; /* Position from the bottom */
+  left: 20px; /* Position from the left */
   z-index: 1002;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   background-color: #00A986; /* This is the purple color we discussed */
   color: white;
   border-radius: 50%;
