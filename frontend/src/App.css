@@ -252,13 +252,12 @@ html, body, #root, .App, .App > div {
 
 
 /* --- Styles for List View Panel --- */
-
 .list-view-panel {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  top: 40%; /* Replaced height: 60vh; with this */
+  top: 40%;
   background-color: white;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
@@ -267,13 +266,18 @@ html, body, #root, .App, .App > div {
   display: flex;
   flex-direction: column;
   
-  /* This rule hides the panel by default */
+  /* NEW: Start fully transparent and hidden */
+  opacity: 0;
+  visibility: hidden;
   transform: translateY(100%);
-  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  /* MODIFIED: Add opacity and visibility to the transition */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.4s, visibility 0.4s;
 }
 
 .list-view-panel.open {
-  /* This rule slides the panel up into view */
+  /* This rule slides the panel up and fades it in */
+  opacity: 1;
+  visibility: visible;
   transform: translateY(0);
 }
 
