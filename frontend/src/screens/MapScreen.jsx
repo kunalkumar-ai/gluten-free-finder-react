@@ -36,7 +36,18 @@ const PlaceDetailCard = ({ place, onClose, userPosition }) => {
 
         <p><strong>Rating:</strong> {place.rating} ({place.user_ratings_total} reviews)</p>
       </div>
-      <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" className="direction-link" aria-label="Get directions">
+      <a 
+        href={googleMapsUrl} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        className="direction-link" 
+        aria-label="Get directions"
+        onClick={() => ReactGA.event({
+          category: "Engagement",
+          action: "Click Get Directions",
+          label: place.name
+        })}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
       </a>
     </div>
@@ -86,7 +97,18 @@ const ListViewPanel = ({ places, onClose, isOpen, userPosition }) => {
           const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.address)}&query_place_id=${place.place_id}`;
           const isDedicated = place.gf_status === 'Dedicated GF';
           return (
-            <a href={googleMapsUrl} key={place.place_id} className="list-item" target="_blank" rel="noopener noreferrer">
+            <a 
+              href={googleMapsUrl} 
+              key={place.place_id} 
+              className="list-item" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => ReactGA.event({
+                category: "Engagement",
+                action: "View Place Details",
+                label: `List - ${place.name}`
+              })}
+            >
               <div className={`list-item-icon ${isDedicated ? 'dedicated' : 'offers'}`}></div>
               <div className="list-item-info"><h4>{place.name}</h4><p>{isDedicated ? 'Dedicated Gluten-Free' : 'Offers Gluten-Free'}</p></div>
               
@@ -142,6 +164,15 @@ const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
     setPlaces([]);
     setSelectedPlace(null);
     setListViewOpen(false);
+  };
+
+  const handlePlaceSelect = (place) => {
+    setSelectedPlace(place);
+    ReactGA.event({
+      category: "Engagement",
+      action: "View Place Details",
+      label: `Map - ${place.name}` // Track that the click came from the map
+    });
   };
 
   // MODIFIED: This useEffect now uses the userPosition prop
@@ -245,7 +276,7 @@ const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
               key={place.place_id}
               position={{ lat: place.geometry.location.lat, lng: place.geometry.location.lng }}
               icon={place.gf_status === 'Dedicated GF' ? dedicatedIcon : restaurantIcon}
-              eventHandlers={{ click: () => setSelectedPlace(place) }}
+              eventHandlers={{ click: () => handlePlaceSelect(place) }}
             />
           )
         ))}
