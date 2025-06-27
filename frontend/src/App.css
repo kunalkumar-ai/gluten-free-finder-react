@@ -258,7 +258,7 @@ html, body, #root, .App, .App > div {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60vh;
+  top: 40%; /* Replaced height: 60vh; with this */
   background-color: white;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
