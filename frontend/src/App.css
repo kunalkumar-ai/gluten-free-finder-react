@@ -490,3 +490,46 @@ html, body, #root, .App > div {
 .feedback-submit-button:hover {
   background-color: #00876c;
 }
+
+/* --- Styles for Loading Screen --- */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFFFF; /* A clean, off-white */
+}
+
+.loading-logo {
+  width: 250px;
+  max-width: 60%;
+  height: auto;
+  animation: pulse 2s infinite ease-in-out; /* A subtle pulse animation */
+}
+
+.loading-text {
+  margin-top: 24px;
+  color: #343a40; /* A slightly darker, more classic text color */
+  font-weight: 500;
+  font-size: 1.1em;
+  font-family: 'Garamond', 'Palatino', 'Times New Roman', serif; /* An elegant serif font stack */
+  font-style: italic; /* Adding italic style can give it a nice touch */
+}
+
+/* This is the animation definition for the pulse effect */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

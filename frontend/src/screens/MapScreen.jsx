@@ -230,10 +230,7 @@ const MapScreen = ({ onNavigateToCitySearch, userPosition, locationError }) => {
     };
   }, []);
 
-  // --- RENDER LOGIC ---
-  if (!userPosition && !locationError) {
-    return <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>CeliacAI- On Spot Gluten Free</div>;
-  }
+  // --- RENDER LOGIC --
 
   // Use the locationError from props
   const displayError = error || locationError;
