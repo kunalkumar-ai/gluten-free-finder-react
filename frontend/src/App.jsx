@@ -118,7 +118,7 @@ function App() {
     if (userPosition) {
       setCurrentView('live');
     } else {
-      alert('You need to enable location permission in your browser settings to use the live map.');
+      alert('Please go to settings and enable location permission for your browser.');
     }
   };
 
