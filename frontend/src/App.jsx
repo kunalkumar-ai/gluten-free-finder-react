@@ -60,34 +60,43 @@ function App() {
       // Promise 1: A timer that resolves after 3 seconds
       const minimumDisplayTime = new Promise(resolve => setTimeout(resolve, 2000));
 
-      // Promise 2: The geolocation check
-      const getLocation = new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(resolve, reject);
+      // Promise 2: The geolocation check, now structured to always resolve
+      const getLocation = new Promise((resolve) => {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            // On success, resolve with a success status and the data
+            resolve({ success: true, data: pos });
+          },
+          () => {
+            // On failure, resolve with a failure status
+            resolve({ success: false });
+          }
+        );
       });
 
-      // Promise.all waits for BOTH the timer and the location check to finish
-      Promise.all([minimumDisplayTime, getLocation])
-        .then(([_, pos]) => {
-          // This runs only on SUCCESS
-          const userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      // Promise.all waits for BOTH promises to finish
+      Promise.all([minimumDisplayTime, getLocation]).then(([_, locationResult]) => {
+        // This code runs only after 3 seconds AND after the location check is complete
+        
+        if (locationResult.success) {
+          // If location was found successfully
+          const userPos = { lat: locationResult.data.coords.latitude, lng: locationResult.data.coords.longitude };
           setUserPosition(userPos);
           setCurrentView('live');
-        })
-        .catch(() => {
-          // This runs only on FAILURE (permission denied)
+        } else {
+          // If location was denied
           setLocationError('Location permission denied.');
           setCurrentView('city');
-        })
-        .finally(() => {
-          // This runs in ALL cases (success or failure)
-          setAppLoading(false); // Hide the loading screen
-        });
+        }
+
+        // Finally, hide the loading screen
+        setAppLoading(false);
+      });
     };
 
     // This event listener handles the case where a user navigates back to the page
     const handlePageShow = (event) => {
       if (event.persisted) {
-        console.log("Page was loaded from back/forward cache. Re-running load logic.");
         runInitialLoad();
       }
     };
@@ -99,7 +108,7 @@ function App() {
     return () => {
       window.removeEventListener('pageshow', handlePageShow);
     };
-  }, []); // This hook only needs to run once to set up the listeners
+  }, []); // This hook only needs to run once
 
   const navigateToCitySearch = () => {
     setCurrentView('city');
