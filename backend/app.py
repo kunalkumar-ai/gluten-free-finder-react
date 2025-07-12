@@ -138,7 +138,7 @@ def get_establishments_route():
             print(f"Checking cache for city: '{city}' and type: '{type_}'")
             
             # Calculate the timestamp for 7 days ago
-            seven_days_ago = (datetime.now() - timedelta(days=7)).isoformat()
+            seven_days_ago = (datetime.now() - timedelta(days=30)).isoformat()
             
             # Query for a case-insensitive city name and type match within the last 7 days
             #cached_city_search = supabase.table('search_live').select('results').ilike('city_name', city).eq('search_type', type_).gte('created_at', seven_days_ago).limit(1).execute()
