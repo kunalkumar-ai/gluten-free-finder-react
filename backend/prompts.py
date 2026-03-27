@@ -8,7 +8,7 @@ def get_restaurants_prompt(city: str, type_: str = "restaurants") -> str:
         type_ (str): Type of establishment to search for ('restaurants' or 'cafes').
         
     Returns:
-        str: Formatted prompt string.
+        str: Formatted prompt string for the LLM.
     """
     if type_ == "cafes":
         establishment_type_plural = "cafes or bakeries"
