@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Sora:wght@300;400;500;600&display=swap');
+
+.allergies-page {
+  --black: #0D0D0D;
+  --white: #FAFAF7;
+  --green: #2D6A4F;
+  --green-mid: #40916C;
+  --green-light: #D8F3DC;
+  --green-pale: #F0FAF2;
+  --gray: #6B7280;
+  --gray-light: #F3F4F0;
+  --border: rgba(13,13,13,0.09);
+
+  font-family: 'Sora', sans-serif;
+  background: var(--white);
+  color: var(--black);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+.allergies-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(250,250,247,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.allergies-back {
+  background: none; border: 1.5px solid var(--border);
+  border-radius: 100px; padding: 8px 18px;
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 500;
+  color: var(--gray); cursor: pointer; transition: all .2s;
+  width: 80px; text-align: center;
+}
+.allergies-back:hover { border-color: var(--green); color: var(--green); }
+.allergies-logo { display: flex; align-items: center; gap: 10px; }
+.allergies-logo-mark {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: var(--green);
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 14px; font-weight: 600;
+}
+.allergies-logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; color: var(--black);
+}
+.allergies-logo-text span { color: var(--green); }
+
+/* ── HERO ── */
+.allergies-hero {
+  background: var(--black);
+  padding: 80px 48px 72px;
+  position: relative; overflow: hidden;
+}
+.allergies-hero::before {
+  content: '';
+  position: absolute; top: -40%; right: -10%;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(45,106,79,.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.allergies-hero-inner {
+  max-width: 720px; margin: 0 auto; text-align: center;
+}
+.allergies-tag {
+  display: inline-block;
+  background: rgba(116,198,157,.12); color: #74C69D;
+  font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 24px;
+}
+.allergies-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 6vw, 68px); font-weight: 900;
+  line-height: 1.05; color: white; margin-bottom: 20px;
+}
+.allergies-title em { font-style: italic; color: #74C69D; }
+.allergies-subtitle {
+  font-size: 16px; color: rgba(250,250,247,.55);
+  line-height: 1.7; font-weight: 300; margin-bottom: 40px;
+}
+
+/* SEARCH */
+.allergies-search-wrap {
+  position: relative; max-width: 520px; margin: 0 auto 28px;
+}
+.allergies-search-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 16px; pointer-events: none;
+}
+.allergies-search {
+  width: 100%; padding: 14px 44px 14px 46px;
+  border-radius: 14px; border: 1.5px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.07); color: white;
+  font-family: 'Sora', sans-serif; font-size: 14px;
+  outline: none; transition: border-color .2s;
+}
+.allergies-search::placeholder { color: rgba(255,255,255,.35); }
+.allergies-search:focus { border-color: #74C69D; }
+.allergies-search-clear {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,.15); border: none; border-radius: 50%;
+  width: 22px; height: 22px; color: white; font-size: 14px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  line-height: 1;
+}
+
+/* FILTERS */
+.allergies-filters { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.allergies-filter-btn {
+  padding: 9px 20px; border-radius: 100px;
+  font-family: 'Sora', sans-serif; font-size: 13px; font-weight: 500;
+  border: 1.5px solid rgba(255,255,255,.15);
+  background: transparent; color: rgba(255,255,255,.55);
+  cursor: pointer; transition: all .2s;
+}
+.allergies-filter-btn:hover { border-color: rgba(255,255,255,.35); color: white; }
+.allergies-filter-btn.active {
+  background: #74C69D; border-color: #74C69D; color: #0D0D0D; font-weight: 600;
+}
+
+/* ── LEGEND ── */
+.allergies-legend {
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  max-width: 1200px; margin: 32px auto 0; padding: 0 48px;
+}
+.legend-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--gray); }
+
+/* ── BADGES ── */
+.allergen-badge, .legend-badge {
+  font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 100px; white-space: nowrap;
+}
+.badge-both { background: #D8F3DC; color: #2D6A4F; }
+.badge-eu { background: #EDE9FE; color: #5B21B6; }
+
+/* ── GRID ── */
+.allergies-grid-wrap {
+  max-width: 1200px; margin: 0 auto;
+  padding: 32px 48px 80px;
+}
+.allergies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── CARD ── */
+.allergen-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent, #2D6A4F);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all .2s;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.allergen-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 36px rgba(13,13,13,0.09);
+}
+.allergen-card-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.allergen-icon-wrap {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.allergen-icon { font-size: 26px; }
+.allergen-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700; color: var(--black);
+  line-height: 1.2;
+}
+.allergen-note {
+  font-size: 12px; color: var(--accent, #2D6A4F);
+  font-weight: 600; margin-top: -8px;
+}
+.allergen-desc {
+  font-size: 13px; color: var(--gray);
+  line-height: 1.65; font-weight: 300;
+}
+
+.allergen-section { display: flex; flex-direction: column; gap: 8px; }
+.allergen-section-title {
+  font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase;
+  color: rgba(13,13,13,.35);
+}
+.allergen-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.allergen-tag {
+  font-size: 12px; font-weight: 500;
+  padding: 4px 10px; border-radius: 100px;
+  background: var(--accent-bg, #D8F3DC);
+  color: var(--accent, #2D6A4F);
+}
+.allergen-tag.tag-hidden {
+  background: var(--gray-light);
+  color: #374151;
+  font-family: 'Sora', monospace;
+}
+
+/* ── EMPTY STATE ── */
+.allergies-empty {
+  text-align: center; padding: 80px 24px;
+  color: var(--gray);
+}
+.allergies-empty-icon { font-size: 48px; margin-bottom: 16px; }
+.allergies-empty p { font-size: 16px; }
+
+/* ── FOOTER NOTE ── */
+.allergies-footer-note {
+  max-width: 1200px; margin: 0 auto;
+  padding: 24px 48px 48px;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 12px; color: var(--gray);
+}
+.allergies-footer-note a { color: var(--green); text-decoration: none; }
+.allergies-footer-note a:hover { text-decoration: underline; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .allergies-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .allergies-nav { padding: 14px 20px; }
+  .allergies-hero { padding: 60px 20px 56px; }
+  .allergies-grid-wrap { padding: 24px 20px 60px; }
+  .allergies-grid { grid-template-columns: 1fr; }
+  .allergies-legend { padding: 0 20px; }
+  .allergies-footer-note { padding: 20px; }
+}

@@ -1,5 +1,5 @@
 /* --- Base Styles --- */
-html, body, #root, .App > div {
+html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
@@ -7,6 +7,11 @@ html, body, #root, .App > div {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+}
+
+.app-map-view {
+  height: 100%;
+  width: 100%;
 }
 
 /* NEW: Separated .App rule to add necessary properties */

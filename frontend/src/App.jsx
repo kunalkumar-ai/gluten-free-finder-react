@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import MapScreen from './screens/MapScreen';
 import CitySearchScreen from './screens/CitySearchScreen';
-import LoadingScreen from './components/LoadingScreen';
+import LandingPage from './screens/LandingPage';
+import AllergiesPage from './screens/AllergiesPage';
 import './App.css';
 import ReactGA from "react-ga4";
 
@@ -39,76 +40,41 @@ const FeedbackModal = ({ isOpen, onClose, onSubmit }) => {
 
 
 function App() {
-  const [currentView, setCurrentView] = useState('live');
+  const [currentView, setCurrentView] = useState('landing');
+  const navigateToAllergies = () => setCurrentView('allergies');
   const [userPosition, setUserPosition] = useState(null);
   const [locationError, setLocationError] = useState(null);
   const [isFeedbackModalOpen, setFeedbackModalOpen] = useState(false);
-  const [isAppLoading, setAppLoading] = useState(true);
 
   useEffect(() => {
-    // --- Initialize Google Analytics ---
+    // Initialize Google Analytics
     const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID;
     if (measurementId) {
       ReactGA.initialize(measurementId);
-      console.log("Google Analytics Initialized");
     }
 
-    // --- Main Loading Logic ---
-    const runInitialLoad = () => {
-      setAppLoading(true);
+    // Geolocation runs in the background
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setUserPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => setLocationError('Location permission denied.')
+    );
 
-      // Promise 1: A timer that resolves after 3 seconds
-      const minimumDisplayTime = new Promise(resolve => setTimeout(resolve, 2000));
-
-      // Promise 2: The geolocation check, now structured to always resolve
-      const getLocation = new Promise((resolve) => {
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
-            // On success, resolve with a success status and the data
-            resolve({ success: true, data: pos });
-          },
-          () => {
-            // On failure, resolve with a failure status
-            resolve({ success: false });
-          }
-        );
-      });
-
-      // Promise.all waits for BOTH promises to finish
-      Promise.all([minimumDisplayTime, getLocation]).then(([_, locationResult]) => {
-        // This code runs only after 3 seconds AND after the location check is complete
-        
-        if (locationResult.success) {
-          // If location was found successfully
-          const userPos = { lat: locationResult.data.coords.latitude, lng: locationResult.data.coords.longitude };
-          setUserPosition(userPos);
-          setCurrentView('live');
-        } else {
-          // If location was denied
-          setLocationError('Location permission denied.');
-          setCurrentView('city');
-        }
-
-        // Finally, hide the loading screen
-        setAppLoading(false);
-      });
-    };
-
-    // This event listener handles the case where a user navigates back to the page
     const handlePageShow = (event) => {
       if (event.persisted) {
-        runInitialLoad();
+        navigator.geolocation.getCurrentPosition(
+          (pos) => setUserPosition({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+          () => setLocationError('Location permission denied.')
+        );
       }
     };
 
     window.addEventListener('pageshow', handlePageShow);
-    runInitialLoad(); // Run the logic for the initial visit
+    return () => window.removeEventListener('pageshow', handlePageShow);
+  }, []);
 
-    // Clean up the event listener when the component is unmounted
-    return () => {
-      window.removeEventListener('pageshow', handlePageShow);
-    };
-  }, []); // This hook only needs to run once
+  const navigateToApp = () => {
+    setCurrentView(userPosition ? 'live' : 'city');
+  };
 
   const navigateToCitySearch = () => {
     setCurrentView('city');
@@ -144,38 +110,42 @@ function App() {
     setFeedbackModalOpen(false);
   };
 
-  if (isAppLoading) {
-    return <LoadingScreen />;
-  }
-
   return (
     <div className="App">
-      {currentView === 'live' ? (
-        <MapScreen 
-          onNavigateToCitySearch={navigateToCitySearch} 
-          userPosition={userPosition}
-          locationError={locationError}
-        />
+      {currentView === 'landing' ? (
+        <LandingPage onNavigateToApp={navigateToApp} onNavigateToAllergies={navigateToAllergies} />
+      ) : currentView === 'allergies' ? (
+        <AllergiesPage onBack={() => setCurrentView('landing')} />
       ) : (
-        <CitySearchScreen 
-          onNavigateToLiveSearch={navigateToLiveSearch} 
-          userPosition={userPosition}
-        />
+        <div className="app-map-view">
+          {currentView === 'live' ? (
+            <MapScreen
+              onNavigateToCitySearch={navigateToCitySearch}
+              userPosition={userPosition}
+              locationError={locationError}
+            />
+          ) : (
+            <CitySearchScreen
+              onNavigateToLiveSearch={navigateToLiveSearch}
+              userPosition={userPosition}
+            />
+          )}
+          <button
+            className="floating-feedback-button"
+            onClick={() => setFeedbackModalOpen(true)}
+            title="Send Feedback"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+            </svg>
+          </button>
+          <FeedbackModal
+            isOpen={isFeedbackModalOpen}
+            onClose={() => setFeedbackModalOpen(false)}
+            onSubmit={handleFeedbackSubmit}
+          />
+        </div>
       )}
-      <button 
-        className="floating-feedback-button" 
-        onClick={() => setFeedbackModalOpen(true)}
-        title="Send Feedback"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-          <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-        </svg>
-      </button>
-      <FeedbackModal 
-        isOpen={isFeedbackModalOpen} 
-        onClose={() => setFeedbackModalOpen(false)} 
-        onSubmit={handleFeedbackSubmit}
-      />
     </div>
   );
 }
