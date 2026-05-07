@@ -193,7 +193,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             <span className="allergy-pill pill-nuts">🌰 Tree Nuts</span>
             <span className="allergy-pill pill-soy">🫘 Soy</span>
             <span className="allergy-pill pill-preserv">🧪 Preservatives</span>
-            <span className="allergy-pill pill-more">+9 more</span>
+            
           </div>
 
           <div className="social-strip">
