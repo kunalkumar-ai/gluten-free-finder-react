@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './LandingPage.css';
 
 
-const TRIP_WORDS = ['trip', 'hotels', 'flights', 'cruises', 'food', 'emergencies'];
+const TRIP_WORDS = ['trip planning', 'hotels', 'flights', 'cruises', 'food', 'emergencies'];
 
 const LandingPage = ({ onNavigateToAllergies }) => {
   const [formStep, setFormStep] = useState(1);
