@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './LandingPage.css';
 
+
+const TRIP_WORDS = ['trip', 'hotels', 'flights', 'cruises', 'food', 'emergencies'];
+
 const LandingPage = ({ onNavigateToAllergies }) => {
   const [formStep, setFormStep] = useState(1);
   const [email, setEmail] = useState('');
@@ -12,6 +15,8 @@ const LandingPage = ({ onNavigateToAllergies }) => {
   const [counterValue, setCounterValue] = useState(0);
   const [finalEmail, setFinalEmail] = useState('');
   const [finalDone, setFinalDone] = useState(false);
+  const [tripIndex, setTripIndex] = useState(0);
+  const [tripVisible, setTripVisible] = useState(true);
   const animationDoneRef = useRef(false);
   const targetCountRef = useRef(0);
 
@@ -49,6 +54,18 @@ const LandingPage = ({ onNavigateToAllergies }) => {
         setCounterValue((v) => v + 1);
       }
     }, 8000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Rotating subline word
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTripVisible(false);
+      setTimeout(() => {
+        setTripIndex((i) => (i + 1) % TRIP_WORDS.length);
+        setTripVisible(true);
+      }, 300);
+    }, 2400);
     return () => clearInterval(interval);
   }, []);
 
@@ -146,13 +163,18 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           </div>
 
           <h1>
-            <span className="underline-word"><em className="highlight">Celiac</em></span><br />
-            or an allergic reaction abroad.<br />
-            <em className="highlight-amber">Never again.</em>
+            Your <span className="hero-allergy-word">allergy</span><br />
+            comes with you everywhere.
           </h1>
 
+          <p className="hero-tagline">The anxiety doesn't have to.</p>
+
           <p className="hero-sub">
-            Your full-trip allergy companion — <strong>restaurants, hotels, trip planning, emergencies.</strong> Every condition. Every country.
+            CeliacAI handles your{' '}
+            <span className="trip-rotating-word" style={{ opacity: tripVisible ? 1 : 0, transform: tripVisible ? 'translateY(0)' : 'translateY(-8px)' }}>
+              {TRIP_WORDS[tripIndex]}
+            </span>
+            {' '}so you travel freely, not fearfully.
           </p>
 
           <div className="founder-badge">

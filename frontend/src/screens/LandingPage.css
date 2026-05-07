@@ -96,10 +96,10 @@
 
 .landing-page .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 5.5vw, 72px);
+  font-size: clamp(40px, 5vw, 68px);
   font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 24px;
+  line-height: 1.18;
+  margin-bottom: 32px;
   animation: lp-fadeUp .5s .08s ease both;
 }
 .landing-page .hero h1 .highlight {
@@ -122,13 +122,44 @@
   border-radius: 2px;
 }
 
+.landing-page .hero-allergy-word {
+  color: var(--green);
+  font-style: italic;
+  display: inline;
+  background: linear-gradient(104deg, transparent 2%, rgba(212,160,23,0.18) 4%, rgba(212,160,23,0.22) 94%, transparent 96%);
+  padding: 2px 6px;
+  border-radius: 4px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.landing-page .hero-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--black);
+  margin-bottom: 20px;
+  margin-top: -16px;
+  animation: lp-fadeUp .5s .14s ease both;
+}
+
+.landing-page .trip-rotating-word {
+  display: inline-block;
+  color: var(--green);
+  font-weight: 600;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  min-width: 5ch;
+}
+
 .landing-page .hero-sub {
-  font-size: 17px; line-height: 1.75;
-  color: var(--gray);
+  font-size: 18px;
+  line-height: 1.7;
+  color: #3d4450;
   max-width: 520px;
   margin-bottom: 36px;
-  font-weight: 300;
-  animation: lp-fadeUp .5s .16s ease both;
+  font-weight: 400;
+  animation: lp-fadeUp .5s .2s ease both;
 }
 .landing-page .hero-sub strong { color: var(--black); font-weight: 600; }
 
