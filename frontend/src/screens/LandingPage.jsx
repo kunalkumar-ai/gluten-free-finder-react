@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './LandingPage.css';
 
-const LandingPage = ({ onNavigateToApp, onNavigateToAllergies }) => {
+const LandingPage = ({ onNavigateToAllergies }) => {
   const [formStep, setFormStep] = useState(1);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -363,15 +363,10 @@ const LandingPage = ({ onNavigateToApp, onNavigateToAllergies }) => {
           </div>
 
           <div className="feature f1">
+            <span className="feature-coming">Coming soon</span>
             <div className="feature-icon-wrap">🗺️</div>
             <h3>Gluten-free restaurant finder</h3>
-            <p><strong>Live now.</strong> Find celiac-safe restaurants near you or in any city worldwide. The feature you already know — now part of a bigger platform.</p>
-            <button
-              onClick={onNavigateToApp}
-              style={{ marginTop: '16px', padding: '10px 20px', background: 'var(--green)', color: 'white', border: 'none', borderRadius: '10px', fontSize: '13px', fontWeight: '600', cursor: 'pointer', fontFamily: 'inherit' }}
-            >
-              Find Restaurants →
-            </button>
+            <p>Find celiac-safe restaurants near you or in any city worldwide. AI-verified, filtered by your exact conditions.</p>
           </div>
 
           <div className="feature f2">
