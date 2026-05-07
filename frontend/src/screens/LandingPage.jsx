@@ -169,18 +169,19 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           </div>
 
           <h1>
-            Your <span className="hero-allergy-word">allergy</span><br />
-            comes with you everywhere.
-          </h1>
-
-          <p className="hero-tagline">The <span className="hero-tagline-anxiety">anxiety</span> doesn't have to.</p>
-
-          <p className="hero-sub">
             CeliacAI handles your{' '}
-            <span className="trip-rotating-word" style={{ opacity: tripVisible ? 1 : 0, transform: tripVisible ? 'translateY(0)' : 'translateY(-8px)' }}>
+            <span
+              className="trip-rotating-word"
+              style={{ opacity: tripVisible ? 1 : 0, transform: tripVisible ? 'translateY(0)' : 'translateY(-8px)' }}
+            >
               {TRIP_WORDS[tripIndex]}
             </span>
-            {' '}so you travel freely, not fearfully.
+            <br />so you travel freely, not fearfully.
+          </h1>
+
+          <p className="hero-sub">
+            Your <span className="hero-allergy-word">allergy</span> comes with you.
+            The <span className="hero-tagline-anxiety">anxiety</span> doesn't have to.
           </p>
 
           <div className="allergy-row">
@@ -345,102 +346,50 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           <div className="problem-resolution">
             <div className="resolution-divider" />
             <p className="resolution-text">
-              CeliacAI carries <em>all of it</em> —
+              CeliacAI carries <em>all of it</em> 
             </p>
-            <p className="resolution-payoff">so you carry your excitement.</p>
+            <p className="resolution-payoff">so you just carry your excitement.</p>
           </div>
 
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="features" id="features">
-        <div className="section-header">
-          <span className="section-tag">What CeliacAI does</span>
-          <h2>Every tool you need.<br /><em>Finally in one place.</em></h2>
-          <p>Built for the strictest dietary condition on earth — so it works for everyone else too.</p>
-        </div>
+      {/* HANDLES MOMENTS */}
+      <section className="handles-section">
+        <div className="handles-inner">
+          <p className="section-tag">What CeliacAI handles</p>
+          <h2>Every moment of your trip.<br /><em>Covered.</em></h2>
 
-        <div className="features-layout">
-          <div className="feature hero-feature">
-            <div>
-              <span className="feature-coming">Coming soon</span>
-              <div className="feature-icon-wrap">📷</div>
-              <h3>AI Menu Scanner</h3>
-              <p>Point your camera at any menu — printed, handwritten, digital, in any language. CeliacAI scans it against your full allergy profile and shows you exactly what's safe, what to avoid, and what questions to ask.</p>
+          <div className="handles-grid">
+            <div className="handle-card">
+              <div className="handle-emoji">🏨</div>
+              <div className="handle-scene">Checking into a hotel abroad — staff confirms your room is allergy-safe</div>
+              <div className="handle-badge">✓ Accommodation handled</div>
             </div>
-            <div className="hero-feature-visual">
-              <div className="scan-header">Live scan — Tokyo restaurant</div>
-              <div className="menu-scan-demo">
-                <div className="dish-row"><span className="dish-name">Yakitori chicken</span><span className="dish-status safe">✓ Safe</span></div>
-                <div className="dish-row"><span className="dish-name">Ramen noodles</span><span className="dish-status danger">✗ Gluten</span></div>
-                <div className="dish-row"><span className="dish-name">Edamame</span><span className="dish-status safe">✓ Safe</span></div>
-                <div className="dish-row"><span className="dish-name">Tamago sushi</span><span className="dish-status danger">✗ Egg</span></div>
-                <div className="dish-row"><span className="dish-name">Miso soup</span><span className="dish-status warn">⚠ Check soy</span></div>
-              </div>
+            <div className="handle-card">
+              <div className="handle-emoji">📍</div>
+              <div className="handle-scene">Your trip itinerary pre-loaded with safe restaurants, grocery stores, and local phrases</div>
+              <div className="handle-badge">✓ Trip planning handled</div>
             </div>
-          </div>
-
-          <div className="feature f1">
-            <span className="feature-coming">Coming soon</span>
-            <div className="feature-icon-wrap">🗺️</div>
-            <h3>Gluten-free restaurant finder</h3>
-            <p>Find celiac-safe restaurants near you or in any city worldwide. AI-verified, filtered by your exact conditions.</p>
-          </div>
-
-          <div className="feature f2">
-            <span className="feature-coming">Coming soon</span>
-            <div className="feature-icon-wrap">🪪</div>
-            <h3>Multi-condition card</h3>
-            <p>One card, all your conditions, in 60+ languages. Celiac + lactose + egg — generated in seconds, shown to any waiter anywhere.</p>
-          </div>
-
-          <div className="feature f3">
-            <span className="feature-coming">Coming soon</span>
-            <div className="feature-icon-wrap">✈️</div>
-            <h3>Trip prep assistant</h3>
-            <p>Before you land: safe dishes, hidden allergens, local grocery brands, key phrases, and a curated restaurant shortlist — personalised to your conditions.</p>
-          </div>
-
-          <div className="feature f4">
-            <span className="feature-coming">Coming soon</span>
-            <div className="feature-icon-wrap">🚨</div>
-            <h3>Emergency layer</h3>
-            <p>Nearest hospital in one tap. Local names for your allergens in the local language. Available medications. Pre-filled emergency card for doctors.</p>
-          </div>
-
-          <div className="feature f5">
-            <span className="feature-coming">Coming soon</span>
-            <div className="feature-icon-wrap">⭐</div>
-            <h3>Community reviews</h3>
-            <p>Reviews filtered by your exact combination — not just "gluten-free friendly" but "safe for celiac + lactose." Real intel from people like you.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* HOW IT WORKS */}
-      <section className="how">
-        <div className="how-inner">
-          <h2>How it works <em>at the table</em></h2>
-          <div className="steps">
-            <div className="step">
-              <div className="step-num">1</div>
-              <h3>Set your profile once</h3>
-              <p>Enter all your conditions — celiac, lactose, egg, nuts, or whatever combination is yours. CeliacAI remembers all of them, always.</p>
+            <div className="handle-card">
+              <div className="handle-emoji">📷</div>
+              <div className="handle-scene">Phone pointed at a menu in Tokyo — every dish instantly scanned against your profile</div>
+              <div className="handle-badge">✓ Restaurant safety handled</div>
             </div>
-            <div className="step">
-              <div className="step-num">2</div>
-              <h3>Scan any menu</h3>
-              <p>Open the camera. Point at the menu in any language. Get an instant colour-coded breakdown of every dish against your full profile.</p>
+            <div className="handle-card">
+              <div className="handle-emoji">🚨</div>
+              <div className="handle-scene">Nearest hospital, local allergen names, emergency card — one tap away, always</div>
+              <div className="handle-badge">✓ Emergencies handled</div>
             </div>
-            <div className="step">
-              <div className="step-num">3</div>
-              <h3>Show the card</h3>
-              <p>One tap generates your translated multi-condition card. Show it to the waiter. They understand exactly what you need — first time, every time.</p>
+            <div className="handle-card handle-card-payoff">
+              <div className="handle-emoji">😮‍💨</div>
+              <div className="handle-scene-payoff">You, relaxed at a café in Lisbon.</div>
+              <div className="handle-feeling">This is what traveling freely feels like.</div>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* FOUNDER STORY */}
       <section className="founder">
