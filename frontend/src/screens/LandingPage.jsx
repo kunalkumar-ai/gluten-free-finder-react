@@ -156,6 +156,12 @@ const LandingPage = ({ onNavigateToAllergies }) => {
 
       {/* HERO */}
       <section className="hero">
+
+        <div className="hero-founder-bar">
+          <span className="hero-founder-bar-icon">🌾</span>
+          Built by someone with celiac disease, lactose intolerance &amp; an egg allergy
+        </div>
+
         <div className="hero-left">
           <div className="eyebrow">
             <span className="eyebrow-dot"></span>
@@ -167,7 +173,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             comes with you everywhere.
           </h1>
 
-          <p className="hero-tagline">The anxiety doesn't have to.</p>
+          <p className="hero-tagline">The <span className="hero-tagline-anxiety">anxiety</span> doesn't have to.</p>
 
           <p className="hero-sub">
             CeliacAI handles your{' '}
@@ -177,18 +183,16 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             {' '}so you travel freely, not fearfully.
           </p>
 
-          <div className="founder-badge">
-            <span className="founder-badge-icon">🌾</span>
-            Built by someone who has celiac disease, lactose intolerance &amp; an egg allergy
-          </div>
-
           <div className="allergy-row">
-            <span className="allergy-pill pill-celiac"><span className="pill-dot"></span> Celiac / Gluten</span>
-            <span className="allergy-pill pill-lactose"><span className="pill-dot"></span> Lactose</span>
-            <span className="allergy-pill pill-egg"><span className="pill-dot"></span> Egg</span>
-            <span className="allergy-pill pill-nuts"><span className="pill-dot"></span> Nut allergy</span>
-            <span className="allergy-pill pill-soy"><span className="pill-dot"></span> Soy</span>
-            <span className="allergy-pill pill-more">+14 more</span>
+            <span className="allergy-pill pill-celiac">🌾 Celiac / Gluten</span>
+            <span className="allergy-pill pill-lactose">🥛 Milk / Lactose</span>
+            <span className="allergy-pill pill-peanut">🥜 Peanuts</span>
+            <span className="allergy-pill pill-egg">🥚 Egg</span>
+            <span className="allergy-pill pill-fish">🐟 Fish / Shellfish</span>
+            <span className="allergy-pill pill-nuts">🌰 Tree Nuts</span>
+            <span className="allergy-pill pill-soy">🫘 Soy</span>
+            <span className="allergy-pill pill-preserv">🧪 Preservatives</span>
+            <span className="allergy-pill pill-more">+9 more</span>
           </div>
 
           <div className="social-strip">
@@ -325,34 +329,27 @@ const LandingPage = ({ onNavigateToAllergies }) => {
       {/* PROBLEM */}
       <section className="problem-band">
         <div className="problem-band-inner">
-          <p className="section-tag" style={{ background: 'rgba(116,198,157,.12)', color: '#74C69D' }}>The real problem</p>
-          <h2>Every tool was built<br />for <em>one condition.</em><br />You have several.</h2>
-          <p className="problem-lead">If you have celiac disease plus lactose intolerance plus an egg allergy — which millions of people do — no single app has ever handled all three.</p>
 
-          <div className="problem-grid">
-            <div className="problem-item">
-              <div className="problem-num">01</div>
-              <h3>One card per condition</h3>
-              <p>Equal Eats, GlutenFreeCard, Spokin — all excellent for one condition. Your reality is three conditions, three cards, hoping the waiter reads all of them.</p>
-            </div>
-            <div className="problem-item">
-              <div className="problem-num">02</div>
-              <h3>No AI, just static text</h3>
-              <p>None of the existing tools can read an actual menu in front of you, scan packaging in a Japanese supermarket, or flag that "may contain" thresholds vary by country.</p>
-            </div>
-            <div className="problem-item">
-              <div className="problem-num">03</div>
-              <h3>Zero trip preparation</h3>
-              <p>You land in Bangkok with no briefing on fish sauce risks, no safe grocery brands, no knowledge of the word "wheat" in Thai. You find out the hard way.</p>
-            </div>
+          <p className="section-tag" style={{ background: 'rgba(116,198,157,.12)', color: '#74C69D' }}>What you actually carry</p>
+
+          <h2>You don't just travel<br />with your <em>allergy.</em></h2>
+
+          <div className="burden-list">
+            <div className="burden-item">😰 <span>The fear</span></div>
+            <div className="burden-item">📋 <span>The planning</span></div>
+            <div className="burden-item">🗣️ <span>The explaining</span></div>
+            <div className="burden-item">😔 <span>The isolation</span></div>
+            <div className="burden-item">😟 <span>The constant worry</span></div>
           </div>
 
-          <div className="problem-callout">
-            <div className="callout-icon">💸</div>
-            <div className="callout-text">
-              A glutening episode ruins <strong>3–5 days of a holiday</strong>. If your holiday cost €3,000, paying <strong>€49/year</strong> to protect it is the easiest decision you'll ever make.
-            </div>
+          <div className="problem-resolution">
+            <div className="resolution-divider" />
+            <p className="resolution-text">
+              CeliacAI carries <em>all of it</em> —
+            </p>
+            <p className="resolution-payoff">so you carry your excitement.</p>
           </div>
+
         </div>
       </section>
 
