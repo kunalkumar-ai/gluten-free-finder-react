@@ -385,9 +385,37 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             </div>
           </div>
 
-          {/* 3. Language Card — photo left */}
+          {/* 3. Language Card — card panel left */}
           <div className="fe-row">
-            <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=900&q=80')" }} />
+            <div className="fe-lang-panel">
+              <div className="flc-stack">
+                <div className="flc-card-back">
+                  <div className="flc-back-header">
+                    <span className="flc-flag">🇹🇭</span>
+                    <span className="flc-title">บัตรแพ้อาหาร</span>
+                  </div>
+                  <div className="flc-back-items">
+                    <div className="flc-item">✗ กลูเตน · ข้าวสาลี</div>
+                    <div className="flc-item">✗ นม · แลคโตส</div>
+                    <div className="flc-item">✗ ไข่</div>
+                  </div>
+                </div>
+                <div className="flc-card">
+                  <div className="flc-header">
+                    <span className="flc-flag">🇩🇪</span>
+                    <span className="flc-title">Allergiekarte</span>
+                  </div>
+                  <div className="flc-headline">Zöliakie &amp;<br />Laktoseintoleranz</div>
+                  <div className="flc-sub">Bitte kein Gluten oder Milch<br />in meinem Essen. Danke.</div>
+                  <div className="flc-items">
+                    <div className="flc-item">✗ Gluten · Weizen · Gerste</div>
+                    <div className="flc-item">✗ Milch · Laktose · Butter</div>
+                    <div className="flc-item">✗ Eier · Mayonnaise</div>
+                  </div>
+                  <div className="flc-footer">Bitte informieren Sie den Koch<br />Please inform the kitchen</div>
+                </div>
+              </div>
+            </div>
             <div className="fe-text">
               <span className="fe-icon">🗣️</span>
               <h3 className="fe-heading">Your safety card,<br />in any language.</h3>
