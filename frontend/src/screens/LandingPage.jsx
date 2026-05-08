@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './LandingPage.css';
 
 
-const TRIP_WORDS = ['trip planning', 'hotels', 'flights', 'cruises', 'food', 'emergencies'];
+const TRIP_WORDS = [ 'allergy', 'planning', 'itenerary','language barriers', 'food', 'emergencies'];
 
 const LandingPage = ({ onNavigateToAllergies }) => {
   const [formStep, setFormStep] = useState(1);
@@ -72,7 +72,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
   // Scroll-reveal IntersectionObserver
   useEffect(() => {
     const targets = document.querySelectorAll(
-      '.landing-page .feature, .landing-page .step, .landing-page .problem-item, .landing-page .condition-row, .landing-page .pricing-card'
+      '.landing-page .feature, .landing-page .step, .landing-page .problem-item, .landing-page .condition-row, .landing-page .pricing-card, .landing-page .fe-row'
     );
     const observer = new IntersectionObserver(
       (entries) => {
@@ -147,6 +147,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           <span className="logo-text">Celiac<span>AI</span></span>
         </a>
         <div className="nav-right">
+          <a href="#problem" className="nav-link">Problem</a>
           <a href="#features" className="nav-link">Features</a>
           <a href="#pricing" className="nav-link">Pricing</a>
           <button className="nav-link" style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: '14px', padding: 0, color: 'var(--gray)' }} onClick={onNavigateToAllergies}>Allergens</button>
@@ -169,7 +170,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           </div>
 
           <h1>
-            CeliacAI handles your{' '}
+            We handle your{' '}
             <span
               className="trip-rotating-word"
               style={{ opacity: tripVisible ? 1 : 0, transform: tripVisible ? 'translateY(0)' : 'translateY(-8px)' }}
@@ -180,7 +181,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
           </h1>
 
           <p className="hero-sub">
-            Your <span className="hero-allergy-word">allergy</span> comes with you.
+            Your <span className="hero-allergy-word">allergies</span> come with you.
             The <span className="hero-tagline-anxiety">anxiety</span> doesn't have to.
           </p>
 
@@ -328,10 +329,10 @@ const LandingPage = ({ onNavigateToAllergies }) => {
       </section>
 
       {/* PROBLEM */}
-      <section className="problem-band">
+      <section className="problem-band" id="problem">
         <div className="problem-band-inner">
 
-          <p className="section-tag" style={{ background: 'rgba(116,198,157,.12)', color: '#74C69D' }}>What you actually carry</p>
+          <p className="section-tag">What you actually carry</p>
 
           <h2>You don't just travel<br />with your <em>allergy.</em></h2>
 
@@ -354,39 +355,81 @@ const LandingPage = ({ onNavigateToAllergies }) => {
         </div>
       </section>
 
-      {/* HANDLES MOMENTS */}
-      <section className="handles-section">
-        <div className="handles-inner">
-          <p className="section-tag">What CeliacAI handles</p>
-          <h2>Every moment of your trip.<br /><em>Covered.</em></h2>
+      {/* FEATURES EDITORIAL */}
+      <section className="fe-section" id="features">
+        <div className="fe-inner">
+          <div className="fe-header">
+            <p className="section-tag">What CeliacAI handles</p>
+            <h2>Every moment of your trip.<br /><em>Covered.</em></h2>
+          </div>
 
-          <div className="handles-grid">
-            <div className="handle-card">
-              <div className="handle-emoji">🏨</div>
-              <div className="handle-scene">Checking into a hotel abroad — staff confirms your room is allergy-safe</div>
-              <div className="handle-badge">✓ Accommodation handled</div>
-            </div>
-            <div className="handle-card">
-              <div className="handle-emoji">📍</div>
-              <div className="handle-scene">Your trip itinerary pre-loaded with safe restaurants, grocery stores, and local phrases</div>
-              <div className="handle-badge">✓ Trip planning handled</div>
-            </div>
-            <div className="handle-card">
-              <div className="handle-emoji">📷</div>
-              <div className="handle-scene">Phone pointed at a menu in Tokyo — every dish instantly scanned against your profile</div>
-              <div className="handle-badge">✓ Restaurant safety handled</div>
-            </div>
-            <div className="handle-card">
-              <div className="handle-emoji">🚨</div>
-              <div className="handle-scene">Nearest hospital, local allergen names, emergency card — one tap away, always</div>
-              <div className="handle-badge">✓ Emergencies handled</div>
-            </div>
-            <div className="handle-card handle-card-payoff">
-              <div className="handle-emoji">😮‍💨</div>
-              <div className="handle-scene-payoff">You, relaxed at a café in Lisbon.</div>
-              <div className="handle-feeling">This is what traveling freely feels like.</div>
+          {/* 1. Restaurant Finder — photo left */}
+          <div className="fe-row">
+            <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80')" }} />
+            <div className="fe-text">
+              <span className="fe-icon">📍</span>
+              <h3 className="fe-heading">Safe restaurants,<br />found.</h3>
+              <p className="fe-body">From boutique cafés to last-minute dinners — our AI surfaces only places verified safe for your exact conditions, wherever you are.</p>
+              <span className="fe-badge fe-badge-live">✓ Available now</span>
             </div>
           </div>
+
+          {/* 2. Menu Scanner — photo right */}
+          <div className="fe-row fe-row-reverse">
+            <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=900&q=80')" }} />
+            <div className="fe-text">
+              <span className="fe-icon">📷</span>
+              <h3 className="fe-heading">Any menu,<br />anywhere, decoded.</h3>
+              <p className="fe-body">Point your camera at a menu — in any language — and get an instant dish-by-dish verdict against your personal allergy profile.</p>
+              <span className="fe-badge fe-badge-soon">Coming soon</span>
+            </div>
+          </div>
+
+          {/* 3. Trip Planning — photo left */}
+          <div className="fe-row">
+            <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&q=80')" }} />
+            <div className="fe-text">
+              <span className="fe-icon">🧳</span>
+              <h3 className="fe-heading">Your whole trip,<br />prepped.</h3>
+              <p className="fe-body">Hotels, restaurants, grocery stores, and local allergy phrases — all lined up before you land, so every destination is safe before you arrive.</p>
+              <span className="fe-badge fe-badge-soon">Coming soon</span>
+            </div>
+          </div>
+
+          {/* 4. Emergencies — phone panel right */}
+          <div className="fe-row fe-row-reverse">
+            <div className="fe-emergency">
+              <div className="fe-phone">
+                <div className="fep-notch" />
+                <div className="fep-status">
+                  <span>9:41</span>
+                  <span>▲ SOS</span>
+                </div>
+                <div className="fep-sos-bar">
+                  <span className="fep-dot" />
+                  <span>EMERGENCY MODE</span>
+                </div>
+                <div className="fep-number-block">
+                  <div className="fep-label">Emergency Services</div>
+                  <div className="fep-number">112</div>
+                  <div className="fep-sublabel">EU universal · works anywhere</div>
+                </div>
+                <div className="fep-contacts">
+                  <div className="fep-contact"><span>🇮🇹 Italy</span><span>112</span></div>
+                  <div className="fep-contact"><span>🇯🇵 Japan</span><span>119</span></div>
+                  <div className="fep-contact"><span>🇺🇸 USA</span><span>911</span></div>
+                </div>
+                <div className="fep-call">📞 CALL NOW</div>
+              </div>
+            </div>
+            <div className="fe-text">
+              <span className="fe-icon">🚨</span>
+              <h3 className="fe-heading">Emergencies,<br />handled.</h3>
+              <p className="fe-body">Nearest hospital, allergen names in the local language, and local emergency numbers — one tap away, always. Even offline.</p>
+              <span className="fe-badge fe-badge-emergency">⚡ Always available</span>
+            </div>
+          </div>
+
         </div>
       </section>
 
