@@ -385,8 +385,19 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             </div>
           </div>
 
-          {/* 3. Trip Planning — photo left */}
+          {/* 3. Language Card — photo left */}
           <div className="fe-row">
+            <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=900&q=80')" }} />
+            <div className="fe-text">
+              <span className="fe-icon">🗣️</span>
+              <h3 className="fe-heading">Your safety card,<br />in any language.</h3>
+              <p className="fe-body">Show your exact conditions to any waiter, chef, or host — instantly translated into the local language. Clear, medically accurate, and works offline.</p>
+              <span className="fe-badge fe-badge-soon">Coming soon</span>
+            </div>
+          </div>
+
+          {/* 4. Trip Planning — photo right */}
+          <div className="fe-row fe-row-reverse">
             <div className="fe-photo" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=900&q=80')" }} />
             <div className="fe-text">
               <span className="fe-icon">🧳</span>
@@ -396,8 +407,8 @@ const LandingPage = ({ onNavigateToAllergies }) => {
             </div>
           </div>
 
-          {/* 4. Emergencies — phone panel right */}
-          <div className="fe-row fe-row-reverse">
+          {/* 5. Emergencies — phone panel left */}
+          <div className="fe-row">
             <div className="fe-emergency">
               <div className="fe-phone">
                 <div className="fep-notch" />
