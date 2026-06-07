@@ -216,7 +216,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
         <div className="waitlist-card" id="waitlist">
           <div className="card-counter">
             <div>
-              <div className="counter-left">Waitlist spots taken</div>
+              <div className="counter-left">Number of people joined</div>
               <div className="counter-num">{counterValue}</div>
             </div>
             <div className="counter-live">
@@ -227,7 +227,7 @@ const LandingPage = ({ onNavigateToAllergies }) => {
 
           {/* STEP 1 */}
           <div className={`card-step ${formStep === 1 ? 'active' : ''}`}>
-            <div className="step1-title">Reserve your spot</div>
+            <div className="step1-title">Onboard now</div>
             <p className="step1-sub">Tell us which plan interests you — this helps us build the right features first. No charge until launch.</p>
 
             <div className="form-group">
